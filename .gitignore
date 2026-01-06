@@ -1,0 +1,8 @@
+# Private personal data - NEVER commit
+private/
+
+# Personalized system instructions (use CLAUDE.template.md as starting point)
+CLAUDE.md
+
+# OS files
+.DS_Store

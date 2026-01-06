@@ -115,7 +115,6 @@ Some people do both daily. Some do one or the other. Some skip days. Find what w
 
 **Anytime:**
 - `/monologue` — Stream of consciousness. Just talk, Claude captures.
-- `/check-day` — Quick mid-day check-in.
 - `/deep-dive [topic]` — Extended exploration of a pattern, decision, or feeling.
 
 ## Configure Daily Rituals

@@ -59,7 +59,6 @@ For domain-specific sessions, also read relevant folders:
 | Command | Purpose |
 |---------|---------|
 | `/start-day` | Morning ritual — Set MIT, rotating framework prompt |
-| `/check-day` | Anytime check-in — Accountability, course correction |
 | `/end-day` | Evening review — Capture the day, note patterns |
 | `/monologue` | Ad hoc stream of consciousness — Just dump, I capture |
 | `/deep-dive [topic]` | Extended exploration — Pattern work, decision work, calibrate assessments |
@@ -106,7 +105,7 @@ For domain-specific sessions, also read relevant folders:
 
 | Context | How to Use History |
 |---------|-------------------|
-| `/start-day`, `/check-day` | Light touch — surface a relevant quote if something connects |
+| `/start-day` | Light touch — surface a relevant quote if something connects |
 | `/end-day` | Note if today's reflection connects to a known theme |
 | `/monologue` | Just capture; connect to history later |
 | `/deep-dive` | **Primary use** — Pull quotes, patterns, context. Quote their own words back. |

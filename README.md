@@ -118,7 +118,6 @@ Explicit workflows you invoke with `/name`. Located in `.claude/commands/`.
 |---------|---------|
 | `/start-day` | Morning kickoff — set your MIT |
 | `/end-day` | Evening review — what went well, what didn't |
-| `/check-day` | Quick mid-day check-in |
 | `/monologue` | Stream of consciousness — just dump |
 | `/deep-dive [topic]` | Extended exploration of a pattern or decision |
 | `/plan-week` | Weekly planning — set focus and intentions |

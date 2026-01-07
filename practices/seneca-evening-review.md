@@ -1,4 +1,4 @@
-# Seneca's Evening Review
+# Evening Review
 
 > End each day with honest self-examination. Not self-criticism. Learning.
 
@@ -7,27 +7,65 @@
 ## The Practice
 
 **When:** Evening, before bed
-
 **Time:** 5 minutes
-
-**Source:** Seneca, *On Anger* Book 3
+**Origin:** Pythagorean (~500 BC), adapted by Seneca (~50 AD)
 
 ---
 
-## The Three Questions
+## The History
+
+This practice is older than Seneca. The Pythagoreans (~500 BC) practiced evening self-examination as part of their spiritual discipline. Their version from the *Golden Verses*:
+
+> "Admit not sleep into your tender eyelids / Till you have reckoned up each deed of the day — / How have I erred, what done or left undone?"
+
+Seneca adapted this in *On Anger* (Book III), describing his nightly practice:
+
+> "When the light has been removed and my wife has fallen silent, aware of this habit that's now mine, I examine my entire day and go back over what I've done and said, hiding nothing from myself, passing nothing by."
+
+The modern "What did I do well? Where did I go wrong?" version is a loose adaptation popularized by productivity writers (Tim Ferriss, Ryan Holiday). It's valid, but it shifted the focus from **virtue cultivation** to **performance improvement**.
+
+---
+
+## Two Versions
+
+### Version A: Virtue-Focused (Original Seneca)
+
+1. **What bad habit did I resist today?**
+2. **What fault did I stand against?**
+3. **In what way am I better?**
+
+*Use when:* You want to work on your moral self. Focus on character, not productivity.
+
+### Version B: Performance-Focused (Modern Adaptation)
 
 1. **What did I do well today?**
-   - Progress, kindness, alignment with values
-   - Give yourself credit
-
 2. **Where did I go wrong?**
-   - Not for self-flagellation
-   - For learning and adjustment
-   - Honest but not harsh
-
 3. **What could I do better tomorrow?**
-   - Specific, actionable
-   - One thing to try differently
+
+*Use when:* You want practical self-improvement. Focus on actions and outcomes.
+
+### Version C: Pythagorean (Duty-Focused)
+
+1. **How have I erred?**
+2. **What have I done?**
+3. **What duty have I omitted?**
+
+*Use when:* You want accountability around responsibilities and commitments.
+
+---
+
+## How to Use in /end-day
+
+Rotate between versions, or pick one that fits your current season:
+
+| Day | Version | Focus |
+|-----|---------|-------|
+| Mon/Thu | Virtue (A) | Character work |
+| Tue/Fri | Performance (B) | Practical improvement |
+| Wed | Pythagorean (C) | Duty and commitments |
+| Sat/Sun | Skip or light | Rest |
+
+Or just use whichever resonates in the moment.
 
 ---
 
@@ -35,7 +73,7 @@
 
 Write freely or just think. The key is honesty without judgment.
 
-Seneca's version: "I hide nothing from myself, I pass nothing by. Why should I fear any of my errors, when I may say: 'See that you do not do this again; I forgive you this time.'"
+Seneca: "I hide nothing from myself, I pass nothing by. Why should I fear any of my errors, when I may say: 'See that you do not do this again; I forgive you this time.'"
 
 ---
 

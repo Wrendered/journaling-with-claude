@@ -8,7 +8,10 @@
 
 | System | Best For | Assessment |
 |--------|----------|------------|
+| [Big Five / OCEAN](big-five-ocean.md) | Scientific baseline, validated trait dimensions | [IPIP-NEO](https://openpsychometrics.org/tests/IPIP-BFFM/) |
 | [Enneagram](enneagram.md) | Core motivations, growth paths, relationship dynamics | [Truity](https://www.truity.com/test/enneagram-personality-test) |
+| [MBTI](mbti.md) | Accessible language, conversation starter | [16Personalities](https://www.16personalities.com/) |
+| [Hogwarts House](hogwarts-house.md) | Cultural shorthand, vibes | [Sorting Hat](https://www.wizardingworld.com/quiz/sorting-hat) |
 
 ---
 
@@ -38,4 +41,4 @@ Claude will research it and add it to this folder.
 
 ---
 
-*One system included. Add more as useful.*
+*Some systems included. Add more as useful.*

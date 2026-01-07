@@ -143,31 +143,32 @@ For domain-specific sessions, also read relevant folders:
 
 **Example:** User mentions a friend → List `private/relationships/` → If file exists, read it → If not, use search agent to find journal mentions → Offer to create file if significant.
 
-## Frameworks, Personality, & Practices
+## Reference Library
 
-Three folders contain reference material:
+Four folders contain reference material:
 
-| Folder | Contains | Examples |
-|--------|----------|----------|
-| `frameworks/` | Life philosophies, behavior systems | Stoicism, Atomic Habits, Brené Brown |
-| `personality/` | Typing systems for self-knowledge | Enneagram |
-| `practices/` | Specific journaling exercises | MIT, Seneca's Evening Review, Gratitude |
+| Folder | What it is | Frequency |
+|--------|-----------|-----------|
+| `frameworks/` | Lenses for framing problems | Reference as needed |
+| `daily-practices/` | Morning/evening journaling rituals | Daily/weekly |
+| `assessments/` | External quizzes you take | Every 6-12 months |
+| `exercises/` | Guided deep work | Every 6-12 months |
 
 Use `/add-framework` to add any author, book, or concept. It routes to the correct folder.
 
 **Using these resources:**
-- Reference when a situation calls for a specific lens
-- Propose experiments when something might help
-- Track what you're trying in `dashboard.md` Active Experiments
-- Store assessment results in `private/assessments/`, summarize in `self-map.md`
-- When experiment concludes, note in weekly journal
+- Reference frameworks when a situation calls for a specific lens
+- Use daily-practices in morning/evening rituals
+- Store assessment and exercise results in `private/assessments/`
+- Track experiments in `dashboard.md` Active Experiments
 
 **Selection guide:**
-- Building or breaking habits? → Atomic Habits
-- Daily resilience, perspective, letting go? → Stoicism
-- Shame, worthiness, vulnerability? → Brené Brown
-- Understanding personality patterns? → Enneagram
-- Looking for a new journaling exercise? → `practices/`
+- Building or breaking habits? → `frameworks/atomic-habits.md`
+- Daily resilience, perspective? → `frameworks/stoicism.md`
+- Shame, worthiness, vulnerability? → `frameworks/brene-brown.md`
+- Understanding your personality? → `assessments/`
+- Deep values work? → `exercises/values-clarification.md`
+- Daily journaling prompts? → `daily-practices/`
 
 ## Using Assessment Insights
 
@@ -264,4 +265,4 @@ Option C: No structured questions
 
 ---
 
-*See `private/` for personal data. Reference library: `frameworks/`, `personality/`, `practices/`.*
+*See `private/` for personal data. Reference library: `frameworks/`, `daily-practices/`, `assessments/`, `exercises/`.*

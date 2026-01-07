@@ -47,14 +47,15 @@ private/                  # Your data (gitignored, stays local)
 ├── decisions/            # Big decisions you're working through
 └── assessments/          # Framework results (Enneagram, etc.)
 
-frameworks/               # Life philosophies (Atomic Habits, Stoicism, Brené Brown)
-personality/              # Typing systems (Enneagram)
-practices/                # Journaling exercises (MIT, Gratitude, Seneca's Evening Review)
+frameworks/               # Lenses for framing problems (Atomic Habits, Stoicism, Brené Brown)
+daily-practices/          # Morning/evening journaling rituals (MIT, Gratitude, Evening Review)
+assessments/              # External quizzes you take (Big Five, Enneagram, MBTI)
+exercises/                # Guided deep work (Values Clarification)
 templates/                # Starter files to copy into private/
 .claude/                  # Claude Code configuration (commands, agents, skills, hooks)
 ```
 
-The reference folders (`frameworks/`, `personality/`, `practices/`) are lenses for self-reflection, not therapeutic protocols. Use `/add-framework` to add any author, book, or concept that resonates.
+The reference folders (`frameworks/`, `daily-practices/`, `assessments/`, `exercises/`) are lenses for self-reflection, not therapeutic protocols. Use `/add-framework` to add any author, book, or concept that resonates.
 
 ---
 

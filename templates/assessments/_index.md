@@ -15,9 +15,11 @@
 | Atomic Habits | Framework | ✓ | — | Personalize via habits discussion |
 | Stoicism | Framework | ✓ | — | Personalize daily practices |
 | Brené Brown | Framework | ✓ | — | Explore shame/vulnerability patterns |
-| Enneagram | Personality | ✓ | — | Take assessment |
+| Big Five | Assessment | ✓ | — | Take assessment |
+| Enneagram | Assessment | ✓ | — | Take assessment |
+| Values Clarification | Exercise | ✓ | — | Do the guided exercise |
 
-**Types:** Framework (`frameworks/`), Personality (`personality/`), Practice (`practices/`)
+**Types:** Framework (`frameworks/`), Assessment (`assessments/`), Daily Practice (`daily-practices/`), Exercise (`exercises/`)
 
 **Pending personalization:** (list what you want to work on next)
 
@@ -48,8 +50,9 @@ Reference material and personal results are separate:
 | Type | Public Reference | Personal Results |
 |------|-----------------|------------------|
 | Framework | `frameworks/[name].md` | `private/assessments/[name].md` |
-| Personality | `personality/[name].md` | `private/assessments/[name].md` |
-| Practice | `practices/[name].md` | (usually tracked in dashboard.md) |
+| Assessment | `assessments/[name].md` | `private/assessments/[name].md` |
+| Daily Practice | `daily-practices/[name].md` | (tracked in journal and dashboard) |
+| Exercise | `exercises/[name].md` | `private/assessments/[name].md` |
 
 **Process:**
 1. Add something (`/add-framework`) or take an assessment

@@ -1,32 +1,34 @@
 ---
-description: Research, add, and personalize a new framework, personality system, or practice.
+description: Research, add, and personalize a new framework, assessment, daily practice, or exercise.
 ---
 
 # /add-framework [name]
 
-> Add a new framework, personality system, or journaling practice to the library. Research it, route it to the correct folder, and suggest integrations.
+> Add a new framework, assessment, daily practice, or exercise to the library. Research it, route it to the correct folder, and suggest integrations.
 
 ## Content Types
 
-This command handles three types of content:
+This command handles four types of content:
 
 | Type | Folder | Examples | What it is |
 |------|--------|----------|------------|
-| **Framework** | `frameworks/` | Stoicism, Atomic Habits, GTD, Brene Brown | Life philosophy or behavior system |
-| **Personality** | `personality/` | Enneagram, MBTI, Big Five, StrengthsFinder | Typing system for self-knowledge |
-| **Practice** | `practices/` | Morning Pages, Bullet Journal, 5-Minute Journal | Specific journaling exercise |
+| **Framework** | `frameworks/` | Stoicism, Atomic Habits, GTD, Brene Brown | Lens for framing problems |
+| **Assessment** | `assessments/` | Enneagram, MBTI, Big Five, StrengthsFinder | External quiz you take |
+| **Daily Practice** | `daily-practices/` | Gratitude, Stoic Morning Prep, Evening Review | Morning/evening journaling ritual |
+| **Exercise** | `exercises/` | Values Clarification, Personal Mission | Guided deep work (do periodically) |
 
 **Classification guide:**
-- Does it describe who you ARE? → `personality/`
-- Does it describe what to WRITE? → `practices/`
-- Does it describe how to THINK or LIVE? → `frameworks/`
+- External quiz that gives you a type/score? → `assessments/`
+- Short prompt for daily/weekly journaling? → `daily-practices/`
+- Guided deep work you do yourself? → `exercises/`
+- Lens for thinking about problems? → `frameworks/`
 
 ## Public vs Private
 
 | Content | Location | Contains |
 |---------|----------|----------|
-| **Generic reference** | `frameworks/`, `personality/`, or `practices/` | What it IS. Shareable, no personal data. |
-| **Personal application** | `private/assessments/[name].md` | How it applies to ME. My results, patterns. |
+| **Generic reference** | `frameworks/`, `assessments/`, `daily-practices/`, or `exercises/` | Instructions. Shareable, no personal data. |
+| **Personal results** | `private/assessments/[name].md` | My results, my answers, my patterns. |
 
 **Rule:** Never put personal details in public folders. That content belongs in `private/assessments/`.
 
@@ -36,10 +38,10 @@ User provides: A framework name, author, book, or concept they want to add.
 
 Examples:
 - `/add-framework Getting Things Done` → frameworks/
-- `/add-framework Myers-Briggs` → personality/
-- `/add-framework Morning Pages` → practices/
+- `/add-framework Myers-Briggs` → assessments/
+- `/add-framework Bullet Journal` → daily-practices/
+- `/add-framework Personal Mission Statement` → exercises/
 - `/add-framework Cal Newport Deep Work` → frameworks/
-- `/add-framework Byron Katie The Work` → frameworks/
 
 ## Process
 
@@ -72,8 +74,9 @@ Based on research, determine the correct folder:
 | If it's a... | Create file at... | Update index... |
 |--------------|-------------------|-----------------|
 | Framework | `frameworks/[name].md` | `frameworks/_index.md` |
-| Personality system | `personality/[name].md` | `personality/_index.md` |
-| Practice | `practices/[name].md` | `practices/_index.md` |
+| Assessment | `assessments/[name].md` | `assessments/_index.md` |
+| Daily Practice | `daily-practices/[name].md` | `daily-practices/_index.md` |
+| Exercise | `exercises/[name].md` | `exercises/_index.md` |
 
 ### 3. Create the file
 
@@ -119,7 +122,7 @@ Based on research, determine the correct folder:
 - [Assessment if applicable]
 ```
 
-**For personality systems** (`personality/[name].md`):
+**For assessments** (`assessments/[name].md`):
 
 ```markdown
 # [System Name]
@@ -152,7 +155,7 @@ Based on research, determine the correct folder:
 - [Key book/source]
 ```
 
-**For practices** (`practices/[name].md`):
+**For daily practices** (`daily-practices/[name].md`):
 
 ```markdown
 # [Practice Name]
@@ -192,6 +195,41 @@ Based on research, determine the correct folder:
 [Where this practice comes from]
 ```
 
+**For exercises** (`exercises/[name].md`):
+
+```markdown
+# [Exercise Name]
+
+> [One-line description]
+
+---
+
+## The Exercise
+
+**Time:** [X minutes]
+**Frequency:** Once, then revisit every 6-12 months
+**Source:** [Origin]
+**Output:** Store results in `private/assessments/[name].md`
+
+---
+
+## How to Do It
+
+[Step by step guided process]
+
+---
+
+## Using Your Results
+
+[What to do with the output — decision filter, daily check-in, etc.]
+
+---
+
+## Source
+
+[Where this exercise comes from]
+```
+
 ### 4. Update indexes
 
 **Update the appropriate index:**
@@ -211,7 +249,7 @@ Based on the research, suggest:
 - Does this suggest a weekly practice? → Propose addition to /weekly-review
 
 **CLAUDE.md updates:**
-- Add to appropriate section (frameworks, personality, or practices)
+- Add to appropriate section (frameworks, assessments, daily-practices, or exercises)
 - Add to selection guide if framework
 
 **Dashboard integration (if applicable):**
@@ -221,7 +259,7 @@ Based on the research, suggest:
 
 Show:
 1. Summary of what was learned
-2. Classification decision (framework/personality/practice)
+2. Classification decision (framework/assessment/daily-practice/exercise)
 3. The created file (or preview)
 4. Proposed integrations
 5. Ask: "Want me to make these integration updates?"
@@ -263,11 +301,11 @@ If yes, the approach depends on type:
 ```
 ## Added: Myers-Briggs (MBTI)
 
-**Type:** Personality system → personality/mbti.md
+**Type:** Assessment → assessments/mbti.md
 
 **Core idea:** 16 personality types based on four dichotomies (E/I, S/N, T/F, J/P).
 
-**Created:** `personality/mbti.md`
+**Created:** `assessments/mbti.md`
 
 **Suggested integrations:**
 - Link to official assessment in Resources

@@ -1,6 +1,6 @@
-# Journaling Practices
+# Daily Practices
 
-> Specific exercises for daily reflection. The actual "what you write" part.
+> Short, recurring prompts for daily journaling. Part of your morning and evening rituals.
 
 ---
 
@@ -11,26 +11,27 @@
 | [MIT](mit.md) | Morning | Productivity | 2 min |
 | [Stoic Morning Prep](stoic-morning-prep.md) | Morning | Stoicism | 5 min |
 | [Gratitude](gratitude.md) | Morning or Evening | Research-backed | 2 min |
-| [Seneca's Evening Review](seneca-evening-review.md) | Evening | Stoicism | 5 min |
+| [Evening Review](seneca-evening-review.md) | Evening | Stoicism | 5 min |
 | [Values Check-in](values-check-in.md) | Morning / Weekly | Various | 3 min |
 
 ---
 
-## How Practices Differ from Frameworks
+## How Daily Practices Differ from Other Folders
 
-| Type | What it is | Examples |
-|------|-----------|----------|
-| **Frameworks** | Life philosophies or behavior systems | Stoicism, Atomic Habits |
-| **Personality** | Maps of who you are | Enneagram, MBTI |
-| **Practices** | Specific exercises you do | Morning prep, evening review |
+| Folder | What it is | Frequency |
+|--------|-----------|-----------|
+| `frameworks/` | Lenses for framing problems | Reference as needed |
+| **`daily-practices/`** | Morning/evening journaling rituals | Daily/weekly |
+| `assessments/` | External quizzes you take | Every 6-12 months |
+| `exercises/` | Guided deep work | Every 6-12 months |
 
-Frameworks inform practices. Stoicism gives us Seneca's Evening Review. But you can use the practice without adopting the whole philosophy.
+Daily practices are short prompts you use as part of `/start-day` and `/end-day`. They take 2-5 minutes and become part of your routine.
 
 ---
 
 ## Example Rotation
 
-You can configure `/start-day` and `/end-day` to use these practices on a rotating schedule. Edit `CLAUDE.md → Daily Rituals` to set your preferences.
+Configure `/start-day` and `/end-day` to use these on a rotating schedule. Edit `CLAUDE.md → Daily Rituals` to set your preferences.
 
 **Example morning rotation:**
 
@@ -41,7 +42,7 @@ You can configure `/start-day` and `/end-day` to use these practices on a rotati
 | Wed | Gratitude |
 | Sat/Sun | Lighter (MIT only) |
 
-**Example evening:** Seneca's Evening Review (daily)
+**Example evening:** Evening Review (daily)
 
 *Or skip the rotation entirely and just set MIT in the morning, capture the day in the evening. Your choice.*
 
@@ -52,7 +53,6 @@ You can configure `/start-day` and `/end-day` to use these practices on a rotati
 Use `/add-framework` with a journaling method:
 
 ```
-/add-framework Morning Pages
 /add-framework Bullet Journal
 /add-framework Five Minute Journal
 ```

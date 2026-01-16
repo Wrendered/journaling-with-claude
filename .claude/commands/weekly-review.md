@@ -8,6 +8,13 @@ description: Review decisions, experiments, and patterns. Retrospective.
 
 Check: `CLAUDE.md → Weekly Rhythm` for this user's configured timing.
 
+## Tasks Context (if Todoist connected)
+
+**Try to fetch completed tasks for the week** using `mcp__todoist__find-completed-tasks` with since/until for the past 7 days.
+
+- If it works: Use completion data in the review. Note wins and patterns.
+- If it fails: Skip silently and rely on journal for review.
+
 **If not configured** (still has `[Example:...]` placeholders):
 - Say: "Your weekly rhythm isn't configured yet. Want to set it up now, or just run the review?"
 - If yes: Walk through the configuration from `/onboarding` or edit CLAUDE.md directly
@@ -27,14 +34,20 @@ Pull all files from `private/decisions/`:
 - Update urgency/status
 - Pick 1-2 for next week's decision work (see CLAUDE.md → Weekly Rhythm for days)
 
-### 2. Experiments & What's Working (5 min)
+### 2. Task Review (if Todoist connected) (5 min)
+If completed tasks were fetched:
+- "You completed [N] tasks this week." List highlights.
+- Any tasks that rolled over repeatedly? Surface as pattern.
+- Any overdue tasks to reschedule or delete?
+
+### 3. Experiments & What's Working (5 min)
 Review `dashboard.md` Active Experiments:
 - How did experiments go? → Note in weekly journal
 - What's working? (Keep doing)
 - What's NOT working? (Adjust)
 - Anything to try next week?
 
-### 3. Organize Weekly Journal (10 min)
+### 4. Organize Weekly Journal (10 min)
 
 Open the current week's journal file (`private/journal/YYYY-Www.md`) and add the top sections:
 
@@ -56,22 +69,22 @@ Open the current week's journal file (`private/journal/YYYY-Www.md`) and add the
 - Add structure if entries are messy
 - Keep all raw content (don't delete)
 
-### 4. Pattern Flagging (5 min)
+### 5. Pattern Flagging (5 min)
 Review this week's journal:
 - Any themes repeating 3x+?
 - Anything connecting to `history/` patterns?
 - If pattern is stable/validated → move to `self-map.md`
 
-### 5. Assessment Check (1 min)
+### 6. Assessment Check (1 min)
 Glance at `assessments/_index.md` Schedule:
 - Anything due soon?
 
-### 6. Next Week Preview
+### 7. Next Week Preview
 - What's the focus?
 - Any big events/deadlines?
 - Which decision(s) to work on? (Check CLAUDE.md for decision work days)
 
-### 7. Backup (1 min)
+### 8. Backup (1 min)
 Run weekly backup of private files:
 ```bash
 .claude/skills/backup/scripts/backup-private.sh

@@ -8,6 +8,13 @@ Run: `date '+%A %B %d, %Y %H:%M'`
 
 Read silently: `private/self-map.md`, `private/dashboard.md`
 
+## Tasks (if Todoist connected)
+
+**Try to fetch completed tasks** using `mcp__todoist__find-completed-tasks` for today.
+
+- If it works: Note completed tasks for the reflection.
+- If it fails: Skip silently and continue.
+
 ## Pulse Check
 
 Start with: "How are you feeling? (One word is fine, rambling is fine too.)"
@@ -78,6 +85,13 @@ If they hit MIT multiple days:
 
 If they missed MIT:
 - "What got in the way?" — no guilt
+
+## Tomorrow Preview (if Todoist connected)
+
+**Try to fetch tomorrow's tasks** using `mcp__todoist__find-tasks-by-date` with tomorrow's date.
+
+- If tasks found: "Tomorrow you have: [list 2-3 key tasks]"
+- If no tasks or not connected: Skip silently.
 
 ## Close
 

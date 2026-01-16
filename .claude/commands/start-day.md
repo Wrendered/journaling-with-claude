@@ -8,6 +8,15 @@ Run: `date '+%A %B %d, %Y %H:%M'`
 
 Read silently: `private/self-map.md`, `private/dashboard.md`
 
+## Tasks (if Todoist connected)
+
+**Try to fetch today's tasks** using `mcp__todoist__find-tasks-by-date` with startDate: "today".
+
+- If it works: You have task integration. Surface today's tasks and overdue items when asking about MIT.
+- If it fails or no tasks found: Skip this section silently. Continue with the normal flow.
+
+Don't error out if Todoist isn't configured. Just proceed without task context.
+
 ## Pulse Check
 
 Start with: "How are you feeling? (One word is fine, rambling is fine too.)"
@@ -17,6 +26,8 @@ Just receive it. Don't problem-solve unless asked. Note energy level for pattern
 ## Ask
 
 Then ask for today's **MIT (Most Important Task)**.
+
+**If tasks were fetched:** Show today's tasks and overdue items, then ask: "Any of these your MIT, or something else?"
 
 Adapt as needed: explain concepts if user is new, help them pick if they're torn.
 

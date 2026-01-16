@@ -143,6 +143,36 @@ For domain-specific sessions, also read relevant folders:
 
 **Example:** User mentions a friend → List `private/relationships/` → If file exists, read it → If not, use search agent to find journal mentions → Offer to create file if significant.
 
+## Task Management (Optional)
+
+> **OPTIONAL SECTION.** If you use a task manager with MCP integration (Todoist, etc.), configure it here. Commands work without it.
+
+If you want tasks with dates and reminders separate from your journal:
+
+**Setup (Todoist example):**
+```bash
+claude mcp add --scope user --transport http todoist https://ai.todoist.net/mcp
+```
+Then run `/mcp` in Claude Code to authenticate.
+
+**What goes where:**
+
+| System | Purpose | Examples |
+|--------|---------|----------|
+| **Task Manager** | Actionable tasks with dates | "Call dentist Tuesday", "Submit report by Friday" |
+| **dashboard.md** | Current state, decisions, habits | Mode, life pulse, active experiments |
+| **Journal** | What happened, reflections | Daily logs, patterns, quotes |
+
+**Suggested projects:** Create projects that match your life areas (Work, Personal, Health, etc.)
+
+**Command integration:** When connected, commands will:
+- `/start-day`: Pull today's tasks, help set MIT from task list
+- `/end-day`: Surface completed tasks, preview tomorrow
+- `/plan-week`: Review upcoming week, create tasks for planned actions
+- `/weekly-review`: Pull completed tasks for reflection
+
+**If not connected:** Commands skip task-related prompts gracefully. Everything else works normally.
+
 ## Reference Library
 
 Four folders contain reference material:

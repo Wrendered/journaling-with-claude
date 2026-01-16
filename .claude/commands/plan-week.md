@@ -10,6 +10,13 @@ Read: `private/dashboard.md` (current state, habits, active decisions)
 
 Check: `CLAUDE.md → Weekly Rhythm` for this user's configured timing and cadence.
 
+## Tasks (if Todoist connected)
+
+**Try to fetch this week's tasks** using `mcp__todoist__find-tasks-by-date` with startDate: "today" and daysCount: 7.
+
+- If it works: Use task list to inform planning discussion.
+- If it fails: Skip silently and rely on dashboard.md for planning.
+
 ## Purpose
 
 Forward-looking planning for the week. Different from `/weekly-review` (retrospective).
@@ -54,6 +61,15 @@ Glance at `private/decisions/`:
 ### 4. Commitments and deadlines
 
 Anything time-sensitive this week? Surface from dashboard or ask.
+
+**If Todoist connected:** Show upcoming tasks with due dates this week.
+
+### 5. Create tasks (if Todoist connected)
+
+For any concrete actions discussed, offer to create Todoist tasks:
+- "Want me to add these to Todoist?"
+- Route to appropriate project (Life Admin, Houses, etc.)
+- Set due dates based on discussion
 
 ## Output
 

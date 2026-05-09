@@ -1,6 +1,12 @@
 ---
 name: setup-backups
-description: One-time setup for automatic backups of private journal data to Dropbox, iCloud, or local path. Creates backup-config.sh and tests the backup. Use when user wants to configure backups, set up data preservation, asks "how do I back up my journal", or first sets up the system.
+description: One-time configuration of automatic backups of private/ data to Dropbox, iCloud, or a local path. Verifies the destination, creates private/backup-config.sh from the template, runs a test backup, and confirms success.
+when_to_use: |
+  ALWAYS invoke this skill when the user wants to configure backups for the first time.
+  Trigger phrases (any of these): "set up backups", "configure backups", "how do I back up",
+  "where do my journals go", "I want to preserve this data", "back up to Dropbox",
+  "back up to iCloud".
+  Do NOT invoke for routine backup runs — that's the `backup` skill.
 allowed-tools: Read, Edit, Write, Bash
 ---
 

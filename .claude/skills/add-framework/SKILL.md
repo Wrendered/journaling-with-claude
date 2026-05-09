@@ -1,6 +1,14 @@
 ---
 name: add-framework
-description: Research and add a new framework, assessment, daily practice, or exercise to the library, then optionally personalize it. Use when user mentions a personality system, methodology, philosophy, or practice they want to add (e.g., Enneagram, GTD, Stoicism, Atomic Habits, MBTI, Big Five, Bullet Journal, Deep Work, NVC), or asks "can we add X" / "research this framework".
+description: Researches and adds a new framework, assessment, daily practice, or exercise to the public library — using parallel subagents for research, routing to the correct folder (frameworks/ vs assessments/ vs daily-practices/ vs exercises/), and optionally personalizing the framework to the user's life via private/assessments/.
+when_to_use: |
+  ALWAYS invoke this skill when the user names a personality system, methodology,
+  philosophy, or practice they want to learn or add.
+  Trigger phrases (any of these): "add [framework name]", "let's add", "can we research",
+  "I want to look into", "research this framework", "import this lens",
+  or any mention by name of: Enneagram, MBTI, Big Five, Hogwarts, GTD, Atomic Habits,
+  Stoicism, Brené Brown, NVC, Deep Work, Bullet Journal, Morning Pages, Pomodoro,
+  Eisenhower, WRAP, IFS, ACT, CBT, DBT, Mindfulness-Based Stress Reduction, etc.
 allowed-tools: Read, Edit, Write, Bash, Glob, Grep, Task, WebFetch, WebSearch
 ---
 

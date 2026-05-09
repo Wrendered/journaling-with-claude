@@ -1,6 +1,12 @@
 ---
 name: monologue
-description: Stream-of-consciousness capture — user dumps thoughts, Claude listens without interrupting then processes into a clean journal entry. Use when user starts venting unprompted, says "let me ramble", "I need to talk", "brain dump", begins long unstructured reflection, or is clearly processing out loud rather than asking a question.
+description: Stream-of-consciousness capture flow that lets the user dump thoughts without interruption, then processes the dump into a clean journal entry, surfaces themes, and offers connections to past entries.
+when_to_use: |
+  ALWAYS invoke this skill when the user starts processing out loud rather than asking a question.
+  Trigger phrases (any of these): "let me ramble", "I need to talk", "brain dump", "venting",
+  "stream of consciousness", "just thinking out loud", "I have a lot on my mind".
+  Also use when the user starts a long unprompted reflection that isn't a question, or when
+  dictation produces a long unstructured passage about feelings, patterns, or experiences.
 allowed-tools: Read, Edit, Write, Bash, Glob, Grep
 ---
 

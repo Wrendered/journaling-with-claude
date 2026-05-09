@@ -1,6 +1,12 @@
 ---
 name: plan-week
-description: Forward-looking weekly planning — set the week's focus, check habits, surface decisions and deadlines, optionally create Todoist tasks. Use when user wants to plan the week ahead, set weekly intentions, asks "what should I focus on this week", or it's their configured planning day (Sun/Mon typical).
+description: Forward-looking weekly planning ritual that sets the week's focus, checks habits, surfaces open decisions and deadlines from private/decisions/, and optionally creates Todoist tasks for planned actions.
+when_to_use: |
+  ALWAYS invoke this skill when the user looks ahead at the upcoming week.
+  Trigger phrases (any of these): "plan my week", "weekly planning", "set up the week",
+  "what should I focus on this week", "set weekly intentions", "this week's focus".
+  Also invoke at the start of a configured planning day (Sun/Mon typical) if the user opens
+  the system without a specific topic.
 allowed-tools: Read, Edit, Write, Bash, Glob
 ---
 

@@ -1,6 +1,12 @@
 ---
 name: weekly-review
-description: Weekly retrospective — review open decisions, completed tasks, experiments, organize the journal with summary/highlights/patterns, run weekly backup. Use when user wants to look back at the week, reflect on the past 7 days, organize the journal, or it's been 7+ days since last review.
+description: Weekly retrospective ritual that reviews open decisions in private/decisions/, surfaces patterns repeating 3+ times across the week's journal, organizes the weekly journal file with Summary and Highlight Quotes sections, runs the backup skill, and updates dashboard tracking.
+when_to_use: |
+  ALWAYS invoke this skill when the user looks back at the past week.
+  Trigger phrases (any of these): "weekly review", "let's review the week", "look back at this week",
+  "reflect on the past 7 days", "organize the journal", "what happened this week".
+  Also invoke if 7+ days have passed since the last weekly-review (check dashboard.md tracking)
+  and the user opens the system without a specific topic.
 allowed-tools: Read, Edit, Write, Bash, Glob, Grep
 ---
 

@@ -1,6 +1,11 @@
 ---
 name: start-day
-description: Morning kickoff — pulse check, set MIT (Most Important Task), surface today's tasks, optional rotating element (Stoic prep, gratitude, etc.). Use when user says good morning, starts their day, wants to set intentions, asks "what should I focus on today", or it's the start of a new day.
+description: Morning kickoff ritual that captures a pulse check, sets the MIT (Most Important Task), surfaces today's tasks if Todoist is connected, and runs the user's configured rotating element (Stoic prep, gratitude, values check-in, etc.).
+when_to_use: |
+  ALWAYS invoke this skill when the user opens a new day or signals morning intent.
+  Trigger phrases (any of these): "good morning", "starting my day", "morning check-in",
+  "what should I focus on today", "set my MIT", "let's get going", "ready to start",
+  or any first message of a new calendar day that mentions intentions or tasks.
 allowed-tools: Read, Edit, Write, Bash, Glob
 ---
 

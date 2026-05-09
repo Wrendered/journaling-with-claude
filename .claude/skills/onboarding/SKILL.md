@@ -1,6 +1,12 @@
 ---
 name: onboarding
-description: Initial first-time setup — conversational interview to populate self-map, dashboard, relationships, and configure daily/weekly rituals in CLAUDE.md. Use when user is new to the system, says they're getting started, asks "how do I begin", or no private/ files exist yet.
+description: First-time setup ritual that creates private/ folder structure from templates, conducts a conversational interview to populate self-map.md and dashboard.md, captures key relationships, and configures daily and weekly rituals in CLAUDE.md.
+when_to_use: |
+  ALWAYS invoke this skill when the user is new to the system or asks how to begin.
+  Trigger phrases (any of these): "I'm new here", "getting started", "set me up",
+  "how do I begin", "first time", "onboard me", "initial setup".
+  Also invoke automatically if private/self-map.md or private/dashboard.md don't exist
+  when the user opens their first session.
 allowed-tools: Read, Edit, Write, Bash, Glob
 ---
 

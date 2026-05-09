@@ -1,6 +1,11 @@
 ---
 name: end-day
-description: Evening review — captures how the day went, wins, lessons, patterns, habit check, optional structured reflection (Seneca's questions, gratitude). Use when user winds down for the night, asks "how did today go", wants evening reflection, processes the day before bed, or says good night.
+description: Evening reflection ritual that captures how the day went, wins and lessons, runs the user's configured reflection questions (Seneca's questions, gratitude, etc.), checks habit streaks, and surfaces patterns repeating 3+ times.
+when_to_use: |
+  ALWAYS invoke this skill when the user winds down or signals end-of-day intent.
+  Trigger phrases (any of these): "good night", "wrapping up", "end of day", "how did today go",
+  "evening reflection", "let's review today", "before bed", "done for today",
+  or any clear shift to retrospective framing about today.
 allowed-tools: Read, Edit, Write, Bash, Glob
 ---
 

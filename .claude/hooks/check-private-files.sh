@@ -12,11 +12,15 @@ set -e
 # Bail silently if jq isn't available
 command -v jq >/dev/null 2>&1 || exit 0
 
-# Env-agnostic project root detection
-PROJECT_DIR="${CLAUDE_PROJECT_DIR:-${CODEX_PROJECT_DIR:-$(git rev-parse --show-toplevel 2>/dev/null)}}"
+# Env-agnostic project root detection.
+# Capture rev-parse separately so `set -e` doesn't abort on non-zero exit
+# when running outside a git repo (Codex/Claude both should set the env var,
+# but this is defensive).
+PROJECT_DIR="${CLAUDE_PROJECT_DIR:-${CODEX_PROJECT_DIR:-}}"
 if [[ -z "$PROJECT_DIR" ]]; then
-  exit 0
+  PROJECT_DIR="$(git rev-parse --show-toplevel 2>/dev/null || true)"
 fi
+[[ -z "$PROJECT_DIR" ]] && exit 0
 
 TOOL_INPUT=$(cat)
 hook_event=$(echo "$TOOL_INPUT" | jq -r '.hook_event_name // ""' 2>/dev/null || echo "")

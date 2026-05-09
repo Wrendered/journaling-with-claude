@@ -252,4 +252,4 @@ There's no shame in needing support. These resources exist because hard times ar
 
 ---
 
-*Built for Claude Code*
+*Built for Claude Code & OpenAI Codex CLI*

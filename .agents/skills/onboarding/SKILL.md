@@ -44,8 +44,9 @@ Before starting the conversation, check and create what's needed. The structure 
    - `ln -sf private/system-instructions.md CLAUDE.local.md` (Anthropic local convention)
    - `ln -sf private/system-instructions.md AGENTS.override.md` (Codex override convention)
 5. Optionally, set up the CLAUDE.md → AGENTS.md symlink if the user wants Claude Code to read AGENTS.md:
-   - Only if no existing CLAUDE.md or user confirms replacement.
-   - `ln -sf AGENTS.md CLAUDE.md`
+   - **CHECK FIRST:** If `CLAUDE.md` already exists (regular file or symlink), STOP and ask the user before doing anything. They likely have personalized content that would be silently clobbered by `ln -sf`.
+   - Safe-only setup: `[[ ! -e CLAUDE.md ]] && ln -s AGENTS.md CLAUDE.md` (no `-f`, fails if file exists)
+   - If existing CLAUDE.md present: confirm with user, back it up to `private/CLAUDE.md.backup-<date>`, then create symlink.
 
 Do this silently, then begin the conversation.
 

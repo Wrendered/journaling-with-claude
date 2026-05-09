@@ -14,26 +14,35 @@ set -euo pipefail
 REPO_DIR="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 cd "$REPO_DIR"
 
-# Save current state
+# Save the current committed .codex/ state, run sync, diff, then RESTORE.
+# This way the working tree is never dirtied by the verification, even on drift.
 TEMP=$(mktemp -d)
 trap "rm -rf $TEMP" EXIT
 
-# Copy committed .codex/ to temp for comparison baseline
-cp -R .codex "$TEMP/before"
+# Snapshot committed state
+cp -R .codex "$TEMP/committed"
 
-# Run sync-codex.sh, then diff
+# Run sync (this mutates .codex/ in-place — necessary because sync-codex.sh
+# writes to .codex/ paths directly)
 bash scripts/sync-codex.sh >/dev/null
 
-# Compare
+# Snapshot regenerated state
+cp -R .codex "$TEMP/regenerated"
+
+# Restore committed state to working tree (verification must not leave dirty files)
+rm -rf .codex
+cp -R "$TEMP/committed" .codex
+
+# Compare committed vs regenerated
 DRIFT=0
-for f in .codex/hooks.json .codex/agents/*.toml; do
-  [[ -f "$f" ]] || continue
-  baseline="$TEMP/before/${f#.codex/}"
-  if [[ ! -f "$baseline" ]] || ! diff -q "$baseline" "$f" >/dev/null 2>&1; then
-    echo "DRIFT: $f differs from sync output"
+while IFS= read -r f; do
+  rel="${f#$TEMP/regenerated/}"
+  committed_file="$TEMP/committed/$rel"
+  if [[ ! -f "$committed_file" ]] || ! diff -q "$committed_file" "$f" >/dev/null 2>&1; then
+    echo "DRIFT: .codex/$rel differs from sync output"
     DRIFT=1
   fi
-done
+done < <(find "$TEMP/regenerated" -type f)
 
 if [[ $DRIFT -eq 1 ]]; then
   echo

@@ -14,6 +14,10 @@
 | [CBT](cbt.md) | Therapeutic lens | Anxious thoughts, rumination, harsh self-talk, depression |
 | [DBT](dbt.md) | Therapeutic lens | Intense emotions, distress tolerance, interpersonal conflict |
 | [IFS](ifs.md) | Therapeutic lens | Inner conflict, self-criticism, parts work |
+| [WRAP](wrap-decisions.md) | Decision framework | Consequential decisions — career, relationships, big purchases |
+| [Pre-mortem](pre-mortem.md) | Decision technique | Combat overconfidence by imagining the failure |
+| [Eisenhower Matrix](eisenhower-matrix.md) | Prioritization | Sorting urgent vs. important; weekly planning |
+| [10-10-10](10-10-10.md) | Decision technique | When short-term emotion is loud (anger, fear, social pressure) |
 
 ---
 
@@ -30,6 +34,14 @@
 **Overwhelmed by an emotion that feels unmanageable?** DBT. Distress tolerance, emotion regulation, wise mind.
 
 **Stuck in inner conflict or self-criticism?** IFS. Notice the part that's loud, get curious about what it's protecting.
+
+**Working through a consequential decision?** WRAP. Widen options, reality-test, attain distance, prepare to be wrong.
+
+**Feeling certain about something risky?** Pre-mortem. Imagine it failed — what went wrong?
+
+**Drowning in busy-not-productive?** Eisenhower Matrix. Most things that feel urgent aren't important. Live in Q2.
+
+**Stuck in a hot moment?** 10-10-10. How will you feel about this in 10 minutes, 10 months, 10 years?
 
 ---
 
@@ -56,4 +68,4 @@ Tell Claude about a framework, author, or concept and the add-framework skill wi
 
 ---
 
-*Six frameworks included. Add more as you explore.*
+*Ten frameworks included. Add more as you explore.*

@@ -6,11 +6,10 @@ when_to_use: |
   Trigger phrases (any of these): "import my old journals", "I have old reflections",
   "process my history", "I have years of past writing", "bring in my therapy notes",
   "import this archive", "I have a journal file", "I have old voice memos".
-  Also invoke if the user mentions personal historical material in private/import/
+  Also invoke if the user mentions personal historical material in private/raw/
   that needs processing.
 context: fork
 paths:
-  - "private/import/**"
   - "private/raw/**"
   - "private/history/**"
 allowed-tools: Read, Edit, Write, Bash, Glob, Grep, Task
@@ -34,7 +33,7 @@ The user has historical material — could be:
 - Images work — Claude can read handwritten journals, but it's slower
 - PDFs are harder — ask them to convert to text if possible
 
-**Where to put it:** `private/import/` — already gitignored, safe for personal material. Create the folder if it doesn't exist.
+**Where to put it:** `private/raw/` — this is the immutable raw-layer folder. Drop the source file there as-is and process it into `private/history/` from there.
 
 **Start by understanding what they have.** Ask about volume, format, time span. Then figure out the best approach together. Be flexible — every archive is different.
 
@@ -45,8 +44,11 @@ The goal is a `private/history/` folder that makes the past **searchable and sur
 ### Target Structure
 
 ```
+private/raw/
+└── historical-journal.txt   # Full text, grep-able (preserve everything; raw layer)
+
 private/history/
-├── journal-raw.txt          # Full text, grep-able (preserve everything)
+├── _index.md                # Map of what was created and how to search it
 ├── quotes-index.md          # Significant quotes organized by theme
 ├── themes-[topic].md        # Deep compilations of recurring themes
 └── relationships-[name].md  # Pattern analysis for key people
@@ -54,10 +56,11 @@ private/history/
 
 ### What Makes Each File Useful
 
-**journal-raw.txt**
+**raw/historical-journal.txt** (or similar; lives in raw/ layer)
 - Complete, searchable archive
 - Dates preserved where possible
 - Nothing lost
+- Never edited after creation — that's what the raw layer means
 
 **quotes-index.md**
 - The user's own words that capture something important
@@ -81,7 +84,7 @@ private/history/
 
 1. **Start by reading** — Get a feel for what's there. What themes recur? Who shows up repeatedly? What quotes jump out?
 
-2. **Create journal-raw.txt first** — Consolidate everything into one searchable file. Preserve dates and structure where possible.
+2. **Create raw/historical-journal.txt (or similar) first** — Consolidate everything into one searchable file in `private/raw/`. Preserve dates and structure where possible.
 
 3. **Build the quotes index** — Pull significant quotes as you read. Organize by theme. This is the most useful artifact.
 

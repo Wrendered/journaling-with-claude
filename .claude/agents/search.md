@@ -76,7 +76,7 @@ Return findings with:
 - `private/history/quotes-index.md` — Curated quotes by theme
 - `private/history/themes-*.md` — Deep theme compilations
 - `private/history/relationships-*.md` — Historical relationship patterns
-- `private/history/journal-raw.txt` — Full text, grep-able
+- `private/raw/historical-journal.txt` — Full text, grep-able (raw layer; processed wiki files in `private/history/`)
 
 **Ongoing relationship tracking (if used):**
 - `private/relationships/[name].md` — One file per key person

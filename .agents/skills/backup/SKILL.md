@@ -32,7 +32,7 @@ For password-protected backup:
 ## What Gets Backed Up
 
 - `private/` folder (excluding `import/`)
-- `CLAUDE.md`
+- `AGENTS.md`
 
 Backups are timestamped zips. Last 10 kept, older pruned automatically.
 

@@ -17,7 +17,7 @@ One-time setup for automatic backups of private data.
 ## What Gets Backed Up
 
 - `private/` folder (excluding `import/`)
-- `CLAUDE.md`
+- `AGENTS.md`
 
 Backups are timestamped zips stored in your configured location. Last 10 kept, older pruned automatically.
 

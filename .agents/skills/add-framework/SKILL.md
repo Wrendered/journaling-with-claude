@@ -258,7 +258,7 @@ Based on the research, suggest:
 - Does this suggest an evening practice? → Propose addition to end-day skill
 - Does this suggest a weekly practice? → Propose addition to weekly-review skill
 
-**CLAUDE.md updates:**
+**AGENTS.md updates:**
 - Add to appropriate section (frameworks, assessments, daily-practices, or exercises)
 - Add to selection guide if framework
 
@@ -301,7 +301,7 @@ If yes, the approach depends on type:
 
 **Practices** (Morning Pages, Bullet Journal, etc.):
 - Add to morning/evening rotation if desired
-- Set up in CLAUDE.md Daily Rituals section
+- Set up in AGENTS.md Daily Rituals section
 - Track in dashboard if building the habit
 
 **After personalization:** Update `private/assessments/_index.md` — change Personalized from "—" to "✓".

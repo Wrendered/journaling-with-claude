@@ -1,6 +1,6 @@
 ---
 name: onboarding
-description: First-time setup ritual that creates private/ folder structure from templates, conducts a conversational interview to populate self-map.md and dashboard.md, captures key relationships, and configures daily and weekly rituals in CLAUDE.md.
+description: First-time setup ritual that creates private/ folder structure from templates, conducts a conversational interview to populate self-map.md and dashboard.md, captures key relationships, and configures daily and weekly rituals in AGENTS.md.
 when_to_use: |
   ALWAYS invoke this skill when the user is new to the system or asks how to begin.
   Trigger phrases (any of these): "I'm new here", "getting started", "set me up",
@@ -16,9 +16,9 @@ First-time conversational setup. Builds the foundation files through interview, 
 
 ## First-Time Setup
 
-Before starting the conversation, check and create what's needed. The structure must match what CLAUDE.md tells Claude to read first.
+Before starting the conversation, check and create what's needed. The structure must match what AGENTS.md tells the assistant to read first.
 
-1. If `CLAUDE.md` doesn't exist, copy from `CLAUDE.template.md`
+1. **AGENTS.md** is tracked in the repo — should always exist after `git clone`. If somehow missing, the user has a deeper problem; bail and tell them.
 2. If `private/` doesn't exist, create the full folder structure:
    - `private/journal/`
    - `private/assessments/`
@@ -29,6 +29,7 @@ Before starting the conversation, check and create what's needed. The structure 
    - `private/archive/`
    - (`private/history/` is created later by the import-history skill if user has historical material)
 3. Copy starter files from templates (only if not present):
+   - `templates/system-instructions.template.md` → `private/system-instructions.md` (the user's personal config — tone, lens stack, daily ritual specifics)
    - `templates/self-map.template.md` → `private/self-map.md`
    - `templates/dashboard.template.md` → `private/dashboard.md`
    - `templates/_index.template.md` → `private/_index.md`
@@ -39,6 +40,12 @@ Before starting the conversation, check and create what's needed. The structure 
    - `templates/relationships/_index.template.md` → `private/relationships/_index.md`
    - `templates/journal/_index.md` → `private/journal/_index.md`
    - `templates/assessments/_index.md` → `private/assessments/_index.md`
+4. Set up the personalization symlinks (so both tools auto-load the user's personal config):
+   - `ln -sf private/system-instructions.md CLAUDE.local.md` (Anthropic local convention)
+   - `ln -sf private/system-instructions.md AGENTS.override.md` (Codex override convention)
+5. Optionally, set up the CLAUDE.md → AGENTS.md symlink if the user wants Claude Code to read AGENTS.md:
+   - Only if no existing CLAUDE.md or user confirms replacement.
+   - `ln -sf AGENTS.md CLAUDE.md`
 
 Do this silently, then begin the conversation.
 
@@ -144,7 +151,7 @@ Some people do both daily. Some do one or the other. Some skip days. Find what w
 
 ## Configure Daily Rituals
 
-The skills are scaffolds — the specific prompts and questions are configured in `CLAUDE.md → Daily Rituals`. Walk through this with them:
+The skills are scaffolds — the specific prompts and questions are configured in `AGENTS.md → Daily Rituals`. Walk through this with them:
 
 **Morning rotating element:**
 Ask: "Do you want a daily prompt after setting your MIT? Some options:"
@@ -163,15 +170,15 @@ Ask: "After capturing how the day went, do you want structured reflection questi
 
 "There's no right answer. Some people love structure, others find it tedious."
 
-**Update CLAUDE.md:**
-Based on their answers, edit the `Daily Rituals` section in `CLAUDE.md`:
+**Update AGENTS.md:**
+Based on their answers, edit the `Daily Rituals` section in `AGENTS.md`:
 - Fill in their morning rotating element preferences (or delete the table if they want minimal)
 - Keep only their chosen evening reflection option (delete the others)
 - This is what start-day and end-day will reference going forward
 
 ## Configure Weekly Rhythm
 
-The weekly skills also read from `CLAUDE.md → Weekly Rhythm`. Walk through this:
+The weekly skills also read from `AGENTS.md → Weekly Rhythm`. Walk through this:
 
 **When to run weekly skills:**
 - "When works best for your weekly review and planning?" (Options they mentioned earlier)
@@ -186,8 +193,8 @@ Ask: "Do you want specific focus days during the week?"
 
 "Some people like structure throughout the week. Others find it rigid. What sounds right?"
 
-**Update CLAUDE.md:**
-Based on their answers, edit the `Weekly Rhythm` section in `CLAUDE.md`:
+**Update AGENTS.md:**
+Based on their answers, edit the `Weekly Rhythm` section in `AGENTS.md`:
 - Set their preferred days for plan-week and weekly-review
 - Fill in day themes if they want them, or delete the table if they prefer minimal
 - This is what the weekly skills will reference going forward

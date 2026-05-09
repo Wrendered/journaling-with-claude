@@ -1,6 +1,6 @@
-# Structured Journaling with Claude Code
+# Structured Journaling with Claude Code & Codex CLI
 
-I built this project to apply what I've learned [designing reliable AI systems](https://wrenchatwork.substack.com/p/rigorous-work-with-fallible-ai) with Claude Code to create a better journaling practice: daily rituals, weekly reviews, decision tracking, and history that stays searchable over time. It ships with a few frameworks and journaling practices, but you can add whatever resonates. Import old journals and they become organized and accessible, not just archived. It's an experiment in leveraging Claude Code's larger toolkit: skills, agents, and hooks. Your data stays local in markdown files you control. Tell Claude you're getting started and it'll walk you through onboarding.
+I built this project to apply what I've learned [designing reliable AI systems](https://wrenchatwork.substack.com/p/rigorous-work-with-fallible-ai) to create a better journaling practice: daily rituals, weekly reviews, decision tracking, and history that stays searchable over time. It ships with a few frameworks and journaling practices, but you can add whatever resonates. Import old journals and they become organized and accessible, not just archived. The system runs in **both Claude Code and OpenAI Codex CLI** — same skills, same hooks, single source of truth. Your data stays local in markdown files you control. Tell the assistant you're getting started and it'll walk you through onboarding.
 
 ---
 
@@ -20,14 +20,16 @@ I built this project to apply what I've learned [designing reliable AI systems](
 
 ## Quick Start
 
-**Requires:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropic's CLI for Claude)
+**Requires either:**
+- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropic's CLI), OR
+- [OpenAI Codex CLI](https://developers.openai.com/codex/cli)
 
 ```bash
 git clone https://github.com/Wrendered/journaling-with-claude.git
 cd journaling-with-claude
 ```
 
-Open Claude Code in this directory and tell it you're getting started. Onboarding triggers automatically and Claude handles the rest.
+Open your assistant in this directory and tell it you're getting started. Onboarding triggers automatically and creates the personalized config files.
 
 **Daily:** Say good morning to set your MIT, wind down at night to reflect. The right skill auto-triggers from your intent — you don't need to remember command names.
 
@@ -45,7 +47,7 @@ The architecture follows a **three-layer pattern** (modeled on [Karpathy's "LLM 
 |-------|---------|----------|
 | **Raw** | Immutable source inputs you don't edit | `private/raw/`, `private/import/`, `private/history/journal-raw.txt` |
 | **Wiki** | Synthesized self-knowledge Claude maintains over time | Most of `private/` |
-| **Schema** | How the wiki is organized; how Claude should navigate it | `CLAUDE.md` |
+| **Schema** | How the wiki is organized; how the assistant should navigate it | `AGENTS.md` (public) + `private/system-instructions.md` (personal) |
 
 ```
 private/                  # Your data (gitignored, stays local)
@@ -109,33 +111,75 @@ This works because the whole system keeps your data search-ready: weekly reviews
 
 ---
 
-## Personalization: How CLAUDE.md Works
+## Personalization
 
-The system separates what you can share (skills, frameworks, practices) from what's personal (your preferences, rituals, history).
+The system separates what you share (skills, frameworks, practices, scaffolding) from what's personal (your tone, rituals, lens stack, history).
 
-**CLAUDE.md is your configuration file.** During onboarding, Claude walks you through setting up:
-- Daily rituals: What prompts do you want in your morning and evening rituals?
-- Weekly rhythm: When do you want to plan the week and run weekly review?
-- Working style: How should Claude challenge you?
+**Public, generic, tracked:**
+- `AGENTS.md` — canonical agent instructions (read by Codex CLI natively, by Claude Code via symlink/import)
+- Skills in `.agents/skills/`, frameworks in `frameworks/`, etc.
 
-Skills read from CLAUDE.md to know what to do. The skill files in `.claude/skills/` are generic orchestrators. Your preferences live in CLAUDE.md.
+**Personal, gitignored:**
+- `private/system-instructions.md` — your personalized config (tone, lens stack, daily ritual specifics). This is the file you edit.
+- `CLAUDE.local.md` and `AGENTS.override.md` — symlinks to `private/system-instructions.md`. Both tools auto-load these.
+- Everything in `private/` — your journal, decisions, relationships, history
 
-**To customize:**
-1. Copy `CLAUDE.template.md` to `CLAUDE.md` (done automatically during onboarding)
-2. Edit the "Daily Rituals" and "Weekly Rhythm" sections
-3. Skills will use your configuration
+**During onboarding** the assistant walks you through setting up:
+- Daily rituals: morning intention prompts, evening reflection style
+- Weekly rhythm: when to plan the week, when to review
+- Working style: how to challenge you, what to never do without asking
+- Lens stack: which frameworks fit which moments
 
-**What this means for sharing:** You can fork this repo, customize CLAUDE.md for yourself, and still pull updates to skills and frameworks without losing your preferences. CLAUDE.md is gitignored.
+These all land in `private/system-instructions.md`.
+
+**Sharing:** Fork the repo, customize `private/system-instructions.md` for yourself, pull updates to skills/frameworks/AGENTS.md without losing your preferences.
 
 ---
 
-## Claude Code Architecture
+## Dual-Tool Compatibility
 
-This project uses Claude Code's full toolkit. Understanding this helps if you want to customize or extend it.
+The system runs in **both Claude Code and OpenAI Codex CLI** with a single source of truth for skills and hooks. This is unusual; here's how it works.
+
+### Why both
+
+- **Claude Code** — strongest agent integration, native skills, hooks, subagents
+- **Codex CLI** — different model family, different ergonomics, broader tool ecosystem (uses [agents.md spec](https://agents.md))
+
+The same daily ritual, the same lens stack, the same hooks fire in either tool.
+
+### What's shared (single source of truth)
+
+| Primitive | Source | How both tools find it |
+|---|---|---|
+| **System instructions** | `AGENTS.md` (public) + `private/system-instructions.md` (personal) | Codex reads natively. Claude Code reads via `CLAUDE.md` symlink → `AGENTS.md`, plus `CLAUDE.local.md` → `private/system-instructions.md`. |
+| **Skills** | `.agents/skills/<name>/SKILL.md` ([agentskills.io](https://agentskills.io) spec) | Codex reads natively. Claude Code reads via `.claude/skills/` symlink. |
+| **Hook scripts** | `.claude/hooks/` (env-agnostic shell scripts) | Both tools invoke the same scripts. `.codex/hooks/` is a symlink. |
+
+### What needs adaptation (different config formats)
+
+| Primitive | Claude Code | Codex CLI | Reconciliation |
+|---|---|---|---|
+| **Hook wiring** | `.claude/settings.json` | `.codex/hooks.json` | Generated from `.claude/settings.json` by `scripts/sync-codex.sh` |
+| **Subagents** | `.claude/agents/*.md` (Markdown + YAML) | `.codex/agents/*.toml` (TOML) | Generated from `.claude/agents/` by `scripts/sync-codex.sh` |
+| **MCP servers** | `.claude/settings.json` | `.codex/config.toml` | Maintained separately (small, low-rot risk) |
+
+`scripts/verify-sync.sh` is a pre-commit guard that fails if the Codex side has drifted from the Claude side.
+
+### Codex CLI gaps (accept these)
+
+- **No auto-triggered skills.** Codex invokes skills via `$skill-name` (explicit). Claude Code auto-triggers from intent. You'll need to be more explicit on Codex.
+- **No auto-dispatched subagents.** Codex spawns subagents only on explicit request.
+- **Hooks need `[features] codex_hooks = true`** in `.codex/config.toml` (handled in this repo).
+
+---
+
+## Claude Code & Codex CLI Architecture
+
+Understanding this helps if you want to customize or extend it.
 
 ### Skills
 
-Auto-triggered workflows. Claude picks the right one based on what you say — you don't have to remember names. Located in `.claude/skills/`.
+Auto-triggered workflows in Claude Code; explicitly invoked in Codex CLI. The skill files (one [agentskills.io](https://agentskills.io)-compliant `SKILL.md` per skill) live in `.agents/skills/` (canonical) with `.claude/skills/` symlinked to that path.
 
 | Skill | Triggers when you... |
 |-------|----------------------|
@@ -165,7 +209,7 @@ Claude Code hooks that enforce rules. Located in `.claude/hooks/`.
 
 | Hook | Purpose |
 |------|---------|
-| `PreToolUse` | Blocks `git add`/`commit`/`push` of `private/` or `CLAUDE.md` |
+| `PreToolUse` | Blocks `git add`/`commit`/`push` of `private/`, `CLAUDE.md`, `CLAUDE.local.md`, or `AGENTS.override.md` |
 | `PostToolUse` | Reviews committed diffs for accidentally included personal info |
 
 ### Adding Your Own
@@ -178,7 +222,7 @@ Claude Code hooks that enforce rules. Located in `.claude/hooks/`.
 
 ## Privacy
 
-**Local storage:** The `private/` folder is gitignored. Your journal files stay on your machine in markdown you control. A security hook blocks any attempt to commit `private/` or `CLAUDE.md`.
+**Local storage:** The `private/` folder is gitignored. Your journal files stay on your machine in markdown you control. A security hook blocks any attempt to commit `private/`, `CLAUDE.md`, `CLAUDE.local.md`, or `AGENTS.override.md`.
 
 **But be aware:** When you use Claude Code, your prompts and file contents are sent to Anthropic's servers. This means your reflections pass through their API. What that means for privacy:
 

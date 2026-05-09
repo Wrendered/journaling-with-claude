@@ -1,8 +1,15 @@
 # Private personal data - NEVER commit
 private/
 
-# Personalized system instructions (use CLAUDE.template.md as starting point)
+# Personal override files (Anthropic + Codex local-override conventions).
+# These are typically symlinks to private/system-instructions.md and never tracked.
 CLAUDE.md
+CLAUDE.local.md
+AGENTS.override.md
+
+# Local agent tooling and session artifacts
+.claude/worktrees/
+.playwright-mcp/
 
 # OS files
 .DS_Store

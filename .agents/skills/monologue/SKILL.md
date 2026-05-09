@@ -27,7 +27,7 @@ User explicitly invokes this, OR starts typing unprompted reflection that's clea
    - Clean up: fix typos, clarify garbled dictation, organize scattered thoughts
    - Surface what seems most important or emotionally charged
    - Note any patterns connecting to recent entries or known themes
-   - **Proactive search:** If they mentioned people, check `private/relationships/` for files. If they mentioned decisions/themes, check relevant folders. Use search agent for journal history. (See CLAUDE.md → Proactive Search)
+   - **Proactive search:** If they mentioned people, check `private/relationships/` for files. If they mentioned decisions/themes, check relevant folders. Use search agent for journal history. (See AGENTS.md → Proactive Search)
 
 3. **Reflect together** — Brief back-and-forth:
    - "Did I get that right?"

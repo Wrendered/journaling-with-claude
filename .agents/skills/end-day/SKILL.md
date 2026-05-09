@@ -49,7 +49,7 @@ Or nothing.
 
 ## Evening Reflection
 
-**Check CLAUDE.md → Daily Rituals → Evening** for this user's configured reflection questions.
+**Check AGENTS.md → Daily Rituals → Evening** for this user's configured reflection questions.
 
 **If not configured** (still has `Option A/B/C` template text, or section is missing):
 - Say: "Your evening reflection isn't configured yet. Want to set it up now, or skip for today?"

@@ -60,22 +60,24 @@ if [[ ${#content} -lt 100 ]]; then
 fi
 
 # Check for attribution markers (these indicate proper separation)
-has_attribution=$(echo "$content" | grep -ciE 'their words|her words|his words|user.s words|claude.s framing|claude.s interpretation|\*\*Quote' || echo "0")
+# grep -c always prints a count and returns 0 if matches, 1 if none — we just want the count
+has_attribution=$(printf '%s' "$content" | grep -ciE 'their words|her words|his words|user.s words|claude.s framing|claude.s interpretation|\*\*Quote' || true)
+has_attribution=${has_attribution:-0}
 
 # Check for narrative-style writing about the user (heuristic: third-person "she/he/they" + verb patterns)
-has_narrative=$(echo "$content" | grep -ciE 'she (said|feels|thinks|noted|mentioned|seemed)|he (said|feels|thinks|noted|mentioned|seemed)|they (said|feel|think|noted|mentioned|seemed)' || echo "0")
+has_narrative=$(printf '%s' "$content" | grep -ciE 'she (said|feels|thinks|noted|mentioned|seemed)|he (said|feels|thinks|noted|mentioned|seemed)|they (said|feel|think|noted|mentioned|seemed)' || true)
+has_narrative=${has_narrative:-0}
 
 # If there's narrative without attribution markers, warn
 if [[ "$has_narrative" -gt 0 && "$has_attribution" -eq 0 ]]; then
-  jq -n \
-    --arg path "$file_path" \
-    --arg narrative "$has_narrative" \
-    '{
-      hookSpecificOutput: {
-        hookEventName: "PostToolUse",
-        additionalContext: ("ATTRIBUTION CHECK: The file at " + $path + " contains " + $narrative + " narrative-style description(s) of what the user said/felt/thought. Per the attribution rule (CLAUDE.md): journal entries must clearly separate the user's actual words from Claude'\''s framings or interpretations. Use sub-sections like **Their words:** for direct quotes/paraphrase, and **Claude'\''s framings offered:** for any reframe or pattern Claude proposed. Re-read the file and refactor if needed.")
-      }
-    }'
+  message="ATTRIBUTION CHECK: The file at ${file_path} contains ${has_narrative} narrative-style description(s) of what the user said/felt/thought. Per the attribution rule (CLAUDE.md): journal entries must clearly separate the user actual words from Claude framings or interpretations. Use sub-sections like **Their words:** for direct quotes or paraphrase, and **Claude framings offered:** for any reframe or pattern Claude proposed. Re-read the file and refactor if needed."
+
+  jq -n --arg msg "$message" '{
+    hookSpecificOutput: {
+      hookEventName: "PostToolUse",
+      additionalContext: $msg
+    }
+  }'
 fi
 
 exit 0

@@ -1,6 +1,12 @@
 ---
-description: Weekly planning. Set focus, habits, and intentions for the week ahead.
+name: plan-week
+description: Forward-looking weekly planning — set the week's focus, check habits, surface decisions and deadlines, optionally create Todoist tasks. Use when user wants to plan the week ahead, set weekly intentions, asks "what should I focus on this week", or it's their configured planning day (Sun/Mon typical).
+allowed-tools: Read, Edit, Write, Bash, Glob
 ---
+
+# Plan Week
+
+Forward-looking weekly planning. Different from weekly-review (retrospective).
 
 ## Context
 
@@ -19,13 +25,11 @@ Check: `CLAUDE.md → Weekly Rhythm` for this user's configured timing and caden
 
 ## Purpose
 
-Forward-looking planning for the week. Different from `/weekly-review` (retrospective).
-
 **Timing:** Check CLAUDE.md for when user prefers to run this (Sun/Mon typical, but configurable).
 
 **If not configured** (still has `[Example:...]` placeholders):
 - Say: "Your weekly rhythm isn't configured yet. Want to set it up now, or just run the planning?"
-- If yes: Walk through the configuration from `/onboarding` or edit CLAUDE.md directly
+- If yes: Walk through the configuration from the onboarding skill or edit CLAUDE.md directly
 - If skip: Run planning with sensible defaults
 
 ## Flow

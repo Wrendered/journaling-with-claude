@@ -1,6 +1,12 @@
 ---
-description: Evening review. Captures wins, lessons, and patterns.
+name: end-day
+description: Evening review — captures how the day went, wins, lessons, patterns, habit check, optional structured reflection (Seneca's questions, gratitude). Use when user winds down for the night, asks "how did today go", wants evening reflection, processes the day before bed, or says good night.
+allowed-tools: Read, Edit, Write, Bash, Glob
 ---
+
+# End Day
+
+Evening ritual. Captures the day, surfaces patterns, sets up tomorrow.
 
 ## Context
 
@@ -42,7 +48,7 @@ Or nothing.
 
 **If not configured** (still has `Option A/B/C` template text, or section is missing):
 - Say: "Your evening reflection isn't configured yet. Want to set it up now, or skip for today?"
-- If yes: Walk through the configuration flow from `/onboarding` → "Configure Daily Rituals" section
+- If yes: Walk through the configuration flow from the onboarding skill → "Configure Daily Rituals" section
 - If skip: Just capture what they shared and close
 
 **If configured:** Use whatever they've set (Seneca's questions, gratitude, nothing, etc.).

@@ -1,14 +1,16 @@
 ---
-description: Research, add, and personalize a new framework, assessment, daily practice, or exercise.
+name: add-framework
+description: Research and add a new framework, assessment, daily practice, or exercise to the library, then optionally personalize it. Use when user mentions a personality system, methodology, philosophy, or practice they want to add (e.g., Enneagram, GTD, Stoicism, Atomic Habits, MBTI, Big Five, Bullet Journal, Deep Work, NVC), or asks "can we add X" / "research this framework".
+allowed-tools: Read, Edit, Write, Bash, Glob, Grep, Task, WebFetch, WebSearch
 ---
 
-# /add-framework [name]
+# Add Framework
 
-> Add a new framework, assessment, daily practice, or exercise to the library. Research it, route it to the correct folder, and suggest integrations.
+Add a new framework, assessment, daily practice, or exercise to the library. Research it, route it to the correct folder, and suggest integrations.
 
 ## Content Types
 
-This command handles four types of content:
+This skill handles four types of content:
 
 | Type | Folder | Examples | What it is |
 |------|--------|----------|------------|
@@ -37,11 +39,11 @@ This command handles four types of content:
 User provides: A framework name, author, book, or concept they want to add.
 
 Examples:
-- `/add-framework Getting Things Done` → frameworks/
-- `/add-framework Myers-Briggs` → assessments/
-- `/add-framework Bullet Journal` → daily-practices/
-- `/add-framework Personal Mission Statement` → exercises/
-- `/add-framework Cal Newport Deep Work` → frameworks/
+- "Add Getting Things Done" → frameworks/
+- "Add Myers-Briggs" → assessments/
+- "Add Bullet Journal" → daily-practices/
+- "Add Personal Mission Statement" → exercises/
+- "Add Cal Newport Deep Work" → frameworks/
 
 ## Process
 
@@ -244,9 +246,9 @@ Based on research, determine the correct folder:
 Based on the research, suggest:
 
 **Ritual integration (if applicable):**
-- Does this suggest a morning practice? → Propose addition to /start-day
-- Does this suggest an evening practice? → Propose addition to /end-day
-- Does this suggest a weekly practice? → Propose addition to /weekly-review
+- Does this suggest a morning practice? → Propose addition to start-day skill
+- Does this suggest an evening practice? → Propose addition to end-day skill
+- Does this suggest a weekly practice? → Propose addition to weekly-review skill
 
 **CLAUDE.md updates:**
 - Add to appropriate section (frameworks, assessments, daily-practices, or exercises)

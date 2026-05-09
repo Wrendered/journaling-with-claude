@@ -1,10 +1,12 @@
 ---
-description: Process old journals into searchable structure.
+name: import-history
+description: Process historical journals, therapy notes, or past reflections into a searchable structure under private/history/. Use when user has old journals to bring in, mentions historical material, asks "can I import my old reflections", or has years of past writing to make searchable.
+allowed-tools: Read, Edit, Write, Bash, Glob, Grep, Task
 ---
 
-# /import-history
+# Import History
 
-> Process historical journals, therapy notes, or past reflections into a searchable, organized structure.
+Process historical journals, therapy notes, or past reflections into a searchable, organized structure.
 
 ## What You're Working With
 

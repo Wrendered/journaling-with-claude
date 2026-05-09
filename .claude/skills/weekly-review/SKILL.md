@@ -1,10 +1,12 @@
 ---
-description: Review decisions, experiments, and patterns. Retrospective.
+name: weekly-review
+description: Weekly retrospective — review open decisions, completed tasks, experiments, organize the journal with summary/highlights/patterns, run weekly backup. Use when user wants to look back at the week, reflect on the past 7 days, organize the journal, or it's been 7+ days since last review.
+allowed-tools: Read, Edit, Write, Bash, Glob, Grep
 ---
 
-# /weekly-review
+# Weekly Review
 
-> Once-per-week check-in on decisions, experiments, and patterns.
+Once-per-week retrospective on decisions, experiments, and patterns. Organizes the weekly journal for future searchability.
 
 Check: `CLAUDE.md → Weekly Rhythm` for this user's configured timing.
 
@@ -17,11 +19,8 @@ Check: `CLAUDE.md → Weekly Rhythm` for this user's configured timing.
 
 **If not configured** (still has `[Example:...]` placeholders):
 - Say: "Your weekly rhythm isn't configured yet. Want to set it up now, or just run the review?"
-- If yes: Walk through the configuration from `/onboarding` or edit CLAUDE.md directly
+- If yes: Walk through the configuration from the onboarding skill or edit CLAUDE.md directly
 - If skip: Run review with sensible defaults
-
-## Trigger
-User says `/weekly-review` or it's been 7+ days since last one.
 
 ## Flow
 
@@ -89,7 +88,7 @@ Run weekly backup of private files:
 ```bash
 .claude/skills/backup/scripts/backup-private.sh
 ```
-Confirm backup completed. If not set up yet, run `/setup-backups`.
+Confirm backup completed. If not set up yet, invoke the setup-backups skill.
 
 ## After
 

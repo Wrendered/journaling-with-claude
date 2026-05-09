@@ -40,6 +40,26 @@ A hook blocks `private/` and `CLAUDE.md` paths automatically. But also review th
 ### Past Approaches That Helped
 [Therapy, coaching, books, frameworks that resonated]
 
+### Epistemic Humility (Productive Stupidity)
+
+**Don't pretend to know things.** If uncertain, say so. Then research.
+
+Inspired by Martin Schwartz's "The Importance of Stupidity in Scientific Research":
+- "Productive stupidity means being ignorant by choice"
+- "If we don't feel stupid, we're not really trying"
+- Our ignorance is infinite; the only course is to muddle through as best we can
+
+And Julia Galef's "Scout Mindset":
+- Curiosity and openness to evidence vs. "soldier mindset" that defends existing beliefs
+- Notice bias, change your mind, update based on evidence
+
+**In practice:**
+- When discussing topics that require expertise (psychology, frameworks, research), use subagents to research rather than confabulating
+- Say "I don't know, let me look that up" rather than generating plausible-sounding guesses
+- When user asks "do you know about X?", it's fine to say "not deeply, want me to research it?"
+- Prefer admitting uncertainty + researching over confident-sounding bullshit
+- If you gave information and later realize it might be wrong, flag it
+
 ## Session Start
 
 At the start of each session, read:
@@ -54,18 +74,23 @@ For domain-specific sessions, also read relevant folders:
 - `private/career/` — For career planning
 - (Add your own domain folders as needed)
 
-## Commands
+## Skills
 
-| Command | Purpose |
-|---------|---------|
-| `/start-day` | Morning ritual — Set MIT, rotating framework prompt |
-| `/end-day` | Evening review — Capture the day, note patterns |
-| `/monologue` | Ad hoc stream of consciousness — Just dump, I capture |
-| `/deep-dive [topic]` | Extended exploration — Pattern work, decision work, calibrate assessments |
-| `/weekly-review` | Decisions, experiments, organize weekly journal — retrospective |
-| `/plan-week` | Weekly planning — set focus, habits, intentions |
-| `/onboarding` | Initial setup — run once when starting |
-| `/add-framework [name]` | Research, add, and personalize a new framework |
+Skills auto-trigger when your intent matches. You don't have to remember names — just describe what you want.
+
+| Skill | Triggers when you... |
+|-------|----------------------|
+| `start-day` | Say good morning, want to set today's intention/MIT |
+| `end-day` | Wind down, ask "how did today go", reflect before bed |
+| `monologue` | Start dumping thoughts, vent, ramble unprompted |
+| `deep-dive` | Want to dig into a pattern, calibrate an assessment, work through a decision |
+| `weekly-review` | Want to look back at the week, organize the journal |
+| `plan-week` | Want to set focus/intentions for the week ahead |
+| `onboarding` | Set the system up for the first time |
+| `add-framework` | Mention a framework, methodology, or practice you want to add |
+| `import-history` | Have old journals/reflections to bring in |
+| `setup-backups` | Want to configure data backups |
+| `backup` | Run a backup of private data |
 
 ## Rules
 
@@ -88,8 +113,8 @@ For domain-specific sessions, also read relevant folders:
 
 **Journal system:** Weekly files in `private/journal/YYYY-Www.md`
 - One file per week with Summary, Highlight Quotes, and Raw Log
-- Commands append to current week's Raw Log throughout the week
-- `/weekly-review` organizes the week: adds Summary, Highlight Quotes, optional sections
+- Skills append to current week's Raw Log throughout the week
+- The weekly-review skill organizes the week: adds Summary, Highlight Quotes, optional sections
 - See `journal/_index.md` for format and search instructions
 
 **After meaningful sessions:**
@@ -105,11 +130,11 @@ For domain-specific sessions, also read relevant folders:
 
 | Context | How to Use History |
 |---------|-------------------|
-| `/start-day` | Light touch — surface a relevant quote if something connects |
-| `/end-day` | Note if today's reflection connects to a known theme |
-| `/monologue` | Just capture; connect to history later |
-| `/deep-dive` | **Primary use** — Pull quotes, patterns, context. Quote their own words back. |
-| `/onboarding` | Full review across all history |
+| start-day | Light touch — surface a relevant quote if something connects |
+| end-day | Note if today's reflection connects to a known theme |
+| monologue | Just capture; connect to history later |
+| deep-dive | **Primary use** — Pull quotes, patterns, context. Quote their own words back. |
+| onboarding | Full review across all history |
 
 **Key files (if you build them):**
 - `history/quotes-index.md` — Grep guide + curated quotes by theme
@@ -145,7 +170,7 @@ For domain-specific sessions, also read relevant folders:
 
 ## Task Management (Optional)
 
-> **OPTIONAL SECTION.** If you use a task manager with MCP integration (Todoist, etc.), configure it here. Commands work without it.
+> **OPTIONAL SECTION.** If you use a task manager with MCP integration (Todoist, etc.), configure it here. Skills work without it.
 
 If you want tasks with dates and reminders separate from your journal:
 
@@ -165,13 +190,13 @@ Then run `/mcp` in Claude Code to authenticate.
 
 **Suggested projects:** Create projects that match your life areas (Work, Personal, Health, etc.)
 
-**Command integration:** When connected, commands will:
-- `/start-day`: Pull today's tasks, help set MIT from task list
-- `/end-day`: Surface completed tasks, preview tomorrow
-- `/plan-week`: Review upcoming week, create tasks for planned actions
-- `/weekly-review`: Pull completed tasks for reflection
+**Skill integration:** When connected, skills will:
+- start-day: Pull today's tasks, help set MIT from task list
+- end-day: Surface completed tasks, preview tomorrow
+- plan-week: Review upcoming week, create tasks for planned actions
+- weekly-review: Pull completed tasks for reflection
 
-**If not connected:** Commands skip task-related prompts gracefully. Everything else works normally.
+**If not connected:** Skills skip task-related prompts gracefully. Everything else works normally.
 
 ## Reference Library
 
@@ -184,7 +209,7 @@ Four folders contain reference material:
 | `assessments/` | External quizzes you take | Every 6-12 months |
 | `exercises/` | Guided deep work | Every 6-12 months |
 
-Use `/add-framework` to add any author, book, or concept. It routes to the correct folder.
+Mention a framework, book, or concept and the add-framework skill will research and route it to the correct folder.
 
 **Using these resources:**
 - Reference frameworks when a situation calls for a specific lens
@@ -215,7 +240,7 @@ Assessment results live in `assessments/` (full details) and `self-map.md` (Cros
 - Offer the reframe they developed during assessment work
 - Don't overdo it — patterns are lenses, not labels
 
-**After /add-framework personalization:**
+**After add-framework personalization:**
 - Assessment-based frameworks → results in `assessments/`, patterns in `self-map.md`
 - Habit-based frameworks → habits in `dashboard.md`
 - Reference these naturally in daily interactions
@@ -236,10 +261,10 @@ Assessment results live in `assessments/` (full details) and `self-map.md` (Cros
 
 ## Daily Rituals
 
-> **CUSTOMIZE THIS SECTION.** The commands (`/start-day`, `/end-day`) read from here to know what prompts and questions to use. Delete what doesn't resonate, add what does.
+> **CUSTOMIZE THIS SECTION.** The start-day and end-day skills read from here to know what prompts and questions to use. Delete what doesn't resonate, add what does.
 
-**Morning (/start-day):**
-1. Pulse check + Set MIT (built into command)
+**Morning (start-day):**
+1. Pulse check + Set MIT (built into the skill)
 2. Rotating element (optional — delete if you prefer minimal):
 
 | Day | Prompt |
@@ -251,8 +276,8 @@ Assessment results live in `assessments/` (full details) and `self-map.md` (Cros
 
 *Or delete the table entirely and just set MIT with no extra prompt.*
 
-**Evening (/end-day):**
-1. Pulse check + capture the day (built into command)
+**Evening (end-day):**
+1. Pulse check + capture the day (built into the skill)
 2. Reflection questions (optional — pick one approach or none):
 
 Option A: Seneca's 3 Questions
@@ -270,11 +295,11 @@ Option C: No structured questions
 
 ## Weekly Rhythm
 
-> **CUSTOMIZE THIS SECTION.** The weekly commands (`/plan-week`, `/weekly-review`) reference this for timing and focus. Adjust to fit your life.
+> **CUSTOMIZE THIS SECTION.** The plan-week and weekly-review skills reference this for timing and focus. Adjust to fit your life.
 
-**Two weekly commands:**
-- `/plan-week` — Beginning of week. Set focus, habits, intentions.
-- `/weekly-review` — End of week. Review decisions, experiments, patterns.
+**Two weekly skills:**
+- plan-week — Beginning of week. Set focus, habits, intentions.
+- weekly-review — End of week. Review decisions, experiments, patterns.
 
 **When to run them (pick what works):**
 - Option A: Both on Sunday (review morning, plan afternoon)
@@ -285,13 +310,13 @@ Option C: No structured questions
 
 | Day | Focus |
 |-----|-------|
-| Sun/Mon | `/plan-week` — Set the week's focus |
+| Sun/Mon | plan-week — Set the week's focus |
 | Tue | [Example: Framework exploration or assessment] |
 | Wed | [Example: Light — just rituals] |
 | Thu | [Example: Decision work] |
-| Fri/Sat | `/weekly-review` — Retrospective |
+| Fri/Sat | weekly-review — Retrospective |
 
-*Delete rows you don't need. Some people want structured day themes, others just want the two weekly commands and nothing else.*
+*Delete rows you don't need. Some people want structured day themes, others just want the two weekly skills and nothing else.*
 
 ---
 

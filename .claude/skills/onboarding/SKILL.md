@@ -1,6 +1,12 @@
 ---
-description: Initial setup. Run once when starting. Populates private/ files through conversation.
+name: onboarding
+description: Initial first-time setup — conversational interview to populate self-map, dashboard, relationships, and configure daily/weekly rituals in CLAUDE.md. Use when user is new to the system, says they're getting started, asks "how do I begin", or no private/ files exist yet.
+allowed-tools: Read, Edit, Write, Bash, Glob
 ---
+
+# Onboarding
+
+First-time conversational setup. Builds the foundation files through interview, not forms.
 
 ## First-Time Setup
 
@@ -68,7 +74,7 @@ For each person mentioned:
 - One sentence about why they matter
 - Create `private/relationships/[name].md` with a stub
 
-Don't go deep here — just capture who matters. The files will fill in over time through `/monologue`, `/deep-dive`, and daily reflections.
+Don't go deep here — just capture who matters. The files will fill in over time through monologue, deep-dive, and daily reflections.
 
 ### Working Style
 - What tone helps you think clearly? (supportive, direct, challenging, etc.)
@@ -93,7 +99,7 @@ Create domain folders as needed (based on what matters to you):
 Near the end, ask: "Do you have old journals, therapy notes, or past reflections you'd like to bring in?"
 
 If yes:
-- Point them to `/import-history`
+- Point them to the import-history skill
 - They can do it now or later
 - It's a separate, deeper process — not required to start using the system
 
@@ -102,24 +108,24 @@ If yes:
 Before closing, explain how to use the system and ask about their preferences:
 
 **Daily (suggested, not required):**
-- `/start-day` — Morning. Set your MIT, brief check-in.
-- `/end-day` — Evening. Reflect on the day.
+- start-day — Morning. Set your MIT, brief check-in.
+- end-day — Evening. Reflect on the day.
 
 Some people do both daily. Some do one or the other. Some skip days. Find what works.
 
 **Weekly:**
-- `/weekly-review` — Look back, organize the journal, note patterns.
-- `/plan-week` — Set focus and intentions for the week ahead.
+- weekly-review — Look back, organize the journal, note patterns.
+- plan-week — Set focus and intentions for the week ahead.
 
 **Ask:** "When do you want to do your weekly review and planning? Some people do review Friday evening and plan Sunday morning. Others do both together on Sunday. What fits your life?"
 
 **Anytime:**
-- `/monologue` — Stream of consciousness. Just talk, Claude captures.
-- `/deep-dive [topic]` — Extended exploration of a pattern, decision, or feeling.
+- monologue — Stream of consciousness. Just talk, Claude captures.
+- deep-dive [topic] — Extended exploration of a pattern, decision, or feeling.
 
 ## Configure Daily Rituals
 
-The commands are scaffolds — the specific prompts and questions are configured in `CLAUDE.md → Daily Rituals`. Walk through this with them:
+The skills are scaffolds — the specific prompts and questions are configured in `CLAUDE.md → Daily Rituals`. Walk through this with them:
 
 **Morning rotating element:**
 Ask: "Do you want a daily prompt after setting your MIT? Some options:"
@@ -142,13 +148,13 @@ Ask: "After capturing how the day went, do you want structured reflection questi
 Based on their answers, edit the `Daily Rituals` section in `CLAUDE.md`:
 - Fill in their morning rotating element preferences (or delete the table if they want minimal)
 - Keep only their chosen evening reflection option (delete the others)
-- This is what `/start-day` and `/end-day` will reference going forward
+- This is what start-day and end-day will reference going forward
 
 ## Configure Weekly Rhythm
 
-The weekly commands also read from `CLAUDE.md → Weekly Rhythm`. Walk through this:
+The weekly skills also read from `CLAUDE.md → Weekly Rhythm`. Walk through this:
 
-**When to run weekly commands:**
+**When to run weekly skills:**
 - "When works best for your weekly review and planning?" (Options they mentioned earlier)
 - Some do both on Sunday, some split across Fri/Sat and Sun/Mon
 
@@ -157,19 +163,19 @@ Ask: "Do you want specific focus days during the week?"
 - Decision work days (e.g., Mon/Thu for working through open decisions)
 - Framework/assessment day (e.g., Tue for exploration)
 - Light days (e.g., Wed just rituals)
-- Or: No day themes, just the two weekly commands
+- Or: No day themes, just the two weekly skills
 
 "Some people like structure throughout the week. Others find it rigid. What sounds right?"
 
 **Update CLAUDE.md:**
 Based on their answers, edit the `Weekly Rhythm` section in `CLAUDE.md`:
-- Set their preferred days for `/plan-week` and `/weekly-review`
+- Set their preferred days for plan-week and weekly-review
 - Fill in day themes if they want them, or delete the table if they prefer minimal
-- This is what the weekly commands will reference going forward
+- This is what the weekly skills will reference going forward
 
 ## Close
 
 - Summarize what we learned
 - Explain the daily/weekly rhythm (above)
-- Mention `/import-history` if they have historical material
+- Mention the import-history skill if they have historical material
 - Set first MIT for tomorrow

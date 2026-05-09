@@ -1,10 +1,12 @@
 ---
-description: Configure automatic backups of private/ to Dropbox or other location.
+name: setup-backups
+description: One-time setup for automatic backups of private journal data to Dropbox, iCloud, or local path. Creates backup-config.sh and tests the backup. Use when user wants to configure backups, set up data preservation, asks "how do I back up my journal", or first sets up the system.
+allowed-tools: Read, Edit, Write, Bash
 ---
 
-# /setup-backups
+# Setup Backups
 
-> One-time setup for automatic backups of your private data.
+One-time setup for automatic backups of private data.
 
 ## What Gets Backed Up
 
@@ -65,7 +67,7 @@ Confirm backup was created successfully.
 
 Show summary:
 - Backup location
-- Runs during `/weekly-review`
+- Runs during weekly-review
 - Manual: `.claude/skills/backup/scripts/backup-private.sh`
 - Encrypted: `.claude/skills/backup/scripts/backup-private.sh --encrypt`
 

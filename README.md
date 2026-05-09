@@ -1,6 +1,6 @@
 # Structured Journaling with Claude Code
 
-I built this project to apply what I've learned [designing reliable AI systems](https://wrenchatwork.substack.com/p/rigorous-work-with-fallible-ai) with Claude Code to create a better journaling practice: daily rituals, weekly reviews, decision tracking, and history that stays searchable over time. It ships with a few frameworks and journaling practices, but you can add whatever resonates. Import old journals and they become organized and accessible, not just archived. It's an experiment in leveraging Claude Code's larger toolkit: commands, agents, skills, and hooks. Your data stays local in markdown files you control. Start with `/onboarding` and build from there.
+I built this project to apply what I've learned [designing reliable AI systems](https://wrenchatwork.substack.com/p/rigorous-work-with-fallible-ai) with Claude Code to create a better journaling practice: daily rituals, weekly reviews, decision tracking, and history that stays searchable over time. It ships with a few frameworks and journaling practices, but you can add whatever resonates. Import old journals and they become organized and accessible, not just archived. It's an experiment in leveraging Claude Code's larger toolkit: skills, agents, and hooks. Your data stays local in markdown files you control. Tell Claude you're getting started and it'll walk you through onboarding.
 
 ---
 
@@ -27,13 +27,13 @@ git clone https://github.com/Wrendered/journaling-with-claude.git
 cd journaling-with-claude
 ```
 
-Open Claude Code in this directory and run `/onboarding`. Claude handles the rest.
+Open Claude Code in this directory and tell it you're getting started. Onboarding triggers automatically and Claude handles the rest.
 
-**Daily:** `/start-day` (morning) and `/end-day` (evening) create a reflection rhythm. Use what works for you.
+**Daily:** Say good morning to set your MIT, wind down at night to reflect. The right skill auto-triggers from your intent — you don't need to remember command names.
 
-**Weekly:** `/weekly-review` to look back, `/plan-week` to set direction.
+**Weekly:** Ask to plan the week or review the past week.
 
-**Tip:** Dictation works great here — typos and garbled speech don't matter because Claude processes everything through context. `/monologue` is built for this. On macOS: System Settings → Keyboard → Dictation → set shortcut to "Press Globe Key Twice."
+**Tip:** Dictation works great here — typos and garbled speech don't matter because Claude processes everything through context. Just start dumping thoughts and the monologue skill picks it up. On macOS: System Settings → Keyboard → Dictation → set shortcut to "Press Globe Key Twice."
 
 ---
 
@@ -52,10 +52,10 @@ daily-practices/          # Morning/evening journaling rituals (MIT, Gratitude, 
 assessments/              # External quizzes you take (Big Five, Enneagram, MBTI)
 exercises/                # Guided deep work (Values Clarification)
 templates/                # Starter files to copy into private/
-.claude/                  # Claude Code configuration (commands, agents, skills, hooks)
+.claude/                  # Claude Code configuration (skills, agents, hooks)
 ```
 
-The reference folders (`frameworks/`, `daily-practices/`, `assessments/`, `exercises/`) are lenses for self-reflection, not therapeutic protocols. Use `/add-framework` to add any author, book, or concept that resonates.
+The reference folders (`frameworks/`, `daily-practices/`, `assessments/`, `exercises/`) are lenses for self-reflection, not therapeutic protocols. Mention any author, book, or concept that resonates and the add-framework skill will research and integrate it.
 
 ---
 
@@ -63,7 +63,7 @@ The reference folders (`frameworks/`, `daily-practices/`, `assessments/`, `exerc
 
 If you have old journals, therapy notes, or past reflections, Claude can process them into a searchable, organized structure.
 
-Run `/import-history` — Claude will read your raw material and build:
+Tell Claude you have old journals to import — the import-history skill triggers and Claude reads your raw material and builds:
 - A searchable full-text archive
 - A quotes index organized by theme
 - Theme files for recurring patterns
@@ -89,21 +89,21 @@ This works because the whole system keeps your data search-ready: weekly reviews
 
 ## Personalization: How CLAUDE.md Works
 
-The system separates what you can share (commands, frameworks, practices) from what's personal (your preferences, rituals, history).
+The system separates what you can share (skills, frameworks, practices) from what's personal (your preferences, rituals, history).
 
-**CLAUDE.md is your configuration file.** When you run `/onboarding`, Claude walks you through setting up:
-- Daily rituals: What prompts do you want in `/start-day` and `/end-day`?
-- Weekly rhythm: When do you run `/plan-week` and `/weekly-review`?
+**CLAUDE.md is your configuration file.** During onboarding, Claude walks you through setting up:
+- Daily rituals: What prompts do you want in your morning and evening rituals?
+- Weekly rhythm: When do you want to plan the week and run weekly review?
 - Working style: How should Claude challenge you?
 
-Commands read from CLAUDE.md to know what to do. The command files in `.claude/commands/` are generic orchestrators. Your preferences live in CLAUDE.md.
+Skills read from CLAUDE.md to know what to do. The skill files in `.claude/skills/` are generic orchestrators. Your preferences live in CLAUDE.md.
 
 **To customize:**
-1. Copy `CLAUDE.template.md` to `CLAUDE.md` (done automatically by `/onboarding`)
+1. Copy `CLAUDE.template.md` to `CLAUDE.md` (done automatically during onboarding)
 2. Edit the "Daily Rituals" and "Weekly Rhythm" sections
-3. Commands will use your configuration
+3. Skills will use your configuration
 
-**What this means for sharing:** You can fork this repo, customize CLAUDE.md for yourself, and still pull updates to commands and frameworks without losing your preferences. CLAUDE.md is gitignored.
+**What this means for sharing:** You can fork this repo, customize CLAUDE.md for yourself, and still pull updates to skills and frameworks without losing your preferences. CLAUDE.md is gitignored.
 
 ---
 
@@ -111,22 +111,23 @@ Commands read from CLAUDE.md to know what to do. The command files in `.claude/c
 
 This project uses Claude Code's full toolkit. Understanding this helps if you want to customize or extend it.
 
-### Commands
+### Skills
 
-Explicit workflows you invoke with `/name`. Located in `.claude/commands/`.
+Auto-triggered workflows. Claude picks the right one based on what you say — you don't have to remember names. Located in `.claude/skills/`.
 
-| Command | Purpose |
-|---------|---------|
-| `/start-day` | Morning kickoff — set your MIT |
-| `/end-day` | Evening review — what went well, what didn't |
-| `/monologue` | Stream of consciousness — just dump |
-| `/deep-dive [topic]` | Extended exploration of a pattern or decision |
-| `/plan-week` | Weekly planning — set focus and intentions |
-| `/weekly-review` | Look back, organize journal, note patterns |
-| `/onboarding` | Initial setup — run once |
-| `/import-history` | Process old journals into searchable structure |
-| `/add-framework [name]` | Research and add a new framework |
-| `/setup-backups` | Configure automatic backups |
+| Skill | Triggers when you... |
+|-------|----------------------|
+| `start-day` | Say good morning, want to set today's MIT |
+| `end-day` | Wind down, ask "how did today go" |
+| `monologue` | Start dumping thoughts unprompted |
+| `deep-dive` | Want to dig into a pattern, calibrate an assessment, work through a decision |
+| `plan-week` | Want to set focus for the week ahead |
+| `weekly-review` | Want to look back at the week, organize the journal |
+| `onboarding` | Are setting up the system for the first time |
+| `import-history` | Have old journals to bring in |
+| `add-framework` | Mention a framework or methodology you want to add |
+| `setup-backups` | Want to configure automatic backups |
+| `backup` | Want to run a backup |
 
 ### Agents
 
@@ -135,14 +136,6 @@ Auto-invoked by Claude when relevant. Located in `.claude/agents/`.
 | Agent | Triggers on |
 |-------|-------------|
 | `search` | Questions about your past, patterns, history |
-
-### Skills
-
-Domain knowledge Claude applies automatically. Located in `.claude/skills/`.
-
-| Skill | Purpose |
-|-------|---------|
-| `backup` | Knows how to run and configure backups |
 
 ### Hooks
 
@@ -155,9 +148,9 @@ Claude Code hooks that enforce rules. Located in `.claude/hooks/`.
 
 ### Adding Your Own
 
-**New command:** Create `.claude/commands/your-command.md`
+**New skill:** Create `.claude/skills/your-skill/SKILL.md` with frontmatter (`name`, `description`). The description is what makes it auto-trigger — list the situations where you want it to fire.
 
-**New framework:** Run `/add-framework [name]` — Claude researches and creates it
+**New framework:** Tell Claude you want to add one — the add-framework skill researches and creates it.
 
 ---
 
@@ -174,7 +167,7 @@ Claude Code hooks that enforce rules. Located in `.claude/hooks/`.
 
 This is a journaling tool, not a secure vault. Don't include passwords, financial account numbers, or information that could harm others if exposed. For maximum privacy, use a commercial API account with zero-retention configured.
 
-**Backups:** Run `/setup-backups` to configure automatic backups of your private files to Dropbox, iCloud, or a local folder. Backups run during `/weekly-review`.
+**Backups:** Tell Claude you want to set up backups — the setup-backups skill walks you through configuring automatic backups to Dropbox, iCloud, or a local folder. Backups also run during weekly review.
 
 ---
 

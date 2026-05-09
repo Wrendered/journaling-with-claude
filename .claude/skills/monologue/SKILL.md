@@ -1,13 +1,16 @@
 ---
-description: Stream of consciousness — just dump, Claude captures.
+name: monologue
+description: Stream-of-consciousness capture — user dumps thoughts, Claude listens without interrupting then processes into a clean journal entry. Use when user starts venting unprompted, says "let me ramble", "I need to talk", "brain dump", begins long unstructured reflection, or is clearly processing out loud rather than asking a question.
+allowed-tools: Read, Edit, Write, Bash, Glob, Grep
 ---
 
-# /monologue
+# Monologue
 
-> Dump your thoughts. Claude listens, then processes into something useful.
+Receive a thought-dump, then process it into something useful.
 
 ## Trigger
-User says `/monologue` or starts typing unprompted reflection.
+
+User explicitly invokes this, OR starts typing unprompted reflection that's clearly a dump (not a question).
 
 ## Flow
 
@@ -50,13 +53,13 @@ Append under today's date in the weekly file (`private/journal/YYYY-Www.md`):
 
 ## What Happens Later
 
-- `/end-day` reviews the day's entries
-- `/weekly-review` organizes the week: adds Summary, Highlight Quotes, optional sections
+- The end-day skill reviews the day's entries
+- The weekly-review skill organizes the week: adds Summary, Highlight Quotes, optional sections
 - Patterns may graduate to `self-map.md`
 
 ## Example
 
-**User:** `/monologue`
+**User:** [opens with stream-of-consciousness reflection]
 
 **Assistant:** "Go ahead — I'm listening."
 

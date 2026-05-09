@@ -1,10 +1,12 @@
 ---
-description: Extended exploration of a pattern, decision, or feeling.
+name: deep-dive
+description: Extended exploration of a specific pattern, decision, feeling, theme, or framework calibration. Pulls historical quotes and context from history/. Use when user wants to "dig into" something specific, calibrate Enneagram/MBTI/etc. results, work through a recurring decision, explore why something keeps happening, or process a feeling that's been lingering.
+allowed-tools: Read, Edit, Write, Bash, Glob, Grep
 ---
 
-# /deep-dive [topic]
+# Deep Dive
 
-> Extended exploration of a specific theme, pattern, decision, or question. Longer than daily rituals, shorter than `/onboarding`.
+Extended exploration of a theme, pattern, decision, or question. Longer than daily rituals, shorter than full onboarding.
 
 ## When to Use
 
@@ -25,13 +27,13 @@ What are we exploring? Options:
 - A **theme** (e.g., "My relationship to achievement")
 
 ### 2. Surface Relevant Context
-I pull from:
-- `history/` theme files — What have you written about this before?
+Pull from:
+- `history/` theme files — What have they written about this before?
 - `self-map.md` — Known patterns, self-knowledge
 - `assessments/` — Relevant framework results
 - Recent weekly journal — Current week's Raw Log and summaries
 
-**Key move:** Quote your own words back to you. "In March 2018 you wrote: '...'"
+**Key move:** Quote their own words back to them. "In March 2018 you wrote: '...'"
 
 ### 3. Explore Together
 Depending on the topic:
@@ -55,7 +57,7 @@ Depending on the topic:
 
 ## Example: Calibrating Enneagram Type
 
-**User:** `/deep-dive` — I want to test my Enneagram results
+**User:** I want to test my Enneagram results
 
 **Assistant:**
 Your assessment suggested Type 3 (Achiever) with a 4 wing. The core pattern is: "Self-worth tied to achievement and recognition. Difficulty being present without producing."
@@ -70,7 +72,7 @@ Your assessment suggested Type 3 (Achiever) with a 4 wing. The core pattern is: 
 
 ## Example: Exploring a Pattern
 
-**User:** `/deep-dive` — Why do I keep not deciding on [major life decision]?
+**User:** Why do I keep not deciding on [major life decision]?
 
 **Assistant:**
 Let me pull what you've written about this...
@@ -91,11 +93,11 @@ The `history/` folder exists FOR these sessions. Daily rituals are light; deep d
 
 | Ritual | History Usage |
 |--------|---------------|
-| `/start-day` | Rarely — maybe surface a relevant quote |
-| `/end-day` | Note if something connects to a theme |
-| `/monologue` | Capture raw, process later |
-| `/deep-dive` | **Primary use** — pull quotes, patterns, context |
-| `/onboarding` | Full review across all history |
+| start-day | Rarely — maybe surface a relevant quote |
+| end-day | Note if something connects to a theme |
+| monologue | Capture raw, process later |
+| **deep-dive** | **Primary use** — pull quotes, patterns, context |
+| onboarding | Full review across all history |
 
 ---
 

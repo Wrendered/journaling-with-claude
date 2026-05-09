@@ -1,6 +1,12 @@
 ---
-description: Morning kickoff. Sets intentions and MIT for the day.
+name: start-day
+description: Morning kickoff — pulse check, set MIT (Most Important Task), surface today's tasks, optional rotating element (Stoic prep, gratitude, etc.). Use when user says good morning, starts their day, wants to set intentions, asks "what should I focus on today", or it's the start of a new day.
+allowed-tools: Read, Edit, Write, Bash, Glob
 ---
+
+# Start Day
+
+Morning ritual. Sets intention and the one thing that matters today.
 
 ## Context
 
@@ -59,7 +65,7 @@ Keep light — identity framing helps but shouldn't feel heavy.
 
 **If not configured** (still has `[Example:...]` placeholders, or section is missing):
 - Say: "Your daily rituals aren't configured yet. Want to set them up now, or skip for today?"
-- If yes: Walk through the configuration flow from `/onboarding` → "Configure Daily Rituals" section
+- If yes: Walk through the configuration flow from the onboarding skill → "Configure Daily Rituals" section
 - If skip: Just close after MIT, no rotating element
 
 **If configured:** Use whatever they've set. The rotating element is personal preference — some want Stoic prep, some want gratitude, some want nothing.

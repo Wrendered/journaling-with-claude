@@ -57,6 +57,15 @@ Append under today's date in the weekly file (`private/journal/YYYY-Www.md`):
 [If significant: "Quote worth keeping: '...'"]
 ```
 
+Also append a log entry to `private/log.md`:
+```markdown
+## [YYYY-MM-DD] monologue | <one-line theme/topic>
+
+<1-2 sentences naming what came up>
+```
+
+The log is the timeline; the journal is the narrative. Both get updated.
+
 ## What Happens Later
 
 - The end-day skill reviews the day's entries

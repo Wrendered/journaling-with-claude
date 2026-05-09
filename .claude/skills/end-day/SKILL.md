@@ -77,6 +77,11 @@ Don't belabor this — quick check, move on.
 - Quote important words verbatim
 - Note patterns, wins, or blocks
 
+**Also append a log entry to `private/log.md`:**
+- Format: `## [YYYY-MM-DD] evening | <one-line theme>`
+- Body: 1-3 sentences capturing the essence (what happened, what landed). Long-form goes in the journal; the log is the timeline.
+- This is what makes Claude able to grep the timeline cheaply later.
+
 **Update `private/dashboard.md`:**
 - Clear completed items from queue
 - Update habit streaks if tracking

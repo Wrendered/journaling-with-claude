@@ -8,6 +8,11 @@ when_to_use: |
   "import this archive", "I have a journal file", "I have old voice memos".
   Also invoke if the user mentions personal historical material in private/import/
   that needs processing.
+context: fork
+paths:
+  - "private/import/**"
+  - "private/raw/**"
+  - "private/history/**"
 allowed-tools: Read, Edit, Write, Bash, Glob, Grep, Task
 ---
 

@@ -8,7 +8,8 @@ when_to_use: |
   "what's underneath this", "why do I keep", "I want to understand this better".
   Also invoke when the user names a recurring pattern, surfaces a stuck decision, or
   references an assessment result they want to test.
-allowed-tools: Read, Edit, Write, Bash, Glob, Grep
+context: fork
+allowed-tools: Read, Edit, Write, Bash, Glob, Grep, Task
 ---
 
 # Deep Dive

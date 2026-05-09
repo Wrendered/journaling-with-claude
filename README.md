@@ -39,21 +39,43 @@ Open Claude Code in this directory and tell it you're getting started. Onboardin
 
 ## How It's Organized
 
+The architecture follows a **three-layer pattern** (modeled on [Karpathy's "LLM Wiki"](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)):
+
+| Layer | Purpose | Location |
+|-------|---------|----------|
+| **Raw** | Immutable source inputs you don't edit | `private/raw/`, `private/import/`, `private/history/journal-raw.txt` |
+| **Wiki** | Synthesized self-knowledge Claude maintains over time | Most of `private/` |
+| **Schema** | How the wiki is organized; how Claude should navigate it | `CLAUDE.md` |
+
 ```
 private/                  # Your data (gitignored, stays local)
+├── _index.md             # MOC — first thing Claude reads (catalog)
 ├── self-map.md           # Patterns, drivers, self-knowledge
 ├── dashboard.md          # Current state — MIT, life areas, habits, experiments
-├── journal/              # Weekly journal files
+├── log.md                # Append-only chronological log (greppable timeline)
+├── tags.md               # Controlled vocabulary
+├── journal/              # Weekly + daily journal files
 ├── decisions/            # Big decisions you're working through
-└── assessments/          # Framework results (Enneagram, etc.)
+├── relationships/        # Key people in your life
+├── concepts/             # Atomic notes about you (declarative filenames)
+├── history/              # Imported past material (years of writing, processed)
+├── raw/                  # Untouched source inputs
+├── archive/              # Closed/resolved items
+└── assessments/          # Framework calibration results
 
-frameworks/               # Lenses for framing problems (Atomic Habits, Stoicism, Brené Brown)
-daily-practices/          # Morning/evening journaling rituals (MIT, Gratitude, Evening Review)
-assessments/              # External quizzes you take (Big Five, Enneagram, MBTI)
+frameworks/               # Lenses (Atomic Habits, Stoicism, CBT, IFS, WRAP, ...)
+daily-practices/          # Journaling rituals (MIT, Gratitude, Seneca, Stoic Morning)
+assessments/              # External quizzes (Big Five, Enneagram, MBTI)
 exercises/                # Guided deep work (Values Clarification)
-templates/                # Starter files to copy into private/
-.claude/                  # Claude Code configuration (skills, agents, hooks)
+templates/                # Starter files copied into private/ on onboarding
+.claude/                  # Claude Code config (skills, agents, hooks)
 ```
+
+**Conventions:**
+- `_index.md` files at folder roots are MOCs — Claude reads them first to orient
+- YAML frontmatter on entries makes filtering grep-cheap (`status: open`, `type: decision`)
+- `log.md` uses prefix format `## [YYYY-MM-DD] type | Title` for cheap timeline reconstruction
+- Concept files use declarative filenames (`i-process-grief-by-building-things.md`) — the filename is the claim
 
 The reference folders (`frameworks/`, `daily-practices/`, `assessments/`, `exercises/`) are lenses for self-reflection, not therapeutic protocols. Mention any author, book, or concept that resonates and the add-framework skill will research and integrate it.
 

@@ -1,0 +1,81 @@
+#!/bin/bash
+# Attribution hook: Warn when journal entries blend user's words with Claude's framing
+#
+# PostToolUse on Write/Edit/MultiEdit when path matches private/journal/ or private/decisions/ or
+# private/relationships/. Soft warning via additionalContext — does not block the operation.
+#
+# Why: The user's journal must preserve THEIR words distinctly from Claude's framings, so
+# they can re-read what they actually said vs. what Claude offered. Blending the two
+# corrupts the historical record.
+#
+# What we check:
+# - If the file is in private/journal/, private/decisions/, or private/relationships/
+# - AND the diff added prose that looks like reflection content (not just structure)
+# - THEN check whether Claude's framings are clearly separated from the user's words
+#
+# Heuristic: a journal entry should have either (a) explicit attribution sub-headers like
+# "**Her words:**" / "**Claude's framings:**", or (b) only direct quotes (no narrative
+# rewriting of what the user said). If it has free narrative without attribution, warn.
+
+set -e
+
+TOOL_INPUT=$(cat)
+hook_event=$(echo "$TOOL_INPUT" | jq -r '.hook_event_name // ""' 2>/dev/null || echo "")
+tool_name=$(echo "$TOOL_INPUT" | jq -r '.tool_name // ""' 2>/dev/null || echo "")
+
+# Only check Write/Edit/MultiEdit
+if [[ "$tool_name" != "Write" && "$tool_name" != "Edit" && "$tool_name" != "MultiEdit" ]]; then
+  exit 0
+fi
+
+# Get the file path from tool input
+file_path=$(echo "$TOOL_INPUT" | jq -r '.tool_input.file_path // .tool_input.path // ""' 2>/dev/null || echo "")
+
+if [[ -z "$file_path" ]]; then
+  exit 0
+fi
+
+# Only check files in attribution-sensitive paths
+attribution_paths='private/journal/|private/decisions/|private/relationships/|private/log\.md'
+if ! echo "$file_path" | grep -qE "$attribution_paths"; then
+  exit 0
+fi
+
+# PostToolUse: file already written, can read it
+if [[ "$hook_event" != "PostToolUse" ]]; then
+  exit 0
+fi
+
+# Skip if file doesn't exist (might have been deleted)
+if [[ ! -f "$file_path" ]]; then
+  exit 0
+fi
+
+# Read the file
+content=$(cat "$file_path" 2>/dev/null || echo "")
+
+# Skip very short files (less than 100 chars — probably just frontmatter)
+if [[ ${#content} -lt 100 ]]; then
+  exit 0
+fi
+
+# Check for attribution markers (these indicate proper separation)
+has_attribution=$(echo "$content" | grep -ciE 'their words|her words|his words|user.s words|claude.s framing|claude.s interpretation|\*\*Quote' || echo "0")
+
+# Check for narrative-style writing about the user (heuristic: third-person "she/he/they" + verb patterns)
+has_narrative=$(echo "$content" | grep -ciE 'she (said|feels|thinks|noted|mentioned|seemed)|he (said|feels|thinks|noted|mentioned|seemed)|they (said|feel|think|noted|mentioned|seemed)' || echo "0")
+
+# If there's narrative without attribution markers, warn
+if [[ "$has_narrative" -gt 0 && "$has_attribution" -eq 0 ]]; then
+  jq -n \
+    --arg path "$file_path" \
+    --arg narrative "$has_narrative" \
+    '{
+      hookSpecificOutput: {
+        hookEventName: "PostToolUse",
+        additionalContext: ("ATTRIBUTION CHECK: The file at " + $path + " contains " + $narrative + " narrative-style description(s) of what the user said/felt/thought. Per the attribution rule (CLAUDE.md): journal entries must clearly separate the user's actual words from Claude'\''s framings or interpretations. Use sub-sections like **Their words:** for direct quotes/paraphrase, and **Claude'\''s framings offered:** for any reframe or pattern Claude proposed. Re-read the file and refactor if needed.")
+      }
+    }'
+fi
+
+exit 0

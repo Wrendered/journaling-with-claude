@@ -11,6 +11,9 @@
 | [Atomic Habits](atomic-habits.md) | Behavior system | Building habits, identity-based change |
 | [Stoicism](stoicism.md) | Philosophy | Daily resilience, perspective, letting go |
 | [Brene Brown](brene-brown.md) | Psychology | Shame, worthiness, vulnerability |
+| [CBT](cbt.md) | Therapeutic lens | Anxious thoughts, rumination, harsh self-talk, depression |
+| [DBT](dbt.md) | Therapeutic lens | Intense emotions, distress tolerance, interpersonal conflict |
+| [IFS](ifs.md) | Therapeutic lens | Inner conflict, self-criticism, parts work |
 
 ---
 
@@ -21,6 +24,12 @@
 **Need daily resilience or perspective?** Stoicism. Focus on what you control, accept what you can't.
 
 **Struggling with shame, perfectionism, or vulnerability?** Brene Brown. Name the armor, speak the shame.
+
+**Caught in anxious or distorted thinking?** CBT. Catch the automatic thought, check it against reality, find a more accurate view.
+
+**Overwhelmed by an emotion that feels unmanageable?** DBT. Distress tolerance, emotion regulation, wise mind.
+
+**Stuck in inner conflict or self-criticism?** IFS. Notice the part that's loud, get curious about what it's protecting.
 
 ---
 
@@ -39,16 +48,12 @@ Frameworks inform everything else. Stoicism gives us the Evening Review (daily p
 
 ## Adding Frameworks
 
-Use `/add-framework` to research and add any author, book, or concept:
+Tell Claude about a framework, author, or concept and the add-framework skill will research it and route it to the correct folder. Examples:
 
-```
-/add-framework Getting Things Done
-/add-framework Cal Newport
-/add-framework Nonviolent Communication
-```
-
-Claude will research it and route it to the correct folder.
+> "Can we add Getting Things Done?"
+> "Look up Cal Newport's Deep Work and add it"
+> "Research Nonviolent Communication"
 
 ---
 
-*Three frameworks included. Add more as you explore.*
+*Six frameworks included. Add more as you explore.*

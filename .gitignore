@@ -11,5 +11,14 @@ AGENTS.override.md
 .claude/worktrees/
 .playwright-mcp/
 
+# Local agent tooling and session artifacts
+.claude/worktrees/
+.playwright-mcp/
+
+# OpenAI Codex / dual-agent setup (kept local until polished for public release)
+.codex/
+.agents/
+AGENTS.md
+
 # OS files
 .DS_Store

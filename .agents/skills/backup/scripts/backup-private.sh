@@ -10,7 +10,7 @@
 set -e
 
 # Config (defaults, can override in private/backup-config.sh)
-REPO_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
+REPO_DIR="$(cd "$(dirname "$0")/../../../.." && pwd)"
 BACKUP_DIR="$HOME/Dropbox/backups/personal-assistant"
 KEEP_BACKUPS=10
 
@@ -41,16 +41,22 @@ fi
 TEMP_DIR=$(mktemp -d)
 trap "rm -rf $TEMP_DIR" EXIT
 
-# Copy files to stage (excluding import/)
+# Copy files to stage, excluding generated/cached folders and import/
+# Excluded: import/ (top-level), .git (local repo), .venv (Python venvs anywhere),
+#           __pycache__, .ipynb_checkpoints, .DS_Store, *.pyc, .env
 echo "Staging files..."
 if [[ -d "$REPO_DIR/private" ]]; then
     mkdir -p "$TEMP_DIR/private"
-    for item in "$REPO_DIR/private"/*; do
-        item_name=$(basename "$item")
-        if [[ "$item_name" != "import" ]]; then
-            cp -r "$item" "$TEMP_DIR/private/"
-        fi
-    done
+    rsync -a \
+        --exclude='import' \
+        --exclude='.git' \
+        --exclude='.venv' \
+        --exclude='__pycache__' \
+        --exclude='.ipynb_checkpoints' \
+        --exclude='.DS_Store' \
+        --exclude='*.pyc' \
+        --exclude='.env' \
+        "$REPO_DIR/private/" "$TEMP_DIR/private/"
 else
     echo "Note: private/ not found"
 fi

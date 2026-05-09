@@ -54,13 +54,13 @@ ls -la [BACKUP_DIR]
 
 ## First-Time Setup
 
-If backup hasn't been configured yet, run `/setup-backups` command to:
+If backup hasn't been configured yet, invoke the `setup-backups` skill to:
 1. Choose backup location (Dropbox, iCloud, local)
 2. Create config file
 3. Test the backup
 
 ## When to Backup
 
-- Automatically during `/weekly-review`
+- Automatically near the end of the `weekly-review` skill
 - Manually anytime with the commands above
 - Before major changes to journal structure

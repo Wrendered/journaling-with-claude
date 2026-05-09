@@ -16,16 +16,29 @@ First-time conversational setup. Builds the foundation files through interview, 
 
 ## First-Time Setup
 
-Before starting the conversation, check and create what's needed:
+Before starting the conversation, check and create what's needed. The structure must match what CLAUDE.md tells Claude to read first.
 
 1. If `CLAUDE.md` doesn't exist, copy from `CLAUDE.template.md`
-2. If `private/` doesn't exist, create the folder structure:
+2. If `private/` doesn't exist, create the full folder structure:
    - `private/journal/`
    - `private/assessments/`
    - `private/decisions/`
-3. If `private/self-map.md` doesn't exist, copy from `templates/self-map.template.md`
-4. If `private/dashboard.md` doesn't exist, copy from `templates/dashboard.template.md`
-5. Copy any missing `_index.md` files from templates
+   - `private/relationships/`
+   - `private/concepts/`
+   - `private/raw/`
+   - `private/archive/`
+   - (`private/history/` is created later by the import-history skill if user has historical material)
+3. Copy starter files from templates (only if not present):
+   - `templates/self-map.template.md` → `private/self-map.md`
+   - `templates/dashboard.template.md` → `private/dashboard.md`
+   - `templates/_index.template.md` → `private/_index.md`
+   - `templates/log.template.md` → `private/log.md`
+   - `templates/tags.template.md` → `private/tags.md`
+   - `templates/concepts/_index.template.md` → `private/concepts/_index.md`
+   - `templates/decisions/_index.template.md` → `private/decisions/_index.md`
+   - `templates/relationships/_index.template.md` → `private/relationships/_index.md`
+   - `templates/journal/_index.md` → `private/journal/_index.md`
+   - `templates/assessments/_index.md` → `private/assessments/_index.md`
 
 Do this silently, then begin the conversation.
 

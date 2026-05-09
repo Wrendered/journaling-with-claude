@@ -19,6 +19,9 @@
 
 set -e
 
+# Bail silently if jq isn't available — this hook is advisory, not load-bearing
+command -v jq >/dev/null 2>&1 || exit 0
+
 TOOL_INPUT=$(cat)
 hook_event=$(echo "$TOOL_INPUT" | jq -r '.hook_event_name // ""' 2>/dev/null || echo "")
 tool_name=$(echo "$TOOL_INPUT" | jq -r '.tool_name // ""' 2>/dev/null || echo "")

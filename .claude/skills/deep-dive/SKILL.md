@@ -9,6 +9,8 @@ when_to_use: |
   Also invoke when the user names a recurring pattern, surfaces a stuck decision, or
   references an assessment result they want to test.
 context: fork
+paths:
+  - "private/**"
 allowed-tools: Read, Edit, Write, Bash, Glob, Grep, Task
 ---
 

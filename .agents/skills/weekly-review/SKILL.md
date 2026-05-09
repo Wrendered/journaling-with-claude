@@ -1,6 +1,6 @@
 ---
 name: weekly-review
-description: Weekly retrospective ritual that reviews open decisions in private/decisions/, surfaces patterns repeating 3+ times across the week's journal, organizes the weekly journal file with Summary and Highlight Quotes sections, runs the backup skill, and updates dashboard tracking.
+description: Weekly retrospective ritual that reviews open decisions in private/decisions/, surfaces patterns repeating 3+ times across the week's journal, organizes the weekly journal file with Summary and Highlight Quotes sections, runs the backup skill, commits the local-only private/ git repo, and updates dashboard tracking.
 when_to_use: |
   ALWAYS invoke this skill when the user looks back at the past week.
   Trigger phrases (any of these): "weekly review", "let's review the week", "look back at this week",
@@ -95,6 +95,23 @@ Run weekly backup of private files:
 .claude/skills/backup/scripts/backup-private.sh
 ```
 Confirm backup completed. If not set up yet, invoke the setup-backups skill.
+
+### 9. Commit private/ to local git (1 min)
+The `private/` folder is its own local-only git repo (no remote). A weekly commit gives you a permanent restore point alongside the Dropbox backup zip — git stores diffs you can grep through, while the zip is a flat snapshot.
+
+```bash
+cd private && git add -A && git status --short
+```
+
+Show the user what changed. If anything is staged, commit with a short message:
+
+```bash
+cd private && git commit -m "Weekly review YYYY-Www: <one-line theme>"
+```
+
+If `git status` is clean (no changes since last commit), skip silently.
+
+**Never** add a remote to this repo. **Never** push it. It's local-only by design — the local git history + Dropbox backup are the two persistence layers; nothing leaves the machine via git.
 
 ## After
 

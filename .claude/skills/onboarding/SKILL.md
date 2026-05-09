@@ -1,6 +1,12 @@
 ---
 name: onboarding
-description: Initial first-time setup — conversational interview to populate self-map, dashboard, relationships, and configure daily/weekly rituals in CLAUDE.md. Use when user is new to the system, says they're getting started, asks "how do I begin", or no private/ files exist yet.
+description: First-time setup ritual that creates private/ folder structure from templates, conducts a conversational interview to populate self-map.md and dashboard.md, captures key relationships, and configures daily and weekly rituals in CLAUDE.md.
+when_to_use: |
+  ALWAYS invoke this skill when the user is new to the system or asks how to begin.
+  Trigger phrases (any of these): "I'm new here", "getting started", "set me up",
+  "how do I begin", "first time", "onboard me", "initial setup".
+  Also invoke automatically if private/self-map.md or private/dashboard.md don't exist
+  when the user opens their first session.
 allowed-tools: Read, Edit, Write, Bash, Glob
 ---
 
@@ -10,16 +16,29 @@ First-time conversational setup. Builds the foundation files through interview, 
 
 ## First-Time Setup
 
-Before starting the conversation, check and create what's needed:
+Before starting the conversation, check and create what's needed. The structure must match what CLAUDE.md tells Claude to read first.
 
 1. If `CLAUDE.md` doesn't exist, copy from `CLAUDE.template.md`
-2. If `private/` doesn't exist, create the folder structure:
+2. If `private/` doesn't exist, create the full folder structure:
    - `private/journal/`
    - `private/assessments/`
    - `private/decisions/`
-3. If `private/self-map.md` doesn't exist, copy from `templates/self-map.template.md`
-4. If `private/dashboard.md` doesn't exist, copy from `templates/dashboard.template.md`
-5. Copy any missing `_index.md` files from templates
+   - `private/relationships/`
+   - `private/concepts/`
+   - `private/raw/`
+   - `private/archive/`
+   - (`private/history/` is created later by the import-history skill if user has historical material)
+3. Copy starter files from templates (only if not present):
+   - `templates/self-map.template.md` → `private/self-map.md`
+   - `templates/dashboard.template.md` → `private/dashboard.md`
+   - `templates/_index.template.md` → `private/_index.md`
+   - `templates/log.template.md` → `private/log.md`
+   - `templates/tags.template.md` → `private/tags.md`
+   - `templates/concepts/_index.template.md` → `private/concepts/_index.md`
+   - `templates/decisions/_index.template.md` → `private/decisions/_index.md`
+   - `templates/relationships/_index.template.md` → `private/relationships/_index.md`
+   - `templates/journal/_index.md` → `private/journal/_index.md`
+   - `templates/assessments/_index.md` → `private/assessments/_index.md`
 
 Do this silently, then begin the conversation.
 

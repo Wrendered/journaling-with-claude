@@ -1,7 +1,17 @@
 ---
 name: deep-dive
-description: Extended exploration of a specific pattern, decision, feeling, theme, or framework calibration. Pulls historical quotes and context from history/. Use when user wants to "dig into" something specific, calibrate Enneagram/MBTI/etc. results, work through a recurring decision, explore why something keeps happening, or process a feeling that's been lingering.
-allowed-tools: Read, Edit, Write, Bash, Glob, Grep
+description: Extended exploration session that pulls quotes and context from private/history/, surfaces relevant patterns from self-map, and works through a specific theme, pattern, decision, feeling, or framework calibration with the user. Reaches for the right framework lens (CBT for distorted thoughts, IFS for inner conflict, WRAP for decisions, etc.) based on the topic.
+when_to_use: |
+  ALWAYS invoke this skill when the user wants to go deeper than a daily ritual on a specific topic.
+  Trigger phrases (any of these): "let's dig into", "deep-dive on", "explore this pattern",
+  "work through this decision", "calibrate my Enneagram", "process this feeling",
+  "what's underneath this", "why do I keep", "I want to understand this better".
+  Also invoke when the user names a recurring pattern, surfaces a stuck decision, or
+  references an assessment result they want to test.
+context: fork
+paths:
+  - "private/**"
+allowed-tools: Read, Edit, Write, Bash, Glob, Grep, Task
 ---
 
 # Deep Dive

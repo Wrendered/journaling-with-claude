@@ -1,6 +1,18 @@
 ---
 name: import-history
-description: Process historical journals, therapy notes, or past reflections into a searchable structure under private/history/. Use when user has old journals to bring in, mentions historical material, asks "can I import my old reflections", or has years of past writing to make searchable.
+description: Long-running historical journal import that processes years of past reflections, therapy notes, or letters into a searchable structure (private/history/) with theme files, relationship files, a quotes index, and a raw archive. Uses parallel subagents for large volumes.
+when_to_use: |
+  ALWAYS invoke this skill when the user wants to bring historical material into the system.
+  Trigger phrases (any of these): "import my old journals", "I have old reflections",
+  "process my history", "I have years of past writing", "bring in my therapy notes",
+  "import this archive", "I have a journal file", "I have old voice memos".
+  Also invoke if the user mentions personal historical material in private/import/
+  that needs processing.
+context: fork
+paths:
+  - "private/import/**"
+  - "private/raw/**"
+  - "private/history/**"
 allowed-tools: Read, Edit, Write, Bash, Glob, Grep, Task
 ---
 

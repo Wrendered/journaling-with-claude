@@ -1,6 +1,11 @@
 ---
 name: end-day
-description: Evening review — captures how the day went, wins, lessons, patterns, habit check, optional structured reflection (Seneca's questions, gratitude). Use when user winds down for the night, asks "how did today go", wants evening reflection, processes the day before bed, or says good night.
+description: Evening reflection ritual that captures how the day went, wins and lessons, runs the user's configured reflection questions (Seneca's questions, gratitude, etc.), checks habit streaks, and surfaces patterns repeating 3+ times.
+when_to_use: |
+  ALWAYS invoke this skill when the user winds down or signals end-of-day intent.
+  Trigger phrases (any of these): "good night", "wrapping up", "end of day", "how did today go",
+  "evening reflection", "let's review today", "before bed", "done for today",
+  or any clear shift to retrospective framing about today.
 allowed-tools: Read, Edit, Write, Bash, Glob
 ---
 
@@ -71,6 +76,11 @@ Don't belabor this — quick check, move on.
   ```
 - Quote important words verbatim
 - Note patterns, wins, or blocks
+
+**Also append a log entry to `private/log.md`:**
+- Format: `## [YYYY-MM-DD] evening | <one-line theme>`
+- Body: 1-3 sentences capturing the essence (what happened, what landed). Long-form goes in the journal; the log is the timeline.
+- This is what makes Claude able to grep the timeline cheaply later.
 
 **Update `private/dashboard.md`:**
 - Clear completed items from queue

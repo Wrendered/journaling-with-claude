@@ -1,6 +1,13 @@
 ---
 name: backup
-description: Run backups of private journal data to configured location. Use when user mentions backup, saving data, preserving journals, or during weekly review.
+description: Runs the configured backup script (.claude/skills/backup/scripts/backup-private.sh) to create a timestamped zip of private/ data in the user's chosen location. Supports an --encrypt flag for password-protected backups.
+when_to_use: |
+  ALWAYS invoke this skill when the user wants to run a backup right now.
+  Trigger phrases (any of these): "back up my data", "run a backup", "save my journal",
+  "preserve my private data", "back up to Dropbox", "manual backup".
+  Also invoke automatically near the end of the weekly-review skill (after journal organization),
+  or before any major restructuring of private/ files.
+  For first-time configuration use the `setup-backups` skill instead.
 allowed-tools: Read, Bash
 ---
 
@@ -47,13 +54,13 @@ ls -la [BACKUP_DIR]
 
 ## First-Time Setup
 
-If backup hasn't been configured yet, run `/setup-backups` command to:
+If backup hasn't been configured yet, invoke the `setup-backups` skill to:
 1. Choose backup location (Dropbox, iCloud, local)
 2. Create config file
 3. Test the backup
 
 ## When to Backup
 
-- Automatically during `/weekly-review`
+- Automatically near the end of the `weekly-review` skill
 - Manually anytime with the commands above
 - Before major changes to journal structure

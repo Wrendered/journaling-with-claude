@@ -80,23 +80,37 @@ Review this week's journal:
 - Anything connecting to `history/` patterns?
 - If pattern is stable/validated → move to `self-map.md`
 
-### 6. Assessment Check (1 min)
+### 6. Snapshot self-map.md if it changed (1 min)
+After any edits to `self-map.md` this week (whether from step 5 above, a `consolidate-memory` pass, or ad-hoc updates), snapshot it so you can see how your synthesis evolved over time:
+
+```bash
+# Compare current to most-recent snapshot; only snapshot if different
+LATEST=$(ls -t private/history/self-map-snapshots/self-map_*.md 2>/dev/null | head -1)
+if [[ -z "$LATEST" ]] || ! diff -q private/self-map.md "$LATEST" > /dev/null; then
+  cp private/self-map.md "private/history/self-map-snapshots/self-map_$(date +%Y-W%V).md"
+  echo "Snapshotted: self-map_$(date +%Y-W%V).md"
+fi
+```
+
+This is the "input never mutated" pattern — current `self-map.md` stays the live working copy, but each meaningful version is preserved alongside. Useful when you want to see how your self-understanding shifted over months/quarters without diving into git diffs.
+
+### 7. Assessment Check (1 min)
 Glance at `assessments/_index.md` Schedule:
 - Anything due soon?
 
-### 7. Next Week Preview
+### 8. Next Week Preview
 - What's the focus?
 - Any big events/deadlines?
 - Which decision(s) to work on? (Check `private/system-instructions.md` for decision work days)
 
-### 8. Backup (1 min)
+### 9. Backup (1 min)
 Run weekly backup of private files:
 ```bash
 .claude/skills/backup/scripts/backup-private.sh
 ```
 Confirm backup completed. If not set up yet, invoke the setup-backups skill.
 
-### 9. Commit private/ to local git (1 min)
+### 10. Commit private/ to local git (1 min)
 The `private/` folder is its own local-only git repo (no remote). A weekly commit gives you a permanent restore point alongside the Dropbox backup zip — git stores diffs you can grep through, while the zip is a flat snapshot.
 
 ```bash

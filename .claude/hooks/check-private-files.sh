@@ -35,9 +35,31 @@ fi
 # === Path patterns (single source of truth) ===
 # A staged-files regex that matches one filename per line.
 BLOCKED_FILES_REGEX='^private/|^CLAUDE\.md$|^CLAUDE\.local\.md$|^AGENTS\.override\.md$'
-# An argument-position regex for `git add <path>` etc.
-BLOCKED_ARG_REGEX='(^|[[:space:]])(private/|CLAUDE\.md|CLAUDE\.local\.md|AGENTS\.override\.md)([[:space:]/]|$)'
+# An argument-position regex for `git add <path>` etc. Matches both `private`
+# and anything under `private/`.
+BLOCKED_ARG_REGEX='(^|[[:space:]])(private(/[^[:space:]]*)?|CLAUDE\.md|CLAUDE\.local\.md|AGENTS\.override\.md)([[:space:]]|$)'
 BLOCKED_LIST="private/, CLAUDE.md, CLAUDE.local.md, or AGENTS.override.md"
+
+normalize_segment() {
+  local normalized="$1"
+  # Handle common shell spellings without trying to be a full shell parser:
+  #   git add ./private/foo
+  #   git add "AGENTS.override.md"
+  #   git add 'CLAUDE.local.md'
+  normalized="${normalized//\"/}"
+  normalized="${normalized//\'/}"
+  normalized="$(printf '%s' "$normalized" | sed -E 's#(^|[[:space:]])\./([[:space:]]|$)#\1.\2#g; s#(^|[[:space:]])\./#\1#g')"
+  printf '%s' "$normalized"
+}
+
+blocked_status_entries() {
+  local include_ignored="${1:-false}"
+  local status_args=(--porcelain --untracked-files=all)
+  [[ "$include_ignored" == "true" ]] && status_args+=(--ignored=matching)
+
+  cd "$PROJECT_DIR" && git status "${status_args[@]}" 2>/dev/null \
+    | grep -E "^[? !]{2} (private/|CLAUDE\.md|CLAUDE\.local\.md|AGENTS\.override\.md)" || true
+}
 
 # Per-segment check function
 check_segment() {
@@ -45,9 +67,11 @@ check_segment() {
   # Strip leading whitespace
   seg="$(echo "$seg" | sed -e 's/^[[:space:]]*//')"
   [[ -z "$seg" ]] && return 0
+  local normalized_seg
+  normalized_seg="$(normalize_segment "$seg")"
 
   # === GIT COMMIT ===
-  if [[ "$seg" =~ ^git[[:space:]]+commit ]]; then
+  if [[ "$normalized_seg" =~ ^git[[:space:]]+commit ]]; then
     if [[ "$hook_event" == "PreToolUse" ]]; then
       staged_files=$(cd "$PROJECT_DIR" && git diff --cached --name-only 2>/dev/null || echo "")
       if echo "$staged_files" | grep -qE "$BLOCKED_FILES_REGEX"; then
@@ -65,22 +89,25 @@ check_segment() {
   fi
 
   # === GIT ADD ===
-  if [[ "$seg" =~ ^git[[:space:]]+add ]]; then
+  if [[ "$normalized_seg" =~ ^git[[:space:]]+add ]]; then
     # Direct add of a blocked path as argument
-    if [[ "$seg" =~ $BLOCKED_ARG_REGEX ]]; then
+    if [[ "$normalized_seg" =~ $BLOCKED_ARG_REGEX ]]; then
       echo "" >&2
       echo "SECURITY BLOCK: Cannot add ${BLOCKED_LIST} to git!" >&2
       echo "  Command segment: $seg" >&2
       exit 2
     fi
-    # git add . or git add -A would sweep in untracked files matching blocked regex
-    if [[ "$seg" =~ git[[:space:]]+add[[:space:]]+(-f[[:space:]]+)?(\.|--all|-A)([[:space:]]|$) ]]; then
-      untracked=$(cd "$PROJECT_DIR" && git status --porcelain 2>/dev/null | grep -E "^\?\? ($BLOCKED_FILES_REGEX|private/.*|CLAUDE\.md|CLAUDE\.local\.md|AGENTS\.override\.md)" || echo "")
-      if [[ -n "$untracked" ]]; then
+    # git add . / -A / --all can sweep in blocked files. With -f/--force, ignored
+    # files are also candidates, so include ignored matches in the scan.
+    if [[ "$normalized_seg" =~ (^|[[:space:]])(\.|--all|-A)([[:space:]]|$) ]]; then
+      include_ignored=false
+      [[ "$normalized_seg" =~ (^|[[:space:]])(-f|--force)([[:space:]]|$) ]] && include_ignored=true
+      blocked_entries="$(blocked_status_entries "$include_ignored")"
+      if [[ -n "$blocked_entries" ]]; then
         echo "" >&2
-        echo "SECURITY BLOCK: 'git add .' would include blocked files!" >&2
-        echo "Untracked blocked files:" >&2
-        echo "$untracked" | sed 's/^/  /' >&2
+        echo "SECURITY BLOCK: bulk git add would include blocked files!" >&2
+        echo "Blocked files:" >&2
+        echo "$blocked_entries" | sed 's/^/  /' >&2
         echo "Use 'git add <specific-files>' instead." >&2
         exit 2
       fi
@@ -89,7 +116,7 @@ check_segment() {
   fi
 
   # === GIT PUSH ===
-  if [[ "$seg" =~ ^git[[:space:]]+push ]]; then
+  if [[ "$normalized_seg" =~ ^git[[:space:]]+push ]]; then
     remote_branch=$(cd "$PROJECT_DIR" && git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo "origin/main")
     commits_files=$(cd "$PROJECT_DIR" && git diff --name-only "$remote_branch"..HEAD 2>/dev/null || echo "")
     if echo "$commits_files" | grep -qE "$BLOCKED_FILES_REGEX"; then

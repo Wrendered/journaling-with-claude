@@ -59,7 +59,6 @@ private/                  # Your data (gitignored, stays local)
 ├── journal/              # Weekly + daily journal files
 ├── decisions/            # Big decisions you're working through
 ├── relationships/        # Key people in your life
-├── concepts/             # Atomic notes about you (declarative filenames)
 ├── history/              # Imported past material (years of writing, processed)
 ├── raw/                  # Untouched source inputs
 ├── archive/              # Closed/resolved items
@@ -77,7 +76,6 @@ templates/                # Starter files copied into private/ on onboarding
 - `_index.md` files at folder roots are MOCs — Claude reads them first to orient
 - YAML frontmatter on entries makes filtering grep-cheap (`status: open`, `type: decision`)
 - `log.md` uses prefix format `## [YYYY-MM-DD] type | Title` for cheap timeline reconstruction
-- Concept files use declarative filenames (`i-process-grief-by-building-things.md`) — the filename is the claim
 
 The reference folders (`frameworks/`, `daily-practices/`, `assessments/`, `exercises/`) are lenses for self-reflection, not therapeutic protocols. Mention any author, book, or concept that resonates and the add-framework skill will research and integrate it.
 
@@ -121,7 +119,6 @@ The system separates what you share (skills, frameworks, practices, scaffolding)
 
 **Personal, gitignored:**
 - `private/system-instructions.md` — your personalized config (tone, lens stack, daily ritual specifics). This is the file you edit.
-- `CLAUDE.local.md` and `AGENTS.override.md` — symlinks to `private/system-instructions.md`. Both tools auto-load these.
 - Everything in `private/` — your journal, decisions, relationships, history
 
 **During onboarding** the assistant walks you through setting up:
@@ -132,7 +129,7 @@ The system separates what you share (skills, frameworks, practices, scaffolding)
 
 These all land in `private/system-instructions.md`.
 
-**Sharing:** Fork the repo, customize `private/system-instructions.md` for yourself, pull updates to skills/frameworks/AGENTS.md without losing your preferences.
+**Sharing:** Fork the repo, customize `private/system-instructions.md` for yourself, pull updates to skills/frameworks/AGENTS.md without losing your preferences. `AGENTS.md` tells the assistant to read this file at session start.
 
 ---
 
@@ -151,7 +148,7 @@ The same daily ritual, the same lens stack, the same hooks fire in either tool.
 
 | Primitive | Source | How both tools find it |
 |---|---|---|
-| **System instructions** | `AGENTS.md` (public) + `private/system-instructions.md` (personal) | Codex reads natively. Claude Code reads via `CLAUDE.md` symlink → `AGENTS.md`, plus `CLAUDE.local.md` → `private/system-instructions.md`. |
+| **System instructions** | `AGENTS.md` (public) + `private/system-instructions.md` (personal) | Codex reads `AGENTS.md` natively. Claude Code reads the same public instructions via `CLAUDE.md` symlink/import. Both are then instructed to read `private/system-instructions.md` as the personal layer. |
 | **Skills** | `.agents/skills/<name>/SKILL.md` ([agentskills.io](https://agentskills.io) spec) | Codex reads natively. Claude Code reads via `.claude/skills/` symlink. |
 | **Hook scripts** | `.claude/hooks/` (env-agnostic shell scripts) | Both tools invoke the same scripts. `.codex/hooks/` is a symlink. |
 
@@ -209,7 +206,7 @@ Claude Code hooks that enforce rules. Located in `.claude/hooks/`.
 
 | Hook | Purpose |
 |------|---------|
-| `PreToolUse` | Blocks `git add`/`commit`/`push` of `private/`, `CLAUDE.md`, `CLAUDE.local.md`, or `AGENTS.override.md` |
+| `PreToolUse` | Blocks `git add`/`commit`/`push` of `private/` or `CLAUDE.md` |
 | `PostToolUse` | Reviews committed diffs for accidentally included personal info |
 
 ### Adding Your Own
@@ -222,7 +219,7 @@ Claude Code hooks that enforce rules. Located in `.claude/hooks/`.
 
 ## Privacy
 
-**Local storage:** The `private/` folder is gitignored. Your journal files stay on your machine in markdown you control. A security hook blocks any attempt to commit `private/`, `CLAUDE.md`, `CLAUDE.local.md`, or `AGENTS.override.md`.
+**Local storage:** The `private/` folder is gitignored. Your journal files stay on your machine in markdown you control. A security hook blocks any attempt to commit `private/` or `CLAUDE.md`.
 
 **But be aware:** When you use Claude Code, your prompts and file contents are sent to Anthropic's servers. This means your reflections pass through their API. What that means for privacy:
 

@@ -24,39 +24,39 @@ This is the Karpathy LLM Wiki "lint" operation: contradictions, stale claims, or
 - User explicitly asks for a vault audit / maintenance pass
 - Every 4-6 weeks during weekly-review (suggest, don't force)
 - After any major event that might have shifted self-knowledge (job change, breakup, big realization) — old claims may now be wrong
-- Before a deep-dive that's going to lean heavily on `self-map.md` / `concepts/` for context
+- Before a deep-dive that's going to lean heavily on `self-map.md` for context
 
 ## What to Check
 
 ### 1. Contradictions across pages
 
-Cross-reference claims in `self-map.md`, `concepts/*.md`, and recent journal entries. Look for:
+Cross-reference claims in `self-map.md`, `history/themes-*.md`, and recent journal entries. Look for:
 - Claims in `self-map.md` that recent entries directly contradict
-- Two concept files making opposing claims about the same pattern
+- Theme files (`history/themes-<topic>.md`) and `self-map.md` making opposing claims about the same pattern
 - Decisions whose status (`open` / `resolved`) doesn't match the journal narrative
 
 Use grep to find candidate pairs. Report with file paths and line numbers.
 
 ### 2. Stale claims
 
-Read `self-map.md` and each `concepts/*.md` file. Flag:
+Read `self-map.md` and `history/themes-*.md`. Flag:
 - Claims with `last-touched` more than 6 months old that haven't been validated
 - Claims that reference circumstances that have changed (job, relationship, location, health)
 - Claims using absolute language ("I always...", "I never...") that recent entries contradict
 
 ### 3. Orphan pages
 
-For each file in `private/concepts/`, `private/decisions/`, `private/relationships/`:
+For each file in `private/decisions/`, `private/relationships/`, `private/history/themes-*.md`:
 - Check if it's linked from `private/_index.md` or the relevant folder `_index.md`
 - Check if it's mentioned anywhere in journal entries from the last 90 days
 - Flag pages with no inbound references — they may be candidates for `private/archive/`
 
-### 4. Missing concept pages
+### 4. Missing pattern coverage
 
-Grep recent journal entries (last 90 days) for recurring themes and claims:
-- If a phrase or pattern appears 3+ times across journal entries
-- AND there's no concept file capturing it
-- THEN flag it as a candidate for graduating to `concepts/`
+Grep recent journal entries (last 90 days) for recurring themes:
+- If a pattern appears 3+ times across journal entries
+- AND `self-map.md` doesn't yet name it
+- THEN flag it as a candidate to add as a sharpened entry in `self-map.md` (or, if there's enough multi-year material, a new `history/themes-<topic>.md`)
 
 ### 5. Tag drift
 
@@ -92,8 +92,8 @@ Structure:
 ## 3. Orphan Pages
 [list with reasoning]
 
-## 4. Concepts Worth Graduating
-[recurring themes from journal that lack concept files]
+## 4. Patterns Worth Adding to self-map.md
+[recurring themes from journal that aren't yet named in self-map.md]
 
 ## 5. Tag Drift
 [tags in use vs. tags.md]
@@ -112,14 +112,14 @@ Structure:
 - Do not auto-edit files based on findings — surface them, let user decide
 - Do not move pages to `archive/` without explicit approval
 - Do not delete tags from `tags.md` without the user reviewing
-- Do not add new concept files — surface candidates, the user writes them
+- Do not edit `self-map.md` directly — surface candidate sharpenings/additions, the user decides
 
 ## Approach
 
 For large vaults, use parallel subagents:
 - Agent 1: Read `self-map.md` + recent journal entries, look for contradictions
-- Agent 2: Walk `concepts/`, check each for staleness and orphan status
-- Agent 3: Grep journal for recurring themes vs. existing concept files
+- Agent 2: Walk `history/themes-*.md` and `decisions/`, check each for staleness and orphan status
+- Agent 3: Grep journal for recurring themes vs. existing self-map entries
 - Agent 4: Audit tags + indexes
 
 Consolidate findings into the single report.

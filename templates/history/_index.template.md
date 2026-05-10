@@ -21,4 +21,4 @@ grep -l "anxious" history/themes-*.md
 ## Cross-references
 
 - Living relationship files in `private/relationships/` — analysis here is the historical archive
-- `private/concepts/` — atomic claims about you that are stable enough to evergreen, often distilled from history
+- `private/self-map.md` — stable patterns about you live here (not in per-claim files; that pattern was tried and dropped as redundant with self-map + history/themes)

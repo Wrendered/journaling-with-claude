@@ -2,10 +2,7 @@
 
 > **Canonical agent instructions for this repo.** Read natively by OpenAI Codex CLI (per the [agents.md spec](https://agents.md)) and by Claude Code via symlink/import (per [Anthropic's memory docs](https://code.claude.com/docs/en/memory)).
 >
-> **This file is public and generic** — works for any user. Personal customization goes in:
-> - `private/system-instructions.md` — your personalized operational manual
-> - `CLAUDE.local.md` (Anthropic local convention) — symlink → private/system-instructions.md
-> - `AGENTS.override.md` (Codex override convention) — symlink → private/system-instructions.md
+> **This file is public and generic** — works for any user. Personal customization has one source of truth: `private/system-instructions.md`.
 >
 > Personal data lives in `private/` (gitignored). The `check-private-files` hook blocks accidental commits.
 
@@ -20,27 +17,27 @@ This system uses a **three-layer architecture** modeled on Karpathy's "LLM Wiki"
 | Layer | Purpose | Where it lives |
 |-------|---------|----------------|
 | **Raw** | Immutable source inputs — voice memos, clipped articles, screenshots, imported journals | `private/raw/`, `private/import/`, `private/history/journal-raw.txt` |
-| **Wiki** | Your synthesized self-knowledge — patterns, decisions, relationships, concepts. Claude maintains this over time. | Everything else in `private/` |
-| **Schema** | Instructions teaching the assistant how the wiki is organized (this file + personal override) | `AGENTS.md` + `private/system-instructions.md` |
+| **Wiki** | Your synthesized self-knowledge — patterns, decisions, relationships, themes. Claude maintains this over time. | Everything else in `private/` |
+| **Schema** | Instructions teaching the assistant how the wiki is organized | `AGENTS.md` + `private/system-instructions.md` |
 
 **First-read order in any session:**
-1. `private/_index.md` — vault map
-2. `private/self-map.md` — patterns, drivers
-3. `private/dashboard.md` — current state
-4. Current week journal — recent context
+1. `private/system-instructions.md` — personal operating manual
+2. `private/_index.md` — vault map
+3. `private/self-map.md` — patterns, drivers
+4. `private/dashboard.md` — current state
+5. Current week journal — recent context
 
 **Conventions:**
 - `_index.md` files at folder roots are MOCs (Maps of Content) — read these first to orient
 - YAML frontmatter on all entries (see `<frontmatter>` below)
 - Append-only log at `private/log.md` with format `## [YYYY-MM-DD] type | Title` — greppable timeline
-- Atomic concept notes in `private/concepts/` with declarative filenames (`i-process-grief-by-building-things.md`)
 - Closed/resolved items move to `private/archive/` to keep active folders scannable
 
 **When to write what:**
 - Daily entries → `private/journal/YYYY-MM-DD.md`, plus log entry in `private/log.md`
 - Weekly rollup → `private/journal/YYYY-Www.md`
-- Insights that recur 3+ times → graduate from journal to `private/concepts/<declarative-claim>.md`
-- Patterns that stabilize → summarize in `private/self-map.md`
+- Patterns that stabilize → summarize in `private/self-map.md` (this is the patterns layer; don't create per-claim files — that pattern was tried and dropped as redundant)
+- Deep theme compilations (multi-year patterns, e.g. grief, decisions, identity) → `private/history/themes-<topic>.md`
 - Decisions → `private/decisions/<name>.md` with `status: open | resolved | abandoned` frontmatter
 
 </schema>
@@ -70,16 +67,6 @@ status: open
 created: 2026-05-09
 revisit: 2026-06-01
 tags: [career, big-decision]
----
-```
-
-**Concept file (atomic note):**
-```yaml
----
-type: concept
-created: 2026-05-09
-last-touched: 2026-05-09
-tags: [self-knowledge]
 ---
 ```
 
@@ -116,13 +103,13 @@ You help with:
 - **Autonomy:** High — Take initiative, update files, notice patterns
 - **Style:** [Customize: supportive, challenging, whatever helps you think clearly]
 - **Execution:** Act directly on files when appropriate, ask for approval on big changes
-- **Boundaries:** Never commit `private/` files, `CLAUDE.local.md`, `AGENTS.override.md`, or personal information
+- **Boundaries:** Never commit `private/` files or personal information
 
 </tone>
 
 ## Before Any Commit
 
-The `check-private-files` hook blocks `private/`, `CLAUDE.md`, `CLAUDE.local.md`, and `AGENTS.override.md` paths automatically. The `check-attribution` hook flags journal entries that mix the user's words with the assistant's framing. Beyond hooks, review the diff content before committing — check for personal information that might have ended up in allowed files (names, locations, private details). If you spot anything sensitive, don't commit.
+The `check-private-files` hook blocks `private/` and `CLAUDE.md` paths automatically. The `check-attribution` hook flags journal entries that mix the user's words with the assistant's framing. Beyond hooks, review the diff content before committing — check for personal information that might have ended up in allowed files (names, locations, private details). If you spot anything sensitive, don't commit.
 
 <working_style>
 
@@ -194,10 +181,12 @@ And Julia Galef's "Scout Mindset":
 
 ## Session Start
 
-At the start of each session, read:
-1. `private/self-map.md` — Patterns, drivers, self-knowledge
-2. `private/dashboard.md` — Current state, tasks, habits
-3. Current weekly journal (`private/journal/YYYY-Www.md`) — Recent context
+The canonical first-read order is in the `<schema>` section above. Repeated here for emphasis:
+1. `private/system-instructions.md` — personal operating manual (tone, lens stack, daily ritual specifics)
+2. `private/_index.md` — vault map
+3. `private/self-map.md` — patterns, drivers
+4. `private/dashboard.md` — current state, tasks, habits
+5. Current weekly journal (`private/journal/YYYY-Www.md`) — recent context
 
 For domain-specific sessions, also read relevant folders:
 - `private/goals/` — For long-term goals and life direction

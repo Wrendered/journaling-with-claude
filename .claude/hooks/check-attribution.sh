@@ -26,13 +26,25 @@ TOOL_INPUT=$(cat)
 hook_event=$(echo "$TOOL_INPUT" | jq -r '.hook_event_name // ""' 2>/dev/null || echo "")
 tool_name=$(echo "$TOOL_INPUT" | jq -r '.tool_name // ""' 2>/dev/null || echo "")
 
-# Only check Write/Edit/MultiEdit
-if [[ "$tool_name" != "Write" && "$tool_name" != "Edit" && "$tool_name" != "MultiEdit" ]]; then
-  exit 0
-fi
+# Tools that edit files: Claude Code (Write/Edit/MultiEdit) and OpenAI Codex CLI (apply_patch).
+# If we don't recognize the tool, exit silently — this hook is advisory.
+case "$tool_name" in
+  Write|Edit|MultiEdit|apply_patch) ;;
+  *) exit 0 ;;
+esac
 
-# Get the file path from tool input
+# Get the file path from tool input.
+# Claude Code: .tool_input.file_path (Write/Edit) or .tool_input.path
+# Codex apply_patch: paths are embedded in the patch payload at .tool_input.command (or .tool_input.input)
 file_path=$(echo "$TOOL_INPUT" | jq -r '.tool_input.file_path // .tool_input.path // ""' 2>/dev/null || echo "")
+
+# If we got nothing and this is Codex apply_patch, scrape the first path out of the patch payload.
+# apply_patch format includes lines like `*** Update File: path/to/file` and `*** Add File: path/to/file`.
+if [[ -z "$file_path" && "$tool_name" == "apply_patch" ]]; then
+  patch_payload=$(echo "$TOOL_INPUT" | jq -r '.tool_input.command // .tool_input.input // .tool_input.patch // ""' 2>/dev/null || echo "")
+  # Pick the first matching path from the patch
+  file_path=$(echo "$patch_payload" | grep -oE '^\*\*\* (Update|Add|Move) File: [^[:space:]]+' | head -1 | sed -E 's/^\*\*\* (Update|Add|Move) File: //')
+fi
 
 if [[ -z "$file_path" ]]; then
   exit 0

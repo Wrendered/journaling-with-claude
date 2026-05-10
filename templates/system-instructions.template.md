@@ -1,6 +1,6 @@
 # Personal System Instructions
 
-> **This is your file.** Personalize freely. Loaded by both Claude Code (via `CLAUDE.local.md` symlink) and OpenAI Codex CLI (via `AGENTS.override.md` symlink). Concatenated AFTER `AGENTS.md`, so this file refines the generic scaffolding.
+> **This is your file.** Personalize freely. Assistants read it after `AGENTS.md`, so this file refines the generic scaffolding without duplicating it.
 >
 > Path: `private/system-instructions.md`. Gitignored, never leaves your machine.
 

@@ -1,11 +1,8 @@
 # Private personal data - NEVER commit
 private/
 
-# Personal override files (Anthropic + Codex local-override conventions).
-# These are typically symlinks to private/system-instructions.md and never tracked.
+# Claude Code compatibility shim. Personal instructions live in private/system-instructions.md.
 CLAUDE.md
-CLAUDE.local.md
-AGENTS.override.md
 
 # Local agent tooling and session artifacts
 .claude/worktrees/

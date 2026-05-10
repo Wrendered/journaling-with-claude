@@ -1,7 +1,7 @@
 #!/bin/bash
 # Security hook: Block private files (hard) + Review diff content (soft)
 #
-# PreToolUse: Block private/ or CLAUDE.md / CLAUDE.local.md / AGENTS.override.md (exit 2)
+# PreToolUse: Block private/ or CLAUDE.md (exit 2)
 # PostToolUse: Inject diff to assistant for content review (additionalContext)
 #
 # Works in both Claude Code (sets $CLAUDE_PROJECT_DIR) and OpenAI Codex CLI
@@ -34,18 +34,17 @@ fi
 
 # === Path patterns (single source of truth) ===
 # A staged-files regex that matches one filename per line.
-BLOCKED_FILES_REGEX='^private/|^CLAUDE\.md$|^CLAUDE\.local\.md$|^AGENTS\.override\.md$'
+BLOCKED_FILES_REGEX='^private/|^CLAUDE\.md$'
 # An argument-position regex for `git add <path>` etc. Matches both `private`
 # and anything under `private/`.
-BLOCKED_ARG_REGEX='(^|[[:space:]])(private(/[^[:space:]]*)?|CLAUDE\.md|CLAUDE\.local\.md|AGENTS\.override\.md)([[:space:]]|$)'
-BLOCKED_LIST="private/, CLAUDE.md, CLAUDE.local.md, or AGENTS.override.md"
+BLOCKED_ARG_REGEX='(^|[[:space:]])(private(/[^[:space:]]*)?|CLAUDE\.md)([[:space:]]|$)'
+BLOCKED_LIST="private/ or CLAUDE.md"
 
 normalize_segment() {
   local normalized="$1"
   # Handle common shell spellings without trying to be a full shell parser:
   #   git add ./private/foo
-  #   git add "AGENTS.override.md"
-  #   git add 'CLAUDE.local.md'
+  #   git add "private/journal/today.md"
   normalized="${normalized//\"/}"
   normalized="${normalized//\'/}"
   normalized="$(printf '%s' "$normalized" | sed -E 's#(^|[[:space:]])\./([[:space:]]|$)#\1.\2#g; s#(^|[[:space:]])\./#\1#g')"
@@ -58,7 +57,7 @@ blocked_status_entries() {
   [[ "$include_ignored" == "true" ]] && status_args+=(--ignored=matching)
 
   cd "$PROJECT_DIR" && git status "${status_args[@]}" 2>/dev/null \
-    | grep -E "^[? !]{2} (private/|CLAUDE\.md|CLAUDE\.local\.md|AGENTS\.override\.md)" || true
+    | grep -E "^[? !]{2} (private/|CLAUDE\.md)" || true
 }
 
 # Per-segment check function

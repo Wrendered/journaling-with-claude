@@ -155,42 +155,72 @@ segment_is_quote_fragment() {
   [[ $((single_count % 2)) -ne 0 || $((double_count % 2)) -ne 0 ]]
 }
 
-while IFS= read -r segment; do
-  segment_trimmed=$(echo "$segment" | sed -e 's/^[[:space:]]*//')
+# For commit detection, only inspect the FIRST non-cd segment. This avoids false
+# positives from prose / markdown bodies containing embedded `&&` and `git commit`
+# (e.g., `gh pr create --body "...cd private && git commit..."` would otherwise
+# split at the `&&` inside the quoted body and produce a fake `git commit` segment).
+#
+# We still run check_segment on ALL segments for security blocking — this restriction
+# only narrows commit-detection for the PostToolUse content-review.
+detect_commit_from_first_segment() {
+  local first_real_segment=""
+  local seg_count=0
+  local saw_leading_cd=false
 
-  # Skip fragments from a sed-split inside a quoted string.
-  if segment_is_quote_fragment "$segment_trimmed"; then
-    continue
-  fi
-
-  # Track `cd <dir>` so we can attribute a later `git commit` to the right repo.
-  if [[ "$segment_trimmed" =~ ^cd[[:space:]]+([^[:space:]]+) ]]; then
-    cd_target="${BASH_REMATCH[1]}"
-    # Strip surrounding quotes (defense against `cd "foo"`)
-    cd_target="${cd_target%\"}"; cd_target="${cd_target#\"}"
-    cd_target="${cd_target%\'}"; cd_target="${cd_target#\'}"
-    if [[ "$cd_target" = /* ]]; then
-      WORKING_DIR="$cd_target"
-    else
-      WORKING_DIR="$PROJECT_DIR/$cd_target"
+  while IFS= read -r seg; do
+    local seg_trimmed
+    seg_trimmed=$(echo "$seg" | sed -e 's/^[[:space:]]*//')
+    [[ -z "$seg_trimmed" ]] && continue
+    if segment_is_quote_fragment "$seg_trimmed"; then
+      continue
     fi
-  fi
 
-  # Detect a real `git commit` (anchored to start of segment after normalization).
-  normalized=$(normalize_segment "$segment_trimmed")
+    seg_count=$((seg_count + 1))
+
+    # Allow at most one leading `cd <dir>` before the real command.
+    if [[ $seg_count -eq 1 && "$seg_trimmed" =~ ^cd[[:space:]]+([^[:space:]]+) ]]; then
+      saw_leading_cd=true
+      local cd_target="${BASH_REMATCH[1]}"
+      cd_target="${cd_target%\"}"; cd_target="${cd_target#\"}"
+      cd_target="${cd_target%\'}"; cd_target="${cd_target#\'}"
+      if [[ "$cd_target" = /* ]]; then
+        WORKING_DIR="$cd_target"
+      else
+        WORKING_DIR="$PROJECT_DIR/$cd_target"
+      fi
+      continue
+    fi
+
+    # First non-cd segment is the "real" command. Stop here.
+    first_real_segment="$seg_trimmed"
+    break
+  done <<< "$1"
+
+  [[ -z "$first_real_segment" ]] && return
+
+  local normalized
+  normalized=$(normalize_segment "$first_real_segment")
   if [[ "$normalized" =~ ^git[[:space:]]+commit ]]; then
     COMMIT_DETECTED=true
     COMMIT_DIR="$WORKING_DIR"
-    # If the commit is happening in a subdir that has its own .git, treat it as
-    # a sub-repo commit. Don't run the parent-repo content-review against it
-    # (the diff would be wrong AND might surface unrelated PII).
     if [[ "$WORKING_DIR" != "$PROJECT_DIR" ]]; then
       if [[ -d "$WORKING_DIR/.git" || -f "$WORKING_DIR/.git" ]]; then
         COMMIT_IN_SUBREPO=true
       fi
     fi
   fi
+}
 
+# Detect commit from the strict first-segment check.
+detect_commit_from_first_segment "$segments_text"
+
+# Run security blocking on ALL segments (kept loose to catch dangerous patterns
+# anywhere in compound commands).
+while IFS= read -r segment; do
+  segment_trimmed=$(echo "$segment" | sed -e 's/^[[:space:]]*//')
+  if segment_is_quote_fragment "$segment_trimmed"; then
+    continue
+  fi
   check_segment "$segment"
 done <<< "$segments_text"
 

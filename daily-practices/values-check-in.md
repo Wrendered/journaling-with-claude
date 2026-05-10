@@ -73,4 +73,4 @@ Values clarification appears in multiple frameworks: ACT (Acceptance and Commitm
 
 ---
 
-*Can be used in /start-day (configure in CLAUDE.md → Daily Rituals). See [Brene Brown](../frameworks/brene-brown.md) for values exercises.*
+*Can be used in /start-day (configure in `private/system-instructions.md → Daily Rituals`). See [Brene Brown](../frameworks/brene-brown.md) for values exercises.*

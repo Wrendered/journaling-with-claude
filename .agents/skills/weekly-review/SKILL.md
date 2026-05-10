@@ -14,7 +14,7 @@ allowed-tools: Read, Edit, Write, Bash, Glob, Grep
 
 Once-per-week retrospective on decisions, experiments, and patterns. Organizes the weekly journal for future searchability.
 
-Check: `AGENTS.md → Weekly Rhythm` for this user's configured timing.
+Check: `private/system-instructions.md → Weekly Rhythm` for this user's configured timing. If that file is missing or silent, fall back to `AGENTS.md → Weekly Rhythm`.
 
 ## Tasks Context (if Todoist connected)
 
@@ -25,7 +25,7 @@ Check: `AGENTS.md → Weekly Rhythm` for this user's configured timing.
 
 **If not configured** (still has `[Example:...]` placeholders):
 - Say: "Your weekly rhythm isn't configured yet. Want to set it up now, or just run the review?"
-- If yes: Walk through the configuration from the onboarding skill or edit AGENTS.md directly
+- If yes: Walk through the configuration from the onboarding skill or edit `private/system-instructions.md` directly
 - If skip: Run review with sensible defaults
 
 ## Flow
@@ -37,7 +37,7 @@ Pull all files from `private/decisions/`:
   - Any deadlines approaching?
   - Want to work on it next week?
 - Update urgency/status
-- Pick 1-2 for next week's decision work (see AGENTS.md → Weekly Rhythm for days)
+- Pick 1-2 for next week's decision work (see `private/system-instructions.md → Weekly Rhythm` for days)
 
 ### 2. Task Review (if Todoist connected) (5 min)
 If completed tasks were fetched:
@@ -87,7 +87,7 @@ Glance at `assessments/_index.md` Schedule:
 ### 7. Next Week Preview
 - What's the focus?
 - Any big events/deadlines?
-- Which decision(s) to work on? (Check AGENTS.md for decision work days)
+- Which decision(s) to work on? (Check `private/system-instructions.md` for decision work days)
 
 ### 8. Backup (1 min)
 Run weekly backup of private files:

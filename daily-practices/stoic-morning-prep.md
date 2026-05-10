@@ -64,4 +64,4 @@ The point: prepare, don't be surprised, respond with virtue anyway.
 
 ---
 
-*Can be used in /start-day (configure in CLAUDE.md → Daily Rituals). See [Stoicism](../frameworks/stoicism.md) for the full philosophy.*
+*Can be used in /start-day (configure in `private/system-instructions.md → Daily Rituals`). See [Stoicism](../frameworks/stoicism.md) for the full philosophy.*

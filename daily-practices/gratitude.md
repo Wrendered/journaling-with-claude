@@ -61,4 +61,4 @@ Ancient practice across traditions. Modern research by Robert Emmons and others 
 
 ---
 
-*Can be used in /start-day (configure in CLAUDE.md → Daily Rituals). Can be added to evening review anytime.*
+*Can be used in /start-day (configure in `private/system-instructions.md → Daily Rituals`). Can be added to evening review anytime.*

@@ -66,7 +66,7 @@ Keep light — identity framing helps but shouldn't feel heavy.
 
 ## Rotating Element
 
-**Check AGENTS.md → Daily Rituals → Morning** for this user's configured rotating element.
+**Check `private/system-instructions.md → Daily Rituals → Morning`** for this user's configured rotating element. If that file is missing or silent, fall back to `AGENTS.md → Daily Rituals`.
 
 **If not configured** (still has `[Example:...]` placeholders, or section is missing):
 - Say: "Your daily rituals aren't configured yet. Want to set them up now, or skip for today?"

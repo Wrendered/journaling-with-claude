@@ -373,7 +373,7 @@ Assessment results live in `assessments/` (full details) and `self-map.md` (Cros
 
 ## Daily Rituals
 
-> **CUSTOMIZE THIS SECTION.** The start-day and end-day skills read from here to know what prompts and questions to use. Delete what doesn't resonate, add what does.
+> **PUBLIC DEFAULTS.** Personal ritual preferences live in `private/system-instructions.md`. The start-day and end-day skills read that file first, then fall back to these defaults if no personal config exists.
 
 **Morning (start-day):**
 1. Pulse check + Set MIT (built into the skill)
@@ -386,7 +386,7 @@ Assessment results live in `assessments/` (full details) and `self-map.md` (Cros
 | Wed | [Example: Gratitude — "What's one thing working well?"] |
 | Sat/Sun | [Example: Lighter touch or skip] |
 
-*Or delete the table entirely and just set MIT with no extra prompt.*
+*In `private/system-instructions.md`, you can replace this table, delete it, or just set MIT with no extra prompt.*
 
 **Evening (end-day):**
 1. Pulse check + capture the day (built into the skill)
@@ -403,11 +403,11 @@ Option B: Simple gratitude
 Option C: No structured questions
 - Just capture how the day went and close.
 
-*Delete the options you don't want. Keep what resonates.*
+*In `private/system-instructions.md`, keep only what resonates.*
 
 ## Weekly Rhythm
 
-> **CUSTOMIZE THIS SECTION.** The plan-week and weekly-review skills reference this for timing and focus. Adjust to fit your life.
+> **PUBLIC DEFAULTS.** Personal weekly cadence lives in `private/system-instructions.md`. The plan-week and weekly-review skills read that file first, then fall back to these defaults.
 
 **Two weekly skills:**
 - plan-week — Beginning of week. Set focus, habits, intentions.

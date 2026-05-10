@@ -221,6 +221,8 @@ Claude Code hooks that enforce rules. Located in `.claude/hooks/`.
 
 **Local storage:** The `private/` folder is gitignored. Your journal files stay on your machine in markdown you control. A security hook blocks any attempt to commit `private/` or `CLAUDE.md`.
 
+See [SECURITY.md](SECURITY.md) for the full public-release and privacy checklist.
+
 **But be aware:** When you use Claude Code, your prompts and file contents are sent to Anthropic's servers. This means your reflections pass through their API. What that means for privacy:
 
 - **Training:** Consumer accounts (Pro/Max) can opt out of model training at [claude.ai/settings](https://claude.ai/settings). Commercial API accounts are excluded from training by default.

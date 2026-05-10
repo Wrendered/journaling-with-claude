@@ -31,7 +31,7 @@ Daily practices are short prompts you use as part of `/start-day` and `/end-day`
 
 ## Example Rotation
 
-Configure `/start-day` and `/end-day` to use these on a rotating schedule. Edit `CLAUDE.md → Daily Rituals` to set your preferences.
+Configure `/start-day` and `/end-day` to use these on a rotating schedule. Edit `private/system-instructions.md → Daily Rituals` to set your preferences.
 
 **Example morning rotation:**
 

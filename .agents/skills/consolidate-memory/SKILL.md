@@ -146,6 +146,8 @@ The report (or a deep-consolidate cross-decade pass over `raw/historical-journal
 cp private/self-map.md "private/history/self-map-snapshots/self-map_$(date +%Y-%m-%d)_pre-<short-finding-name>.md"
 ```
 
+**Snapshots are immutable** — once written, do not edit them, even to correct attribution or typos. They preserve "what we believed at that moment," errors and all. Fix issues in the current `self-map.md` instead; the next snapshot captures the correction. If you find yourself wanting to edit a snapshot, take a *new* snapshot of the corrected state.
+
 **5. Edit using this citation format:**
 
 ```markdown

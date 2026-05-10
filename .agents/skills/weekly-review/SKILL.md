@@ -94,6 +94,8 @@ fi
 
 This is the "input never mutated" pattern — current `self-map.md` stays the live working copy, but each meaningful version is preserved alongside. Useful when you want to see how your self-understanding shifted over months/quarters without diving into git diffs.
 
+**Snapshots are immutable.** Once a snapshot exists in `private/history/self-map-snapshots/`, do not edit it — including for attribution corrections, typo fixes, or restructuring. The whole point of a snapshot is to preserve "what we believed at that moment," errors and all. If a past self-map.md mis-attributed something, fix it in the *current* self-map.md (which the next snapshot will capture); the historical snapshot stays as evidence of what the synthesis used to be. If you find yourself wanting to edit a snapshot, that's a signal to take a *new* snapshot of the corrected current state instead.
+
 ### 7. Assessment Check (1 min)
 Glance at `assessments/_index.md` Schedule:
 - Anything due soon?

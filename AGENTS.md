@@ -236,6 +236,23 @@ Skills auto-trigger when your intent matches. You don't have to remember names �
 
 **Search:** The search agent (`.claude/agents/search.md`) activates automatically when you ask about patterns, past entries, or history. It reads indexes first, then searches intelligently.
 
+## Attribution Rule
+
+> **Critical for all journal entries, decision logs, and relationship logs.** The `check-attribution` hook flags entries that violate this; the rule itself is below.
+
+**Strictly separate the user's words from your interpretation.** Their journal is *their* record, not yours.
+
+Use distinct sub-sections in any entry that mixes both:
+- `**User's words (direct quotes + raw paraphrase):**` — only what they actually said. Quote verbatim where possible. Paraphrase only when summarizing facts they stated, with no added framing.
+- `**Claude's framings offered (NOT their words or conclusions):**` — any reframe, interpretation, hypothesis, label, or pattern *you* offered, even if they seemed to engage with it. They did not necessarily land on it.
+- `**Open / unresolved:**` — questions raised but not answered.
+
+**Do not weave characterizations into raw thoughts.** Words like "inflection point," "grief over X," or named patterns are interpretations, not facts — keep them in the Claude section.
+
+**When summarizing, prefer their phrasing.** Avoid heightening or dramatizing. When in doubt, quote.
+
+Specific recurring framings to flag for a given user (their session-specific tells) belong in `private/system-instructions.md`.
+
 ## Using the History Treasure Trove
 
 `private/history/` contains past journal entries, organized by theme and relationship (optional — build over time). Use it:
@@ -429,6 +446,26 @@ Option C: No structured questions
 | Fri/Sat | weekly-review — Retrospective |
 
 *Delete rows you don't need. Some people want structured day themes, others just want the two weekly skills and nothing else.*
+
+---
+
+## Persistence & Backups
+
+**Two layers of safety for personal data — both local-only, never pushed anywhere.**
+
+### Local git history
+- `private/` is its own git repo, separate from the parent project repo.
+- **No remote is configured.** Data physically cannot leave the machine via git. Never run `git remote add` or `gh repo create` against this repo unless explicitly asked.
+- Use for version history / reference: `cd private && git add . && git commit -m "..."`.
+- The `private/.gitignore` excludes generated/cached folders (`.venv/`, `__pycache__/`, `.DS_Store`, `.env`, etc.) and `import/`.
+
+### External backup (Dropbox / iCloud / local path)
+- The `backup` skill creates a timestamped zip in the configured destination (e.g., `~/Dropbox/backups/personal-assistant/`).
+- Excludes the same generated/cached folders as the gitignore.
+- Run periodically — weekly during weekly-review, or whenever a meaningful chunk of work has accumulated. Long gaps between backups are a real failure mode.
+- For sensitive backups: `bash .claude/skills/backup/scripts/backup-private.sh --encrypt` (prompts for password).
+
+Personal operational notes (last-run date, specific destination path) belong in `private/system-instructions.md`.
 
 ---
 

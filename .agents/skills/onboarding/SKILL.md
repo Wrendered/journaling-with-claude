@@ -24,7 +24,6 @@ Before starting the conversation, check and create what's needed. The structure 
    - `private/assessments/`
    - `private/decisions/`
    - `private/relationships/`
-   - `private/concepts/`
    - `private/raw/`
    - `private/archive/`
    - (`private/history/` is created later by the import-history skill if user has historical material)
@@ -35,7 +34,6 @@ Before starting the conversation, check and create what's needed. The structure 
    - `templates/_index.template.md` → `private/_index.md`
    - `templates/log.template.md` → `private/log.md`
    - `templates/tags.template.md` → `private/tags.md`
-   - `templates/concepts/_index.template.md` → `private/concepts/_index.md`
    - `templates/decisions/_index.template.md` → `private/decisions/_index.md`
    - `templates/relationships/_index.template.md` → `private/relationships/_index.md`
    - `templates/journal/_index.md` → `private/journal/_index.md`

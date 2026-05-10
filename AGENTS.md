@@ -20,7 +20,7 @@ This system uses a **three-layer architecture** modeled on Karpathy's "LLM Wiki"
 | Layer | Purpose | Where it lives |
 |-------|---------|----------------|
 | **Raw** | Immutable source inputs — voice memos, clipped articles, screenshots, imported journals | `private/raw/`, `private/import/`, `private/history/journal-raw.txt` |
-| **Wiki** | Your synthesized self-knowledge — patterns, decisions, relationships, concepts. Claude maintains this over time. | Everything else in `private/` |
+| **Wiki** | Your synthesized self-knowledge — patterns, decisions, relationships, themes. Claude maintains this over time. | Everything else in `private/` |
 | **Schema** | Instructions teaching the assistant how the wiki is organized (this file + personal override) | `AGENTS.md` + `private/system-instructions.md` |
 
 **First-read order in any session:**
@@ -33,14 +33,13 @@ This system uses a **three-layer architecture** modeled on Karpathy's "LLM Wiki"
 - `_index.md` files at folder roots are MOCs (Maps of Content) — read these first to orient
 - YAML frontmatter on all entries (see `<frontmatter>` below)
 - Append-only log at `private/log.md` with format `## [YYYY-MM-DD] type | Title` — greppable timeline
-- Atomic concept notes in `private/concepts/` with declarative filenames (`i-process-grief-by-building-things.md`)
 - Closed/resolved items move to `private/archive/` to keep active folders scannable
 
 **When to write what:**
 - Daily entries → `private/journal/YYYY-MM-DD.md`, plus log entry in `private/log.md`
 - Weekly rollup → `private/journal/YYYY-Www.md`
-- Insights that recur 3+ times → graduate from journal to `private/concepts/<declarative-claim>.md`
-- Patterns that stabilize → summarize in `private/self-map.md`
+- Patterns that stabilize → summarize in `private/self-map.md` (this is the patterns layer; don't create per-claim files — that pattern was tried and dropped as redundant)
+- Deep theme compilations (multi-year patterns, e.g. grief, decisions, identity) → `private/history/themes-<topic>.md`
 - Decisions → `private/decisions/<name>.md` with `status: open | resolved | abandoned` frontmatter
 
 </schema>
@@ -70,16 +69,6 @@ status: open
 created: 2026-05-09
 revisit: 2026-06-01
 tags: [career, big-decision]
----
-```
-
-**Concept file (atomic note):**
-```yaml
----
-type: concept
-created: 2026-05-09
-last-touched: 2026-05-09
-tags: [self-knowledge]
 ---
 ```
 

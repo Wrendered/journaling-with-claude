@@ -17,7 +17,13 @@
 
 ## Folders
 
-- [concepts/](concepts/_index.md) — Atomic notes about myself (one idea per file, declarative filenames)
+<!-- Stable patterns about yourself live in self-map.md, not their own files.
+     Deep theme compilations belong in history/themes-<topic>.md if you have
+     substantial historical material. The atomic-notes-per-claim pattern
+     was tried and removed: it was redundant with self-map + history/themes,
+     and per-claim filenames clashed with the "don't diagnose, frame as
+     observation" tone discipline. -->
+
 - [decisions/](decisions/_index.md) — Open and resolved decisions
 - [relationships/](relationships/_index.md) — Key people in my life
 - [journal/](journal/_index.md) — Weekly journal files (`YYYY-Www.md`) and daily entries (`YYYY-MM-DD.md`)

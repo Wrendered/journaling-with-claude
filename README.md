@@ -59,7 +59,6 @@ private/                  # Your data (gitignored, stays local)
 ├── journal/              # Weekly + daily journal files
 ├── decisions/            # Big decisions you're working through
 ├── relationships/        # Key people in your life
-├── concepts/             # Atomic notes about you (declarative filenames)
 ├── history/              # Imported past material (years of writing, processed)
 ├── raw/                  # Untouched source inputs
 ├── archive/              # Closed/resolved items

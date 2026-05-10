@@ -131,24 +131,82 @@ check_segment() {
 }
 
 # === Handle compound commands by splitting on && and ; ===
-# Use awk to split, preserving empty segments
-# Replace common compound separators with newlines for easy iteration
+# Naive split: doesn't respect shell quoting. We compensate below by detecting
+# fragments that look truncated (unbalanced quotes) and ignoring them.
 segments_text=$(echo "$command" | sed -E 's/[[:space:]]*&&[[:space:]]*/\n/g; s/[[:space:]]*;[[:space:]]*/\n/g; s/[[:space:]]*\|\|[[:space:]]*/\n/g')
 
+# Track during the loop whether an actual `git commit` was executed in the OUTER
+# repo (PROJECT_DIR). Used by the PostToolUse content-review at the bottom.
+COMMIT_DETECTED=false
+COMMIT_IN_SUBREPO=false
+COMMIT_DIR="$PROJECT_DIR"
+# Tracks the cwd as we walk segments. Updated by `cd <dir>` segments so a later
+# `git commit` segment can be attributed to the right repo.
+WORKING_DIR="$PROJECT_DIR"
+
+# Unbalanced-quote detector. If a segment has an odd count of either quote type,
+# it's almost certainly a fragment of a quoted string that the naive `&&`/`;` split
+# tore in half — like `echo "When I 'cd && git commit', the hook..."`. Skip those.
+segment_is_quote_fragment() {
+  local s="$1"
+  local single_count double_count
+  single_count=$(printf '%s' "$s" | tr -cd "'" | wc -c | tr -d ' ')
+  double_count=$(printf '%s' "$s" | tr -cd '"' | wc -c | tr -d ' ')
+  [[ $((single_count % 2)) -ne 0 || $((double_count % 2)) -ne 0 ]]
+}
+
 while IFS= read -r segment; do
+  segment_trimmed=$(echo "$segment" | sed -e 's/^[[:space:]]*//')
+
+  # Skip fragments from a sed-split inside a quoted string.
+  if segment_is_quote_fragment "$segment_trimmed"; then
+    continue
+  fi
+
+  # Track `cd <dir>` so we can attribute a later `git commit` to the right repo.
+  if [[ "$segment_trimmed" =~ ^cd[[:space:]]+([^[:space:]]+) ]]; then
+    cd_target="${BASH_REMATCH[1]}"
+    # Strip surrounding quotes (defense against `cd "foo"`)
+    cd_target="${cd_target%\"}"; cd_target="${cd_target#\"}"
+    cd_target="${cd_target%\'}"; cd_target="${cd_target#\'}"
+    if [[ "$cd_target" = /* ]]; then
+      WORKING_DIR="$cd_target"
+    else
+      WORKING_DIR="$PROJECT_DIR/$cd_target"
+    fi
+  fi
+
+  # Detect a real `git commit` (anchored to start of segment after normalization).
+  normalized=$(normalize_segment "$segment_trimmed")
+  if [[ "$normalized" =~ ^git[[:space:]]+commit ]]; then
+    COMMIT_DETECTED=true
+    COMMIT_DIR="$WORKING_DIR"
+    # If the commit is happening in a subdir that has its own .git, treat it as
+    # a sub-repo commit. Don't run the parent-repo content-review against it
+    # (the diff would be wrong AND might surface unrelated PII).
+    if [[ "$WORKING_DIR" != "$PROJECT_DIR" ]]; then
+      if [[ -d "$WORKING_DIR/.git" || -f "$WORKING_DIR/.git" ]]; then
+        COMMIT_IN_SUBREPO=true
+      fi
+    fi
+  fi
+
   check_segment "$segment"
 done <<< "$segments_text"
 
-# === PostToolUse content review (single trigger; not per-segment) ===
-if [[ "$hook_event" == "PostToolUse" && "$command" =~ git[[:space:]]+commit ]]; then
-  committed_diff=$(cd "$PROJECT_DIR" && git show --format="" HEAD 2>/dev/null || echo "")
+# === PostToolUse content review (only fires for real outer-repo commits) ===
+if [[ "$hook_event" == "PostToolUse" && "$COMMIT_DETECTED" == "true" && "$COMMIT_IN_SUBREPO" == "false" ]]; then
+  committed_diff=$(cd "$COMMIT_DIR" && git show --format="" HEAD 2>/dev/null || echo "")
+  committed_sha=$(cd "$COMMIT_DIR" && git rev-parse --short HEAD 2>/dev/null || echo "")
   if [[ -n "$committed_diff" ]]; then
     jq -n \
       --arg diff "$committed_diff" \
+      --arg sha "$committed_sha" \
+      --arg dir "$COMMIT_DIR" \
       '{
         hookSpecificOutput: {
           hookEventName: "PostToolUse",
-          additionalContext: ("CONTENT REVIEW: Check this committed diff for personal information (names, locations, private details). If you see any sensitive info, recommend: git reset --soft HEAD~1\n\n" + $diff)
+          additionalContext: ("CONTENT REVIEW (commit " + $sha + " in " + $dir + "): Check this committed diff for personal information (names, locations, private details). If you see any sensitive info, recommend: git reset --soft HEAD~1\n\n" + $diff)
         }
       }'
   fi

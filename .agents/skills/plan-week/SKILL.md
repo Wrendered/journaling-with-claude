@@ -20,7 +20,7 @@ Run: `date '+%A %B %d, %Y'`
 
 Read: `private/dashboard.md` (current state, habits, active decisions)
 
-Check: `AGENTS.md → Weekly Rhythm` for this user's configured timing and cadence.
+Check: `private/system-instructions.md → Weekly Rhythm` for this user's configured timing and cadence. If that file is missing or silent, fall back to `AGENTS.md → Weekly Rhythm`.
 
 ## Tasks (if Todoist connected)
 
@@ -31,11 +31,11 @@ Check: `AGENTS.md → Weekly Rhythm` for this user's configured timing and caden
 
 ## Purpose
 
-**Timing:** Check AGENTS.md for when user prefers to run this (Sun/Mon typical, but configurable).
+**Timing:** Check `private/system-instructions.md` for when user prefers to run this (Sun/Mon typical, but configurable).
 
 **If not configured** (still has `[Example:...]` placeholders):
 - Say: "Your weekly rhythm isn't configured yet. Want to set it up now, or just run the planning?"
-- If yes: Walk through the configuration from the onboarding skill or edit AGENTS.md directly
+- If yes: Walk through the configuration from the onboarding skill or edit `private/system-instructions.md` directly
 - If skip: Run planning with sensible defaults
 
 ## Flow
@@ -66,7 +66,7 @@ If no habits yet, ask if they want to set one up. Use Atomic Habits framework:
 
 Glance at `private/decisions/`:
 - Any with approaching deadlines?
-- Which 1-2 to work on this week? (Check AGENTS.md → Weekly Rhythm for decision work days)
+- Which 1-2 to work on this week? (Check `private/system-instructions.md → Weekly Rhythm` for decision work days)
 
 ### 4. Commitments and deadlines
 

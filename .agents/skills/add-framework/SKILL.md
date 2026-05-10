@@ -301,7 +301,7 @@ If yes, the approach depends on type:
 
 **Practices** (Morning Pages, Bullet Journal, etc.):
 - Add to morning/evening rotation if desired
-- Set up in AGENTS.md Daily Rituals section
+- Set up in `private/system-instructions.md` Daily Rituals section
 - Track in dashboard if building the habit
 
 **After personalization:** Update `private/assessments/_index.md` — change Personalized from "—" to "✓".

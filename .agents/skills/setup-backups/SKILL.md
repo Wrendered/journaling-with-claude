@@ -34,11 +34,11 @@ Before setup, confirm your backup destination's parent directory exists:
 
 Ask user: "Where do you want backups stored?"
 
-Default: `~/Dropbox/backups/personal-assistant/`
+Default: `~/Dropbox/backups/journaling-with-claude/`
 
 Other options:
-- iCloud: `~/Library/Mobile Documents/com~apple~CloudDocs/backups/personal-assistant/`
-- Local: `~/backups/personal-assistant/`
+- iCloud: `~/Library/Mobile Documents/com~apple~CloudDocs/backups/journaling-with-claude/`
+- Local: `~/backups/journaling-with-claude/`
 - Custom path
 
 Verify the parent directory exists.

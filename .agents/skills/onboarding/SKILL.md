@@ -149,7 +149,7 @@ Some people do both daily. Some do one or the other. Some skip days. Find what w
 
 ## Configure Daily Rituals
 
-The skills are scaffolds — the specific prompts and questions are configured in `AGENTS.md → Daily Rituals`. Walk through this with them:
+The skills are scaffolds — the specific prompts and questions are configured in `private/system-instructions.md → Daily Rituals`. Walk through this with them:
 
 **Morning rotating element:**
 Ask: "Do you want a daily prompt after setting your MIT? Some options:"
@@ -168,15 +168,15 @@ Ask: "After capturing how the day went, do you want structured reflection questi
 
 "There's no right answer. Some people love structure, others find it tedious."
 
-**Update AGENTS.md:**
-Based on their answers, edit the `Daily Rituals` section in `AGENTS.md`:
+**Update private/system-instructions.md:**
+Based on their answers, edit the `Daily Rituals` section in `private/system-instructions.md`:
 - Fill in their morning rotating element preferences (or delete the table if they want minimal)
 - Keep only their chosen evening reflection option (delete the others)
 - This is what start-day and end-day will reference going forward
 
 ## Configure Weekly Rhythm
 
-The weekly skills also read from `AGENTS.md → Weekly Rhythm`. Walk through this:
+The weekly skills also read from `private/system-instructions.md → Weekly Rhythm`. Walk through this:
 
 **When to run weekly skills:**
 - "When works best for your weekly review and planning?" (Options they mentioned earlier)
@@ -191,8 +191,8 @@ Ask: "Do you want specific focus days during the week?"
 
 "Some people like structure throughout the week. Others find it rigid. What sounds right?"
 
-**Update AGENTS.md:**
-Based on their answers, edit the `Weekly Rhythm` section in `AGENTS.md`:
+**Update private/system-instructions.md:**
+Based on their answers, edit the `Weekly Rhythm` section in `private/system-instructions.md`:
 - Set their preferred days for plan-week and weekly-review
 - Fill in day themes if they want them, or delete the table if they prefer minimal
 - This is what the weekly skills will reference going forward

@@ -8,5 +8,18 @@ CLAUDE.md
 .claude/worktrees/
 .playwright-mcp/
 
+# Local secrets and generated development artifacts
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+*.pyc
+*.pyo
+*.zip
+
 # OS files
 .DS_Store

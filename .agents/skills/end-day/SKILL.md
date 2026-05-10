@@ -49,7 +49,7 @@ Or nothing.
 
 ## Evening Reflection
 
-**Check AGENTS.md → Daily Rituals → Evening** for this user's configured reflection questions.
+**Check `private/system-instructions.md → Daily Rituals → Evening`** for this user's configured reflection questions. If that file is missing or silent, fall back to `AGENTS.md → Daily Rituals`.
 
 **If not configured** (still has `Option A/B/C` template text, or section is missing):
 - Say: "Your evening reflection isn't configured yet. Want to set it up now, or skip for today?"

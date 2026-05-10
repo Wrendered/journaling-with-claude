@@ -126,6 +126,52 @@ Consolidate findings into the single report.
 
 For small vaults (under ~50 files), a single sequential pass is fine.
 
+## Graduating Findings (when the user decides to act)
+
+The report (or a deep-consolidate cross-decade pass over `raw/historical-journal.txt`) surfaces candidates. When the user picks one to graduate into `self-map.md`, follow this process:
+
+**1. One at a time, not batch.** Each graduation is a real edit to the user's synthesis of themself. Batches blur sources and lose attribution.
+
+**2. Verify the source quote verbatim.** Re-read the cited entry in `raw/historical-journal.txt` or `journal/YYYY-Www.md`. Quote integrity matters; never paraphrase.
+
+**3. Decide where it lands.** Candidate sections of `self-map.md`:
+- **Drivers** / "What Energizes" — motivational, identity, what-pulls-me content
+- **Patterns (Bugs)** — loops, avoidance, traps to watch
+- **What Works** — active practices, orientations, counter-frames
+- **Cross-Framework Patterns** table — one-line patterns linking multiple frameworks
+
+**4. Snapshot self-map.md first.** The `weekly-review` skill auto-snapshots; for ad-hoc graduations between weekly-reviews, copy manually:
+
+```bash
+cp private/self-map.md "private/history/self-map-snapshots/self-map_$(date +%Y-%m-%d)_pre-<short-finding-name>.md"
+```
+
+**5. Edit using this citation format:**
+
+```markdown
+- **<Pattern name>** — *"<verbatim quote>"* ([YYYY-MM-DD](raw/historical-journal.txt)). <Brief gloss / why this matters>. Recurrence: <other dated occurrences if any>.
+```
+
+For **revisions** to existing entries (not pure additions): preserve the original framing as-is, then append a sub-bullet *"Revised YYYY-MM-DD per &lt;source&gt; — &lt;what's now nuanced or corrected&gt;."* Don't rewrite over the original; layer on top so the evolution is visible.
+
+**6. Append a one-liner to `log.md`:**
+
+```markdown
+## [YYYY-MM-DD] graduation | <pattern name> → self-map.md (<section>)
+
+Source: <source file or report>. Why now: <user's reason>. Snapshot: <snapshot filename>.
+```
+
+**7. Commit private repo** with a message naming the source: `Graduate <pattern> from <source> → self-map.md (<section>)`.
+
+### Citation conventions
+
+- Always `(YYYY-MM-DD)` — exact date only, no "around X" or relative dates.
+- Markdown link the source: `[YYYY-MM-DD](path/to/source.md)`.
+- Multi-occurrence patterns: primary citation inline, then `Recurrence: <date1>, <date2>` so future readers can grep all sources.
+- Claude framings the user has explicitly adopted: `(Claude's framing, adopted YYYY-MM-DD)` — provenance honest.
+- Claude framings the user has NOT explicitly adopted: do NOT graduate. Hold in the report or theme file until the user's own words match.
+
 ## Related Skills
 
 - `weekly-review` — surfaces patterns from the past 7 days; this skill is the multi-week version

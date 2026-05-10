@@ -76,7 +76,6 @@ templates/                # Starter files copied into private/ on onboarding
 - `_index.md` files at folder roots are MOCs — Claude reads them first to orient
 - YAML frontmatter on entries makes filtering grep-cheap (`status: open`, `type: decision`)
 - `log.md` uses prefix format `## [YYYY-MM-DD] type | Title` for cheap timeline reconstruction
-- Concept files use declarative filenames (`i-process-grief-by-building-things.md`) — the filename is the claim
 
 The reference folders (`frameworks/`, `daily-practices/`, `assessments/`, `exercises/`) are lenses for self-reflection, not therapeutic protocols. Mention any author, book, or concept that resonates and the add-framework skill will research and integrate it.
 

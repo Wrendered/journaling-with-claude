@@ -181,10 +181,12 @@ And Julia Galef's "Scout Mindset":
 
 ## Session Start
 
-At the start of each session, read:
-1. `private/self-map.md` — Patterns, drivers, self-knowledge
-2. `private/dashboard.md` — Current state, tasks, habits
-3. Current weekly journal (`private/journal/YYYY-Www.md`) — Recent context
+The canonical first-read order is in the `<schema>` section above. Repeated here for emphasis:
+1. `private/system-instructions.md` — personal operating manual (tone, lens stack, daily ritual specifics)
+2. `private/_index.md` — vault map
+3. `private/self-map.md` — patterns, drivers
+4. `private/dashboard.md` — current state, tasks, habits
+5. Current weekly journal (`private/journal/YYYY-Www.md`) — recent context
 
 For domain-specific sessions, also read relevant folders:
 - `private/goals/` — For long-term goals and life direction

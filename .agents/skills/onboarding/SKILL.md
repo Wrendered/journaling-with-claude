@@ -38,13 +38,12 @@ Before starting the conversation, check and create what's needed. The structure 
    - `templates/relationships/_index.template.md` → `private/relationships/_index.md`
    - `templates/journal/_index.md` → `private/journal/_index.md`
    - `templates/assessments/_index.md` → `private/assessments/_index.md`
-4. Set up the personalization symlinks (so both tools auto-load the user's personal config):
-   - `ln -sf private/system-instructions.md CLAUDE.local.md` (Anthropic local convention)
-   - `ln -sf private/system-instructions.md AGENTS.override.md` (Codex override convention)
-5. Optionally, set up the CLAUDE.md → AGENTS.md symlink if the user wants Claude Code to read AGENTS.md:
+4. Set up Claude Code to read AGENTS.md (Codex reads it natively):
    - **CHECK FIRST:** If `CLAUDE.md` already exists (regular file or symlink), STOP and ask the user before doing anything. They likely have personalized content that would be silently clobbered by `ln -sf`.
    - Safe-only setup: `[[ ! -e CLAUDE.md ]] && ln -s AGENTS.md CLAUDE.md` (no `-f`, fails if file exists)
    - If existing CLAUDE.md present: confirm with user, back it up to `private/CLAUDE.md.backup-<date>`, then create symlink.
+
+   Note: there are no separate override files. AGENTS.md instructs the assistant to read `private/system-instructions.md` at session start, so personalization loads via that single file regardless of which tool is reading.
 
 Do this silently, then begin the conversation.
 

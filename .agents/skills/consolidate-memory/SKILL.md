@@ -128,7 +128,9 @@ For small vaults (under ~50 files), a single sequential pass is fine.
 
 ## Graduating Findings (when the user decides to act)
 
-The report (or a deep-consolidate cross-decade pass over `raw/historical-journal.txt`) surfaces candidates. When the user picks one to graduate into `self-map.md`, follow this process:
+The report (or a deep-consolidate cross-decade pass over `raw/historical-journal.txt`) surfaces candidates. When the user picks one to graduate into `self-map.md`, follow this process.
+
+> **Status tracking.** Each report should include a **Status Tracker** table near the top — one row per finding, with states `✅ Graduated · ✓ Already in vault · ⏳ Pending · ❌ Not graduating`. Update the cell when a finding is acted on. Future sessions can grep `⏳ Pending` across all `_*report*.md` files at `private/` root to surface what's open across reports. This is the durable "save for later" mechanism — don't rely on the report being re-read top-to-bottom.
 
 **1. One at a time, not batch.** Each graduation is a real edit to the user's synthesis of themself. Batches blur sources and lose attribution.
 

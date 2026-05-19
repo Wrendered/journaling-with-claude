@@ -10,6 +10,8 @@
 |----------|---------|------|--------|
 | [Values Clarification](values-clarification.md) | Identify your 2 core values | 30 min | Brene Brown |
 
+**Couple/joint exercises** moved to [`couple/`](../couple/_index.md) — values clarification couple version, pre-commitment conversations, etc.
+
 ---
 
 ## How Exercises Differ from Other Folders

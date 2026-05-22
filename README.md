@@ -133,6 +133,32 @@ These all land in `private/system-instructions.md`.
 
 ---
 
+## Using Obsidian (optional)
+
+The vault is plain markdown on disk, so [Obsidian](https://obsidian.md/) works on top of it without any restructuring. This gets you visualizations (local graph view, backlinks pane, Bases tables) for browsing the wiki layer alongside the LLM-driven editing you already have.
+
+### Phase 0 — Minimal setup
+
+1. **Install Obsidian** from [obsidian.md](https://obsidian.md/) (free for personal use).
+2. **Open this project folder as a vault**: in Obsidian, `Open folder as vault` → pick the repo root. The included [`.obsidianignore`](.obsidianignore) hides tooling (`.git/`, `.claude/`, `.codex/`, `.agents/`, build caches) so only knowledge content shows in the graph.
+3. Browse the included `frameworks/`, `daily-practices/`, `exercises/`, `couple/`, etc. With your own `private/` content joined in, the entire vault becomes one navigable graph.
+
+### What stays per-user vs shared
+
+The `.obsidian/` folder Obsidian creates (workspace state, plugin local data, custom hotkeys) is **gitignored entirely** — your personal Obsidian config never touches the public repo. Later phases will ship recommended defaults under `templates/obsidian-config/` that any consumer can copy into their `.obsidian/` to bootstrap a sensible starting setup.
+
+### What's coming in later phases
+
+- **Phase 1**: install `kepano/obsidian-skills` (Obsidian CEO's Agent Skills for Claude Code / Codex CLI) so the assistants write Obsidian-native conventions (wikilinks, callouts, Bases).
+- **Phase 2**: backfill `[[wikilinks]]` across cross-referenced files (relationships ↔ decisions ↔ self-map) so the graph view becomes meaningful.
+- **Phase 3**: generic Bases views in `templates/bases/` (open decisions, relationships by last-touched, journal entries by mood/tag) that consumers can use as-is.
+
+### Plugin safety note
+
+Obsidian community plugins are **not sandboxed** — they have full filesystem and network access. A 2026 supply-chain incident (PHANTOMPULSE RAT) underscored the risk. Stay in Restricted Mode by default. Only enable well-vetted plugins from the official directory. Audit anything obscure before installing.
+
+---
+
 ## Dual-Tool Compatibility
 
 The system runs in **both Claude Code and OpenAI Codex CLI** with a single source of truth for skills and hooks. This is unusual; here's how it works.

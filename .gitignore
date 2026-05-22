@@ -8,6 +8,12 @@ CLAUDE.md
 .claude/worktrees/
 .playwright-mcp/
 
+# Obsidian per-user state (workspace, plugin data, custom hotkeys, etc.).
+# Recommended public defaults will ship under templates/obsidian-config/ in
+# a later phase. For now: keep all of .obsidian/ local-only so personal
+# workspace state never leaks. See README → "Using Obsidian (optional)".
+.obsidian/
+
 # Local secrets and generated development artifacts
 .env
 .env.*

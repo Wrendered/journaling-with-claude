@@ -17,7 +17,7 @@ Morning ritual. Sets intention and the one thing that matters today.
 
 Run: `date '+%A %B %d, %Y %H:%M'`
 
-Read silently: `private/self-map.md`, `private/dashboard.md`
+Read silently in this order: `private/system-instructions.md`, `private/_index.md`, `private/self-map.md`, `private/dashboard.md`. (System-instructions and _index are also session-start reads in AGENTS.md — listed here for the case where this skill is invoked mid-session and they haven't been loaded yet.)
 
 ## Tasks (if Todoist connected)
 
@@ -52,6 +52,14 @@ Wait for their answer.
   ### [Day] [Date]
   **Morning:** Feeling: [pulse]. MIT: [their MIT]. [rotating element response if any]
   ```
+  **Attribution:** if the rotating element produces a reframe of what they said (a Stoic recasting, a CBT thought-test, etc.), label it `Claude's framing:` and keep their words separate. See `AGENTS.md → Attribution Rule` — the `check-attribution` hook will flag blended entries.
+- Append a log entry to `private/log.md`:
+  ```markdown
+  ## [YYYY-MM-DD] morning | <MIT or theme>
+
+  <one-line context: feeling, what's pulling them today>
+  ```
+  The log is the timeline; the journal is the narrative. Both get updated.
 - Connect to mission/deadlines if relevant
 
 ## Identity Check (optional, when relevant)

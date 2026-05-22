@@ -52,16 +52,25 @@ Depending on the topic:
 - **Assessment calibration:** "Does this description fit? Give me a recent example where it did/didn't."
 - **Feeling work:** What framework lens helps here? (Shame/vulnerability? Stoic reframe? Enneagram pattern?)
 
+**Reach for the right lens** — check `private/system-instructions.md → Lens Stack` (fallback `AGENTS.md → Lens Stack`) for the user's mapping of situations to frameworks. Don't pick a lens at random; the stack exists specifically so you can reach for it.
+
 ### 4. Synthesize
 - What did we learn?
 - What's the update to your self-understanding?
 - Any action items?
 
 ### 5. Capture
-- Session notes → Weekly journal (`private/journal/YYYY-Www.md`) under today's date
-- Profile updates → `self-map.md` or `assessments/`
-- New patterns → Potentially add to `history/` theme files
-- When weekly review happens, key insights become Highlight Quotes
+- **Session notes → Weekly journal** (`private/journal/YYYY-Www.md`) under today's date.
+  - **Attribution is critical here.** Deep-dive is the canonical "extended exploration" skill — you'll be pulling quotes from history AND offering pattern interpretations. Use the sub-section split: `**User's words:**` for verbatim + raw paraphrase, `**Claude's framings offered (NOT her conclusions):**` for any reframe/interpretation/label you offered. See `AGENTS.md → Attribution Rule` (the `check-attribution` hook flags blended entries) and `private/system-instructions.md → Attribution rule` for the personal recurring-pattern flags.
+- **Log entry → `private/log.md`** for meaningful sessions:
+  ```markdown
+  ## [YYYY-MM-DD] decision | <topic>     ← (or `pattern` / `monologue` / `note` based on what came up)
+
+  <1-3 sentences naming what surfaced. Cross-ref the journal entry and any decision/relationship files touched.>
+  ```
+- **Profile updates → `self-map.md` or `assessments/`:** follow the citation + snapshot + log process in `consolidate-memory → Graduating Findings`. Do NOT edit self-map directly from a deep-dive session — surface the candidate finding in the journal entry, snapshot self-map first, then make the edit with a verbatim quote and a `log.md` graduation entry. (Snapshot mechanism documented in `weekly-review → step 6`.)
+- **New patterns → `history/` theme files:** if a recurring theme surfaces that warrants its own compilation, create or extend `history/themes-<topic>.md`.
+- **When weekly review happens, key insights become Highlight Quotes.**
 
 ---
 
@@ -89,7 +98,7 @@ Let me pull what you've written about this...
 
 From your journal (6 months ago): "I keep saying I'll decide next month..."
 From last year: "Both options seem fine, which is the problem."
-From years ago: "I'd rather have someone else make big choices so I can complain if it's wrong versus be responsible."
+From years ago: [an even older quote on the same theme — quote it verbatim from history/]
 
 **Pattern:** Decision avoidance on high-stakes questions has been running for years.
 

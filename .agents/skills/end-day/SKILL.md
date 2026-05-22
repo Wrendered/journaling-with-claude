@@ -17,7 +17,7 @@ Evening ritual. Captures the day, surfaces patterns, sets up tomorrow.
 
 Run: `date '+%A %B %d, %Y %H:%M'`
 
-Read silently: `private/self-map.md`, `private/dashboard.md`
+Read silently in this order: `private/system-instructions.md`, `private/_index.md`, `private/self-map.md`, `private/dashboard.md`. (System-instructions and _index are also session-start reads in AGENTS.md — listed here for the case where this skill is invoked mid-session and they haven't been loaded yet.)
 
 ## Tasks (if Todoist connected)
 
@@ -76,6 +76,7 @@ Don't belabor this — quick check, move on.
   ```
 - Quote important words verbatim
 - Note patterns, wins, or blocks
+- **Attribution:** evening reflection often produces interpretation. If you offer a reframe or name a pattern they didn't explicitly say, label it `Claude's framing:` and keep their words separate. See `AGENTS.md → Attribution Rule` — the `check-attribution` hook will flag blended entries.
 
 **Also append a log entry to `private/log.md`:**
 - Format: `## [YYYY-MM-DD] evening | <one-line theme>`
@@ -86,9 +87,7 @@ Don't belabor this — quick check, move on.
 - Clear completed items from queue
 - Update habit streaks if tracking
 
-**Update `private/self-map.md` only if:**
-- New long-term pattern discovered
-- Mission clarity changed
+**Do not edit `private/self-map.md` directly from end-day.** If a meaningful pattern emerges that's worth graduating, *flag* it in the evening journal entry and let `weekly-review` or `consolidate-memory` handle the graduation — those skills carry the snapshot + citation + log process (see `consolidate-memory → Graduating Findings`). Ad-hoc self-map edits at the end of a tired evening tend to be brittle.
 
 ## Surface patterns
 

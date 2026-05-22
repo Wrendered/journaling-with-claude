@@ -31,6 +31,10 @@ Check: `private/system-instructions.md → Weekly Rhythm` for this user's config
 ## Flow
 
 ### 1. Decision Review (5-10 min)
+
+> When a decision moves status (open → active, active → resolved, etc.) or a meaningful new datum lands, append a `## [YYYY-MM-DD] decision | <one-line>` entry to `private/log.md` per `AGENTS.md → Memory & Patterns`. The decision file itself is the narrative; `log.md` is the greppable timeline.
+
+
 Pull all files from `private/decisions/`:
 - **For each open decision:**
   - Any new information this week?
@@ -78,7 +82,8 @@ Open the current week's journal file (`private/journal/YYYY-Www.md`) and add the
 Review this week's journal:
 - Any themes repeating 3x+?
 - Anything connecting to `history/` patterns?
-- If pattern is stable/validated → move to `self-map.md`
+- If pattern is stable/validated → graduate to `self-map.md` following `consolidate-memory → Graduating Findings` (snapshot first via step 6 below, then the citation format + log entry). Don't edit self-map ad-hoc here — the graduation process exists so future readers can trace where each self-map line came from.
+- Append a `log.md` entry for any meaningful pattern surfaced this week, format: `## [YYYY-MM-DD] pattern | <one-line>` per `AGENTS.md → Memory & Patterns`.
 
 ### 6. Snapshot self-map.md if it changed (1 min)
 After any edits to `self-map.md` this week (whether from step 5 above, a `consolidate-memory` pass, or ad-hoc updates), snapshot it so you can see how your synthesis evolved over time:

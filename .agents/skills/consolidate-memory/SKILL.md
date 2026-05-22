@@ -60,10 +60,10 @@ Grep recent journal entries (last 90 days) for recurring themes:
 
 ### 5. Tag drift
 
-Read `private/tags.md`. Compare to actual tags in use across `private/**/*.md` frontmatter:
-- Tags used but not in the controlled vocabulary → flag as drift
-- Tags in the vocabulary but never used → candidates for removal
-- Multiple tags for the same concept (e.g., `career`, `career-move`, `job`) → flag as redundancy
+Read `private/tags.md`. Compare to actual tags in use across `private/**/*.md` frontmatter — **scope: journal frontmatter only** (`private/journal/YYYY-Www.md`). Per the 2026-05-22 convention documented in `tags.md`, tags don't apply to relationships/decisions/assessments — checking those would over-report. Flag:
+- Tags used in journal frontmatter but not in the controlled vocabulary → drift
+- Tags in the vocabulary but never used in journal frontmatter → candidates for removal
+- Multiple tags for the same concept (e.g., `career`, `career-move`, `job`) → redundancy
 
 ### 6. Index drift
 
@@ -109,10 +109,10 @@ Structure:
 
 ## What NOT to do
 
-- Do not auto-edit files based on findings — surface them, let user decide
+- Do not auto-edit files based on findings during the audit phase — surface them, let user decide
 - Do not move pages to `archive/` without explicit approval
 - Do not delete tags from `tags.md` without the user reviewing
-- Do not edit `self-map.md` directly — surface candidate sharpenings/additions, the user decides
+- Do not edit `self-map.md` during the audit phase — surface candidate sharpenings/additions and let the user pick which to graduate. Edits happen only in the *graduation* phase below, one finding at a time, with snapshot + citation + log entry.
 
 ## Approach
 
@@ -130,7 +130,14 @@ For small vaults (under ~50 files), a single sequential pass is fine.
 
 The report (or a deep-consolidate cross-decade pass over `raw/historical-journal.txt`) surfaces candidates. When the user picks one to graduate into `self-map.md`, follow this process.
 
-> **Status tracking.** Each report should include a **Status Tracker** table near the top — one row per finding, with states `✅ Graduated · ✓ Already in vault · ⏳ Pending · ❌ Not graduating`. Update the cell when a finding is acted on. Future sessions can grep `⏳ Pending` across all `_*report*.md` files at `private/` root to surface what's open across reports. This is the durable "save for later" mechanism — don't rely on the report being re-read top-to-bottom.
+> **Status tracking.** Each report should include a **Status Tracker** table near the top — one row per finding, with states from this vocabulary:
+> - `✅ Graduated` / `✅ Done` — fully addressed; the artifact (self-map line, file move, etc.) is in place
+> - `✓ Already in vault` — finding was an observation about something already correctly handled; no action needed
+> - `⏳ Pending` — open, not yet addressed
+> - `➖ Deferred` — explicitly postponed with a reason (e.g., depends on something paused; revisit when conditions change)
+> - `❌ Not graduating` / `❌ Skipped` — actively decided not to act on; record the reason in the cell
+>
+> Update the cell when a finding moves. Future sessions can grep `⏳ Pending` across all `_*report*.md` files at `private/` root to surface what's open across reports. This is the durable "save for later" mechanism — don't rely on the report being re-read top-to-bottom.
 
 **1. One at a time, not batch.** Each graduation is a real edit to the user's synthesis of themself. Batches blur sources and lose attribution.
 
@@ -178,6 +185,6 @@ Source: <source file or report>. Why now: <user's reason>. Snapshot: <snapshot f
 
 ## Related Skills
 
-- `weekly-review` — surfaces patterns from the past 7 days; this skill is the multi-week version
-- `deep-dive` — works on a single specific topic; this skill works across the vault
-- `import-history` — adds NEW material to the vault; this skill maintains EXISTING material
+- `weekly-review` — surfaces patterns from the past 7 days; this skill is the multi-week version. Also owns the **auto-snapshot** of `self-map.md` (step 6 of weekly-review). This skill's ad-hoc snapshots complement that automatic capture.
+- `deep-dive` — works on a single specific topic; this skill works across the vault. Deep-dive sessions sometimes generate graduation candidates that flow through this skill's Graduating Findings process.
+- `import-history` — adds NEW material to the vault; this skill maintains EXISTING material.

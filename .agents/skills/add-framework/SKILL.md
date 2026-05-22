@@ -242,8 +242,8 @@ Based on research, determine the correct folder:
 
 ### 4. Update indexes
 
-**Update the appropriate index:**
-- Add row to Quick Reference table
+**Update the appropriate public index** (these live in the public scaffold and document what's in the library):
+- Add row to Quick Reference table in `frameworks/_index.md` / `assessments/_index.md` / `daily-practices/_index.md` / `exercises/_index.md`
 - Add to selection guide or related section
 
 **Update personal index** — Add to `private/assessments/_index.md`:
@@ -254,13 +254,11 @@ Based on research, determine the correct folder:
 Based on the research, suggest:
 
 **Ritual integration (if applicable):**
-- Does this suggest a morning practice? → Propose addition to start-day skill
-- Does this suggest an evening practice? → Propose addition to end-day skill
-- Does this suggest a weekly practice? → Propose addition to weekly-review skill
+- Does this suggest a morning practice? → Propose addition to `private/system-instructions.md → Daily Rituals → Morning`
+- Does this suggest an evening practice? → Propose addition to `private/system-instructions.md → Daily Rituals → Evening`
+- Does this suggest a weekly practice? → Propose addition to `private/system-instructions.md → Weekly Rhythm`
 
-**AGENTS.md updates:**
-- Add to appropriate section (frameworks, assessments, daily-practices, or exercises)
-- Add to selection guide if framework
+> **Personal config lives in `private/system-instructions.md`, not `AGENTS.md`.** AGENTS.md is the public scaffold and only changes when the public conventions change (new skill ships, schema changes, etc.). When the user wants a lens auto-surfaced in their rituals, that goes in their private layer.
 
 **Dashboard integration (if applicable):**
 - Does it suggest tracking something? → Propose dashboard section

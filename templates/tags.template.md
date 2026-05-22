@@ -4,7 +4,7 @@
 
 ## Active tags
 
-Edit this list as your life evolves. Don't let drift create `career`, `career-move`, `career-anthropic`, etc. — pick one level of granularity and stick to it. Tag drift is the most common Obsidian failure mode.
+Edit this list as your life evolves. Don't let drift create `career`, `career-move`, `career-project-x`, etc. — pick one level of granularity and stick to it. Tag drift is the most common Obsidian failure mode.
 
 | Tag | What it covers |
 |-----|----------------|
@@ -28,6 +28,6 @@ Edit this list as your life evolves. Don't let drift create `career`, `career-mo
 ## Conventions
 
 - Lowercase, kebab-case (`mental-health`, not `MentalHealth` or `mental_health`)
-- No nested tags (`career-anthropic` is a sub-bucket — instead, put `tags: [career]` and `topic: anthropic` in frontmatter)
+- No nested tags (`career-project-x` is a sub-bucket — instead, put `tags: [career]` and `topic: project-x` in frontmatter)
 - Tags in frontmatter ONLY, never inline `#tags` in body text
 - Add a tag here BEFORE using it the second time

@@ -56,7 +56,7 @@ private/history/
 
 ### What Makes Each File Useful
 
-**raw/historical-journal.txt** (or similar; lives in raw/ layer)
+**`raw/historical-journal.txt`** (canonical filename; lives in raw/ layer)
 - Complete, searchable archive
 - Dates preserved where possible
 - Nothing lost
@@ -82,9 +82,20 @@ private/history/
 
 **Go slow. Be careful.** This is years of someone's inner life. Read thoroughly before organizing.
 
+### Attribution discipline applies to imports too
+
+You are taking raw user-authored material and producing *theme files, relationship analyses, and quote indexes* that necessarily blend their words with your synthesis. The attribution rule from `AGENTS.md → Attribution Rule` applies:
+
+- **Verbatim quotes** belong inline with dates. Quote them, don't paraphrase.
+- **Pattern names, theme labels, and interpretive synthesis** are *your* framings — label them as such in the file. E.g., in `themes-<topic>.md`, separate "Quotes (verbatim, dated)" from "Pattern observation (Claude's framing, YYYY-MM-DD)".
+- **Relationship analyses** (`relationships-<name>.md`) should keep "What she wrote about him" and "Pattern reading" as distinct sub-sections.
+- When in doubt, quote. The `check-attribution` hook won't fire on history files (they're not journals), but the principle is the same.
+
+### Steps
+
 1. **Start by reading** — Get a feel for what's there. What themes recur? Who shows up repeatedly? What quotes jump out?
 
-2. **Create raw/historical-journal.txt (or similar) first** — Consolidate everything into one searchable file in `private/raw/`. Preserve dates and structure where possible.
+2. **Create `raw/historical-journal.txt` first** — Consolidate everything into one searchable plaintext file at exactly that path in `private/raw/`. Preserve dates and structure where possible. (The search agent, `_index.md`, and `AGENTS.md` all expect this canonical filename — don't use a variant.)
 
 3. **Build the quotes index** — Pull significant quotes as you read. Organize by theme. This is the most useful artifact.
 

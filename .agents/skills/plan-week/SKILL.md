@@ -40,6 +40,16 @@ Check: `private/system-instructions.md → Weekly Rhythm` for this user's config
 
 ## Flow
 
+### 0. Pending backlog check
+
+Before setting focus, surface what's already on the open list across all consolidation/deep-consolidate reports:
+
+```bash
+grep "⏳ Pending" private/_*report*.md 2>/dev/null
+```
+
+This pulls every Status Tracker row still open. You don't have to act on any of them — the point is to make pending work visible so the user can decide whether this week is when one of them gets attention. See `consolidate-memory → Status Tracker` for the mechanism.
+
 ### 1. What's the focus this week?
 
 One theme or priority. Not a task list.
@@ -62,11 +72,12 @@ If no habits yet, ask if they want to set one up. Use Atomic Habits framework:
 - Habit: What's one small thing that person would do?
 - Stack: What existing routine could you attach it to?
 
-### 3. Decisions on deck
+### 3. Decisions and active threads on deck
 
-Glance at `private/decisions/`:
-- Any with approaching deadlines?
-- Which 1-2 to work on this week? (Check `private/system-instructions.md → Weekly Rhythm` for decision work days)
+Glance broader than just `private/decisions/`:
+- **Decisions:** `private/decisions/*.md` — any with approaching deadlines? Which 1-2 to work on this week? (Check `private/system-instructions.md → Weekly Rhythm` for decision work days.)
+- **Active experiments:** `private/dashboard.md → Active Experiments` — anything to check on, conclude, or extend?
+- **Pending backlog items from step 0:** of the `⏳ Pending` items surfaced above, any worth slotting into this week's focus?
 
 ### 4. Commitments and deadlines
 

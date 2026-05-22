@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Values — Circle ~15</title>
+<style>
+  :root {
+    --bg: #f9f7f4;
+    --fg: #2c2a26;
+    --muted: #7a766f;
+    --accent: #4a6741;
+    --accent-soft: #d5e0cf;
+    --border: #d8d4cb;
+  }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    margin: 0;
+    padding: 2rem 2.5rem 6rem;
+    line-height: 1.5;
+  }
+  header {
+    max-width: 900px;
+    margin: 0 auto 1.5rem;
+  }
+  h1 {
+    font-weight: 500;
+    font-size: 1.6rem;
+    margin: 0 0 0.4rem;
+    letter-spacing: -0.01em;
+  }
+  .instruction {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+  .counter {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    background: white;
+  }
+  .counter.target { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .counter.over { background: #fce8e0; border-color: #b85c3a; color: #b85c3a; }
+  .grid {
+    max-width: 900px;
+    margin: 1.5rem auto 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: 0.4rem;
+  }
+  .value {
+    padding: 0.55rem 0.7rem;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 0.92rem;
+    font-family: inherit;
+    color: var(--fg);
+    transition: all 0.12s ease;
+  }
+  .value:hover { border-color: var(--accent); }
+  .value.selected {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    font-weight: 500;
+  }
+  footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid var(--border);
+    padding: 1rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.04);
+  }
+  .output {
+    flex: 1;
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 0.82rem;
+    color: var(--muted);
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 0.4rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg);
+  }
+  button.action {
+    padding: 0.55rem 1rem;
+    background: var(--accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  button.action:hover { background: #3d5736; }
+  button.action.copied { background: #6b8a5e; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Circle ~15 Values</h1>
+  <p class="instruction">Scan the list. Click ~15 that resonate. Don't overthink — go with your gut. (Step 1 of the values clarification exercise.)</p>
+  <div class="counter" id="counter">Selected: 0</div>
+</header>
+
+<div class="grid" id="grid"></div>
+
+<footer>
+  <div class="output" id="output">No selections yet</div>
+  <button class="action" id="copyBtn">Copy list</button>
+</footer>
+
+<script>
+const values = [
+  "Accountability","Adaptability","Adventure","Altruism",
+  "Authenticity","Balance","Beauty","Belonging",
+  "Career","Caring","Collaboration","Commitment",
+  "Community","Compassion","Competence","Confidence",
+  "Connection","Contentment","Contribution","Cooperation",
+  "Courage","Creativity","Curiosity","Dignity",
+  "Diversity","Environment","Efficiency","Equality",
+  "Ethics","Excellence","Fairness","Faith",
+  "Family","Financial stability","Forgiveness","Freedom",
+  "Friendship","Fun","Future generations","Generosity",
+  "Giving back","Grace","Gratitude","Growth",
+  "Harmony","Health","Home","Honesty",
+  "Hope","Humility","Humor","Inclusion",
+  "Independence","Initiative","Integrity","Intuition",
+  "Job security","Joy","Justice","Kindness",
+  "Knowledge","Leadership","Learning","Legacy",
+  "Leisure","Love","Loyalty","Making a difference",
+  "Nature","Openness","Optimism","Order",
+  "Parenting","Patience","Patriotism","Peace",
+  "Perseverance","Personal fulfillment","Power","Pride",
+  "Recognition","Reliability","Resourcefulness","Respect",
+  "Responsibility","Risk-taking","Safety","Security",
+  "Self-discipline","Self-expression","Self-respect","Serenity",
+  "Service","Simplicity","Spirituality","Sportsmanship",
+  "Stewardship","Success","Teamwork","Thrift",
+  "Time","Tradition","Travel","Trust",
+  "Truth","Understanding","Uniqueness","Usefulness",
+  "Vision","Vulnerability","Wealth","Well-being",
+  "Wholeheartedness","Wisdom"
+];
+
+const grid = document.getElementById('grid');
+const counter = document.getElementById('counter');
+const output = document.getElementById('output');
+const copyBtn = document.getElementById('copyBtn');
+const selected = new Set();
+
+values.forEach(v => {
+  const btn = document.createElement('button');
+  btn.className = 'value';
+  btn.textContent = v;
+  btn.addEventListener('click', () => {
+    if (selected.has(v)) {
+      selected.delete(v);
+      btn.classList.remove('selected');
+    } else {
+      selected.add(v);
+      btn.classList.add('selected');
+    }
+    update();
+  });
+  grid.appendChild(btn);
+});
+
+function update() {
+  const n = selected.size;
+  counter.textContent = `Selected: ${n}`;
+  counter.classList.remove('target', 'over');
+  if (n >= 13 && n <= 17) counter.classList.add('target');
+  else if (n > 17) counter.classList.add('over');
+  const arr = [...selected];
+  output.textContent = arr.length ? arr.join(', ') : 'No selections yet';
+}
+
+copyBtn.addEventListener('click', async () => {
+  if (selected.size === 0) return;
+  const text = [...selected].join(', ');
+  try {
+    await navigator.clipboard.writeText(text);
+    copyBtn.textContent = 'Copied!';
+    copyBtn.classList.add('copied');
+    setTimeout(() => {
+      copyBtn.textContent = 'Copy list';
+      copyBtn.classList.remove('copied');
+    }, 1800);
+  } catch (e) {
+    // Fallback: select the output text
+    const range = document.createRange();
+    range.selectNode(output);
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+  }
+});
+</script>
+</body>
+</html>

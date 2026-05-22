@@ -98,7 +98,7 @@ Let me pull what you've written about this...
 
 From your journal (6 months ago): "I keep saying I'll decide next month..."
 From last year: "Both options seem fine, which is the problem."
-From years ago: "I'd rather have someone else make big choices so I can complain if it's wrong versus be responsible."
+From years ago: [an even older quote on the same theme — quote it verbatim from history/]
 
 **Pattern:** Decision avoidance on high-stakes questions has been running for years.
 

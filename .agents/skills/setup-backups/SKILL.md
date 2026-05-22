@@ -17,7 +17,8 @@ One-time setup for automatic backups of private data.
 ## What Gets Backed Up
 
 - `private/` folder (excluding `import/`)
-- `AGENTS.md`
+
+`AGENTS.md` and other project-level scaffolding are version-controlled in the public repo and recoverable via `git clone` — backups intentionally cover only `private/` (the per-user data that has no remote).
 
 Backups are timestamped zips stored in your configured location. Last 10 kept, older pruned automatically.
 
@@ -51,7 +52,7 @@ Copy template to `private/backup-config.sh`:
 cp templates/backup-config.template.sh private/backup-config.sh
 ```
 
-Update BACKUP_DIR in the config to user's chosen location.
+If the user chose a non-default location (anything other than `~/Dropbox/backups/journaling-with-claude/`), edit `private/backup-config.sh` and replace the `BACKUP_DIR="..."` line with their chosen path. The template ships with the Dropbox default uncommented; an `sed -i ''` or `Edit` tool change is fine.
 
 ### 3. Create backup directory
 

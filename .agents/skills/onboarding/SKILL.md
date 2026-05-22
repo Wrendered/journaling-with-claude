@@ -1,6 +1,6 @@
 ---
 name: onboarding
-description: First-time setup ritual that creates private/ folder structure from templates, conducts a conversational interview to populate self-map.md and dashboard.md, captures key relationships, and configures daily and weekly rituals in AGENTS.md.
+description: First-time setup ritual that creates private/ folder structure from templates, conducts a conversational interview to populate self-map.md and dashboard.md, captures key relationships, and configures daily and weekly rituals in private/system-instructions.md (the per-user personal config layer).
 when_to_use: |
   ALWAYS invoke this skill when the user is new to the system or asks how to begin.
   Trigger phrases (any of these): "I'm new here", "getting started", "set me up",

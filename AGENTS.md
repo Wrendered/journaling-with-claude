@@ -460,7 +460,7 @@ Option C: No structured questions
 - The `private/.gitignore` excludes generated/cached folders (`.venv/`, `__pycache__/`, `.DS_Store`, `.env`, etc.) and `import/`.
 
 ### External backup (Dropbox / iCloud / local path)
-- The `backup` skill creates a timestamped zip in the configured destination (e.g., `~/Dropbox/backups/personal-assistant/`).
+- The `backup` skill creates a timestamped zip in the configured destination (default: `~/Dropbox/backups/journaling-with-claude/`).
 - Excludes the same generated/cached folders as the gitignore.
 - Run periodically — weekly during weekly-review, or whenever a meaningful chunk of work has accumulated. Long gaps between backups are a real failure mode.
 - For sensitive backups: `bash .claude/skills/backup/scripts/backup-private.sh --encrypt` (prompts for password).

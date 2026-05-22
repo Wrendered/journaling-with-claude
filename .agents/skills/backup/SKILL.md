@@ -32,7 +32,8 @@ For password-protected backup:
 ## What Gets Backed Up
 
 - `private/` folder (excluding `import/`)
-- `AGENTS.md`
+
+`AGENTS.md` and other project-level scaffolding are version-controlled in the public repo and recoverable via `git clone` — backups intentionally cover only `private/` (the per-user data that has no remote).
 
 Backups are timestamped zips. Last 10 kept, older pruned automatically.
 

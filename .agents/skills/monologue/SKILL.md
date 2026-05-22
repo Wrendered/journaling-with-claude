@@ -41,21 +41,29 @@ User explicitly invokes this, OR starts typing unprompted reflection that's clea
    - **Discuss findings first** — Don't just dump search results. Surface what you found and ask: "Does this resonate?" "Anything connect?" Follow their curiosity.
    - Only offer if it seems useful — don't over-process a quick dump
 
-5. **Capture** — Append the *processed* version to weekly journal
-   - The value is the cleaned-up reflection, not raw dictation
-   - Include significant quotes if they said something worth preserving exactly
-   - Note the theme or what this was about
+5. **Capture** — Append to weekly journal using the attribution split below
+   - Their verbatim words and your processing go in distinct sub-sections
+   - The `check-attribution` hook will flag entries that blend the two
+   - See `AGENTS.md → Attribution Rule` for the full convention; the personal recurring framings to flag live in `private/system-instructions.md`
 
 ## Journal Entry Format
 
-Append under today's date in the weekly file (`private/journal/YYYY-Www.md`):
+Append under today's date in the weekly file (`private/journal/YYYY-Www.md`). The attribution split is non-negotiable — *processing* is exactly the moment when blending becomes invisible if you don't keep the layers separate:
+
 ```markdown
 **Monologue (HH:MM):** [Brief theme/topic]
 
-[Processed summary — clean, organized version of what they said]
+**User's words (direct quotes + raw paraphrase):**
+[The actual words they said. Quote verbatim where the language carries weight. Paraphrase only for connective tissue, no added framing.]
 
-[If significant: "Quote worth keeping: '...'"]
+**Claude's processing (NOT their conclusions):**
+[The cleaned-up summary, themes named, patterns spotted. Anything you noticed they didn't explicitly say goes here.]
+
+**Open / unresolved:**
+[Questions raised that didn't get answered.]
 ```
+
+If they engaged with one of your framings ("yeah, that's it"), record their engagement separately — adoption is not authorship.
 
 Also append a log entry to `private/log.md`:
 ```markdown
@@ -70,7 +78,7 @@ The log is the timeline; the journal is the narrative. Both get updated.
 
 - The end-day skill reviews the day's entries
 - The weekly-review skill organizes the week: adds Summary, Highlight Quotes, optional sections
-- Patterns may graduate to `self-map.md`
+- Patterns may graduate to `self-map.md` — follow the citation/snapshot/log process in `consolidate-memory → Graduating Findings`. Don't promote anything to self-map ad-hoc from a monologue session.
 
 ## Example
 

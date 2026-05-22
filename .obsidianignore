@@ -1,0 +1,36 @@
+# .obsidianignore — what Obsidian should NOT index
+#
+# Glob-style patterns. Anything matching here is hidden from search, graph,
+# backlinks, and `[[` autocomplete. Files still exist on disk; they just
+# don't pollute the knowledge graph.
+#
+# See README → Obsidian setup for the rationale and the per-user
+# `.obsidian/` config story.
+
+# Tooling and agent infrastructure (not knowledge content)
+.git/
+.github/
+.claude/
+.codex/
+.agents/
+scripts/
+node_modules/
+
+# Build/cache/env artifacts
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+*.pyc
+*.pyo
+
+# One-time import / raw processing folders
+import/
+private/import/
+
+# Backup zips (shouldn't be in the vault folder, but defensive)
+*.zip
+
+# OS files
+.DS_Store

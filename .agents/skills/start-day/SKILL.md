@@ -116,6 +116,6 @@ If user mentions someone by name (friend, partner, collaborator):
 1. List `private/relationships/` filenames to check if they have a file
 2. If file exists → Read it for context
 3. If no file → Use search agent to find journal mentions
-4. If significant person with no file → Offer to create one
+4. If significant person with no file → Offer to create one using `templates/relationships/_template.md` (frontmatter required: `type`, `relation`, `since` if known, `last-touched`)
 
 Don't let key people slip by without context.

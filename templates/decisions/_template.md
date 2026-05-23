@@ -1,8 +1,18 @@
+---
+type: decision
+status: open
+created: YYYY-MM-DD
+revisit: YYYY-MM-DD
+tags: [add, relevant, tags]
+---
+
 # Decision: [TITLE]
 
 **Status:** Open | Exploring | Leaning [X] | DECIDED — [OUTCOME]
 
 **Last Updated:** [DATE]
+
+> The YAML frontmatter above is what tools (grep, search agents, future Bases views) query. Keep `status` accurate: `open` | `resolved` | `abandoned`. Body-text **Status:** line above is the human-readable narrative version.
 
 ---
 

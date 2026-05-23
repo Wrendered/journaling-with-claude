@@ -96,7 +96,7 @@ After the life areas, ask: "Who are the 3-5 most important people in your life r
 For each person mentioned:
 - Get their name and relationship (partner, best friend, tow partner, etc.)
 - One sentence about why they matter
-- Create `private/relationships/[name].md` with a stub
+- Create `private/relationships/[name].md` using `templates/relationships/_template.md` (includes required YAML frontmatter: `type`, `relation`, `since`, `last-touched` per AGENTS.md schema)
 
 Don't go deep here — just capture who matters. The files will fill in over time through monologue, deep-dive, and daily reflections.
 

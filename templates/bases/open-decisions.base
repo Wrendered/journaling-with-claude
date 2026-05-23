@@ -1,0 +1,40 @@
+# Open decisions, sorted by next-revisit date.
+# Generic template — works on any vault that has decisions/*.md files
+# with the project's standard frontmatter (`status`, `revisit`, `tags`).
+#
+# Copy this file into your vault (e.g., to `dashboards/open-decisions.base`)
+# and open it in Obsidian to render as an interactive table.
+#
+# See templates/bases/README.md for more.
+
+filters:
+  and:
+    - file.path.startsWith("decisions/")
+    - file.ext == "md"
+    - file.name != "_index"
+    - status == "open"
+
+properties:
+  status:
+    display: "Status"
+  created:
+    display: "Opened"
+  revisit:
+    display: "Revisit by"
+  tags:
+    display: "Tags"
+
+views:
+  - type: table
+    name: "Open decisions — by revisit date"
+    order:
+      - file.name
+      - status
+      - created
+      - revisit
+      - tags
+    sort:
+      - property: revisit
+        direction: ASC
+      - property: created
+        direction: ASC

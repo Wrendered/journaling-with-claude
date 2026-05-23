@@ -1,0 +1,37 @@
+# Relationships sorted by last-touched (most stale at top).
+# Surfaces who you haven't engaged with recently — a nudge toward
+# reaching out, or toward asking yourself why a thread went quiet.
+#
+# Generic template — works on any vault that has relationships/*.md files
+# with the project's standard frontmatter (`relation`, `since`, `last-touched`).
+#
+# Copy this file into your vault (e.g., to `dashboards/relationships.base`)
+# and open it in Obsidian.
+
+filters:
+  and:
+    - file.path.startsWith("relationships/")
+    - file.ext == "md"
+    - file.name != "_index"
+
+properties:
+  relation:
+    display: "Relation"
+  since:
+    display: "Since"
+  last-touched:
+    display: "Last touched"
+
+views:
+  - type: table
+    name: "Relationships — most stale first"
+    order:
+      - file.name
+      - relation
+      - since
+      - last-touched
+    sort:
+      - property: last-touched
+        direction: ASC
+      - property: file.name
+        direction: ASC

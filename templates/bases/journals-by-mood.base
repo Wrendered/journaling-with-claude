@@ -1,0 +1,43 @@
+# Journal entries filtered by a mood tag.
+# Default filter: mood contains "shame" — change to whatever you want to track
+# across time (e.g., "lit-up", "regret", "grounded", "anxious").
+#
+# Generic template — works on any vault that has journal/*.md files
+# with the project's standard frontmatter (`date`, `week`, `mood` array,
+# `tags`, `people`).
+#
+# Copy this file into your vault (e.g., to `dashboards/journals-shame.base`)
+# and open it in Obsidian. To track a different mood, edit the filter line
+# `mood.contains("shame")` below.
+
+filters:
+  and:
+    - file.path.startsWith("journal/")
+    - file.ext == "md"
+    - file.name != "_index"
+    - mood.contains("shame")
+
+properties:
+  date:
+    display: "Date"
+  week:
+    display: "Week"
+  mood:
+    display: "Mood"
+  tags:
+    display: "Tags"
+  people:
+    display: "People"
+
+views:
+  - type: table
+    name: "Journal entries — mood contains 'shame'"
+    order:
+      - date
+      - week
+      - mood
+      - tags
+      - people
+    sort:
+      - property: date
+        direction: DESC

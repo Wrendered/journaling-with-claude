@@ -149,9 +149,11 @@ The `.obsidian/` folder Obsidian creates (workspace state, plugin local data, cu
 
 ### What's coming in later phases
 
-- **Phase 1**: install `kepano/obsidian-skills` (Obsidian CEO's Agent Skills for Claude Code / Codex CLI) so the assistants write Obsidian-native conventions (wikilinks, callouts, Bases).
-- **Phase 2**: backfill `[[wikilinks]]` across cross-referenced files (relationships ↔ decisions ↔ self-map) so the graph view becomes meaningful.
-- **Phase 3**: generic Bases views in `templates/bases/` (open decisions, relationships by last-touched, journal entries by mood/tag) that consumers can use as-is.
+See [ROADMAP.md](ROADMAP.md) for the full vision, active phases, and backlog. Short version:
+
+- **Phase 1** (in progress): generic Bases templates in `templates/bases/` (open decisions, relationships by last-touched, journals by mood/tag) + targeted wikilink convention for journal `people:` arrays. Bases gives analytical aggregation Claude Code can't already do.
+- **Phase 3**: belief-revision log + outcome tracking on resolved decisions. The deepest long-term investment — captures *how* your self-understanding changes over years, not just *what* you currently believe.
+- **Backlog**: Smart Connections / Calendar / Templater plugins, mobile capture, audio capture, quarterly scheduled deep-consolidate, external integrations (calendar, health data). Promote from backlog as they mature.
 
 ### Plugin safety note
 

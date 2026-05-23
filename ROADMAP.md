@@ -37,13 +37,11 @@ The discipline of writing things down such that future-you can disagree with pas
 
 ---
 
-### Highest-leverage active work (replacing Phase 3 as the current focus)
+### Highest-leverage active work
 
-**A. Finish surfacing the deep-consolidate findings.** `private/_deep-consolidate-report-2026-05-10.md` identified 24 cross-decade patterns; 12 were graduated into `self-map.md`; 12 remain `⏳ Pending`. Closing the most active ones (especially loops directly relevant to live decisions) puts cross-decade material into every session's session-start read.
+**A. Add YAML frontmatter to decisions + relationships.** Per AGENTS.md schema, decision files should have `type / status / created / revisit / tags` frontmatter; relationship files should have `type / relation / since / last-touched`. Today they use body-text headers (`**Status:** Open`). This is schema drift, ~5 min per file, ~20 files total. Once landed: grep works better, wikilinks become more reliable, future Bases / queryable views become viable, AND nothing about LLM-reading workflow gets worse.
 
-**B. Wire 8-year history into daily skill flows.** Currently `start-day`, `end-day`, `plan-week`, and `monologue` rarely or never reach into `history/themes-*.md` or `historical-journal.txt`. Daily rituals (highest-frequency touchpoints) skip the richest material. Small skill-text additions surface relevant historical content reflexively rather than only when explicitly asked.
-
-Both A and B are inside-the-existing-system work. Neither adds a tool. Both directly address the "history feels underutilized" frustration.
+**B. Finish surfacing remaining deep-consolidate findings (incremental).** 16 of 24 closed; 8 remain `⏳ Pending` (mostly LOW severity). No rush; close them as relevance surfaces or in the next quarterly deep-consolidate pass.
 
 ---
 
@@ -57,59 +55,38 @@ Originally framed as the next active phase. The holistic review (2026-05-23) rec
 
 Captured for future consideration. Not committed; mature ideas graduate to Active phases.
 
-### Phase 3 (deferred from active) — Belief revision + outcome tracking
+**Scoping decision (2026-05-23):** the system stays inside its current stack — markdown vault + Claude Code + Codex CLI + optionally Obsidian. **Out of scope:** mobile/audio/photo capture, external integrations (calendar, health data, etc.). Future work is organized around five pillars below: improved skills, better organization, better linking, better searching, better visualization.
 
-**Goal:** Make the system capture not just *what* you believe but *how that belief has changed and what evidence changed it*. Over years, becomes a record of your own self-model's evolution you can inspect, disagree with, learn from.
+### 🛠️ Improved skills
 
-**Two mechanisms:**
-- **Belief-revision log.** When a graduation revises an existing self-map entry, capture: prior belief, evidence that overturned it, when. Possibly its own file at `private/beliefs/`, or a new entry type in `log.md`.
-- **Outcome tracking on closed decisions.** For decisions that resolve, scheduled 6-month follow-up: was the outcome what you expected? Better? Worse? Feeds back into self-map.
+- **Quarterly scheduled deep-consolidate** — wire the `schedule` skill to run `deep-consolidate` on `raw/historical-journal.txt` every 3 months. Each pass produces a fresh dated report. Status Tracker handles backlog across reports. ~30 min one-time setup.
+- **Belief-revision log mechanism** *(was Phase 3)* — when a graduation revises an existing self-map entry, capture the prior belief, the evidence that overturned it, and when. Possibly its own file at `private/beliefs/`, or a new entry type in `log.md`. The deepest long-term investment when the existing graduation pipeline is mature.
+- **Outcome tracking on closed decisions** *(was Phase 3)* — for resolved decisions (SF condo SOLD, Safeguards rejection, etc.), scheduled 6-month follow-up: was the outcome what you expected? Feeds back into self-map as calibration ("I tend to underestimate X").
+- **Smarter proactive search triggers** — beyond the start-day/end-day historical-resonance check that just landed, extend to monologue, deep-dive, plan-week so history surfaces in more contexts. Light touch each time.
 
-**Why this got deferred:** the May 10 deep-consolidate produced 24 findings; only 12 are graduated. Building a second log mechanism on a half-finished first one compounds infrastructure debt. Re-promote to Active when the existing pipeline is drained.
+### 📁 Better organization
 
-### #2 Obsidian plugins worth adopting (after Phase 1)
+- **YAML frontmatter on decisions + relationships** — see Active work. Schema drift cleanup. ~90 min mechanical.
+- **Periodic `_archive/` maintenance** — every quarter, review what's accumulated. Some becomes deletable; some becomes a permanent historical reference.
+- **`tags.md` review** — controlled vocabulary drift naturally happens; periodic review keeps it lean.
 
-- **Smart Connections** (free, local embeddings) — semantic "related notes" sidebar. Catches connections grep misses. Underrated.
-- **Calendar** — month-grid sidebar tied to weekly journals; clickable date navigation.
-- **Templater** — dynamic templates (`<% tp.date.now() %>`, prompts) for daily/weekly note scaffolding.
-- **Periodic Notes** — opinionated daily/weekly/monthly/yearly note structure.
+### 🔗 Better linking
 
-Phase boundary: install one at a time, evaluate, keep or remove.
+- **Cross-reference wikilinks in decision and relationship files** — after frontmatter cleanup, add `[[wikilinks]]` from each decision file to related relationship files and themes, and vice versa. One-time targeted backfill, similar in scope to the journal `people:` wikilink work.
+- **Auto-detect entity mentions in journal prose** — Claude extracts proper-noun mentions during ritual processing and proposes wikilink additions. Possible skill enhancement to monologue + end-day.
 
-### #4 Capture flow improvements
+### 🔍 Better searching
 
-- **Mobile capture** — iOS Shortcut that writes a markdown file into `raw/inbox/`. The next ritual session processes the inbox into journal + relationship files.
-- **Audio capture** — voice memo → transcript → raw layer. Local Whisper or paid service. Captures things you wouldn't write down.
-- **Photo journals with captions** — date-stamped, optionally semantic-search via embeddings.
+- **Smart Connections plugin** (Obsidian, free, local embeddings) — semantic "related notes" sidebar. Catches connections grep misses. Worth trying once the linking work has matured.
+- **Search agent improvements** — smarter cross-year retrieval; better at recognizing themes vs literal text. Could include built-in "deep-search-this-pattern-across-history" mode.
 
-### #6 Quarterly scheduled deep-consolidate
+### 📊 Better visualization
 
-Use the `schedule` skill to run `deep-consolidate` on `raw/historical-journal.txt` every 3 months. Each pass produces a fresh `_deep-consolidate-report-YYYY-MM-DD.md`. New findings graduate per the existing process. Status Tracker mechanism handles backlog across reports.
-
-Effort: ~30 min to wire up.
-
-### #7 External integrations
-
-- **Todoist** — already integrated for tasks. Could expand: pull completed-tasks summary into weekly-review automatically.
-- **Calendar (Google/iCal)** — events that contextualize journal entries (travel, meetings, milestones).
-- **Health data** (sleep, HRV, activity) — sometimes mood patterns track physiological state more than emotional state. Worth correlating.
-
-Privacy posture: all consumed data must come *in* to the local vault; nothing about journal content leaves the machine.
-
-### #8 Cross-decade pattern detection enhancements
-
-- **Belief-revision log over years** (depends on Phase 3) — visualize how core beliefs have shifted.
-- **Auto-detected entity recognition** in journal prose, not just `people:` arrays — Claude extracts mentions and proposes wikilink additions during ritual processing.
-- **Mood arc visualization** across months/years — Bases + a chart plugin, or a dedicated visualization.
-- **Decision outcome calibration** — for resolved decisions, did pre-mortems play out? Develops a sense for which lenses serve you and which are noise.
-
-### #9 Quote bank
-
-A `quotes/` folder (public for shared aphorisms, private for personal quotes) cross-referenced with where each quote shows up in journals or theme files. Useful when a phrase keeps showing up across years.
-
-### #10 Speaking aloud as ritual
-
-Voice-driven monologue → transcript → existing monologue skill pipeline. Different cognitive mode than typing.
+- **Local graph view** — works today in Obsidian. Becomes more useful as cross-references grow.
+- **Backlinks pane** — works today. Lights up further as wikilinks expand.
+- **Revisit Bases templates** — after frontmatter cleanup unblocks them. Aspirational: open-decisions dashboard, relationships-by-last-touched, mood-arc-over-time.
+- **Mood arc visualization** — Bases + chart plugin, or dedicated chart. Year-over-year view of mood/tag patterns.
+- **Calendar plugin** — month-grid sidebar tied to weekly journals; clickable date navigation. Small.
 
 ---
 
@@ -118,6 +95,14 @@ Voice-driven monologue → transcript → existing monologue skill pipeline. Dif
 ### Phase 0 — Obsidian minimal setup (2026-05-22, PR #15)
 
 `.obsidianignore` + `.gitignore` update + README "Using Obsidian (optional)" section. Lets anyone open the project folder as an Obsidian vault without restructuring; per-user `.obsidian/` state never leaks publicly.
+
+### Phase 1b — Wikilink convention for journal `people:` arrays (2026-05-23, PR #16)
+
+Backfilled 7 weekly journals from `people: [alon, brody]` → `people: ["[[alon]]", "[[brody]]"]`. New entries use the convention. Documented in ROADMAP. Phase 1a (Bases templates) shipped in same PR but walked back in PR #17.
+
+### Cleanup + history wiring (2026-05-23, PR #17)
+
+Walked back broken Bases templates (moved to `_draft/`, then deleted entirely in follow-up). Wired 9-year history into `start-day` and `end-day` skills via "Historical resonance" sections. Graduated 4 more deep-consolidate findings (§1.5, §3.2, §3.4, §4.4) — total 16 of 24 closed.
 
 ### Prior infrastructure (Mar-May 2026)
 

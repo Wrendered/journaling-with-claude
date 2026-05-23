@@ -151,9 +151,16 @@ Everyone has significant people. For each person who:
 - Is mentioned in theme files as significant
 - User identifies as important
 
-Create a stub in `private/relationships/[name].md`:
+Create a stub in `private/relationships/[name].md`. **Always include YAML frontmatter** per `AGENTS.md → YAML Frontmatter Convention` — see `templates/relationships/_template.md` for the canonical shape:
 
 ```markdown
+---
+type: relationship
+relation: partner | family | friend | mentor | collaborator
+since: YYYY-MM-DD   # skip if unknown
+last-touched: YYYY-MM-DD
+---
+
 # [Name]
 
 > [One-line relationship description]

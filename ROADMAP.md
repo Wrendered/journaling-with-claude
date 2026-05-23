@@ -22,52 +22,50 @@ The discipline of writing things down such that future-you can disagree with pas
 
 ## Active phases
 
-### Phase 1 — Obsidian visualization + targeted wikilinks
+### Phase 1 — Obsidian visualization + targeted wikilinks (PARTIALLY WALKED BACK 2026-05-23)
 
-**Goal:** Make Obsidian's Bases and backlinks pane genuinely useful on the existing vault with minimal file churn. Skip the global graph view (it's mostly aesthetic past a few hundred notes). Bases delivers analytical aggregation Claude Code can't already do; targeted wikilinks light up backlinks for high-value entities (people, decisions).
+**Status:** Phase 1b shipped and kept. Phase 1a walked back. Phase 1c dropped.
 
-**Components:**
+**What landed and stays:**
+- **1b** — Journal frontmatter `people: [alon, brody]` → `people: ["[[alon]]", "[[brody]]"]` backfilled across W01-W21. New entries follow the convention.
 
-- **1a (public):** Build 3-4 generic Bases templates that work on any consumer's vault: open decisions table, relationships sorted by `last-touched`, journals filtered by mood/tag. Live at `templates/bases/`.
-- **1b (per-user):** Convert journal frontmatter `people: [alon, brody]` → `people: ["[[alon]]", "[[brody]]"]`. Targeted backfill across existing weekly journals. Document the convention for future entries.
-- **1c (public):** Update skills (`weekly-review`, `consolidate-memory`) to mention Bases conventions where relevant. Update `add-framework` to drop Bases template references for habit-tracking frameworks.
+**What was walked back (2026-05-23):**
+- **1a** — Three generic Bases templates were built at `templates/bases/`. A holistic review then confirmed they wouldn't return rows on the canonical example vault because `decisions/*.md` and `relationships/*.md` use body-text headers (`**Status:** Open`), not the YAML frontmatter Bases queries. Templates moved to `templates/bases/_draft/`; README documents the situation honestly. Three options to revive: add YAML frontmatter to ~20 files (~90 min), adjust queries, or skip Bases.
+- **1c** — skill updates referencing Bases never started. Dropped.
 
-**Status:** in progress (2026-05-23).
-
-**Out of scope (deliberately):** wholesale in-prose wikilink conversion across 250 files. Marginal ROI; Claude grep already serves the "find references" use case better than backlinks pane.
+**Lesson surfaced by the review:** publishing infrastructure-that-doesn't-actually-work-on-the-author's-vault is worse than not shipping. The graph view + Bases were hypotheses that ambient visualization would surface more patterns; the data so far says the cross-decade work via `deep-consolidate` surfaces more, faster, more usefully. Walked back rather than doubling down.
 
 ---
 
-### Phase 3 — Belief revision + outcome tracking
+### Highest-leverage active work (replacing Phase 3 as the current focus)
 
-**Goal:** Make the system capture not just *what* you believe but *how that belief has changed and what evidence changed it*. Over years, this becomes the most valuable artifact — a record of your own self-model's evolution that you can inspect, disagree with, and learn from.
+**A. Finish surfacing the deep-consolidate findings.** `private/_deep-consolidate-report-2026-05-10.md` identified 24 cross-decade patterns; 12 were graduated into `self-map.md`; 12 remain `⏳ Pending`. Closing the most active ones (especially loops directly relevant to live decisions) puts cross-decade material into every session's session-start read.
 
-**Two mechanisms (design pending):**
+**B. Wire 8-year history into daily skill flows.** Currently `start-day`, `end-day`, `plan-week`, and `monologue` rarely or never reach into `history/themes-*.md` or `historical-journal.txt`. Daily rituals (highest-frequency touchpoints) skip the richest material. Small skill-text additions surface relevant historical content reflexively rather than only when explicitly asked.
 
-- **Belief-revision log.** When a graduation revises an existing self-map entry, also capture: what was the prior belief, what evidence overturned it, when. Lives somewhere accessible — probably `log.md` with a new `belief-revision` type, possibly cross-referenced from self-map snapshots. Design questions:
-  - Per-graduation? Or batched into the snapshot?
-  - Should it be its own file (`private/beliefs/`)?
-  - How does it differ from the existing graduation log entry?
-- **Outcome tracking on closed decisions.** For decisions that resolve (SF condo SOLD, Safeguards rejection, etc.), schedule a 6-month follow-up: was the outcome what you expected? Better? Worse? What does this teach you? Feeds back into self-map as "I tend to under/overestimate X."
+Both A and B are inside-the-existing-system work. Neither adds a tool. Both directly address the "history feels underutilized" frustration.
 
-**Public deliverables:**
-- Skill updates (`weekly-review`, `consolidate-memory`, possibly `deep-dive`) that invoke these mechanisms.
-- Convention documented in the skills + a `templates/beliefs/` example.
-- Optional: a Base view "decisions with outcome review pending."
+---
 
-**Per-user deliverables:**
-- Their actual belief-revision entries in `private/`.
-- Outcome retrospectives on their resolved decisions.
+### Phase 3 — Belief revision + outcome tracking (DEFERRED — moved to Backlog)
 
-**Status:** design pending. Will write a design doc inside this roadmap once Phase 1 lands.
-
-**Why this is the highest-leverage thing:** the difference between "I have a lot of notes about myself" and "I have a record of how my understanding of myself has changed and what evidence changed it." That's the long-term compounding asset.
+Originally framed as the next active phase. The holistic review (2026-05-23) recommended *not* proceeding until the existing graduation pipeline is empty — building a second log mechanism on top of a half-finished first one compounds infrastructure debt. Moved to Backlog for now. Will re-promote when the deep-consolidate findings are drained.
 
 ---
 
 ## Backlog
 
 Captured for future consideration. Not committed; mature ideas graduate to Active phases.
+
+### Phase 3 (deferred from active) — Belief revision + outcome tracking
+
+**Goal:** Make the system capture not just *what* you believe but *how that belief has changed and what evidence changed it*. Over years, becomes a record of your own self-model's evolution you can inspect, disagree with, learn from.
+
+**Two mechanisms:**
+- **Belief-revision log.** When a graduation revises an existing self-map entry, capture: prior belief, evidence that overturned it, when. Possibly its own file at `private/beliefs/`, or a new entry type in `log.md`.
+- **Outcome tracking on closed decisions.** For decisions that resolve, scheduled 6-month follow-up: was the outcome what you expected? Better? Worse? Feeds back into self-map.
+
+**Why this got deferred:** the May 10 deep-consolidate produced 24 findings; only 12 are graduated. Building a second log mechanism on a half-finished first one compounds infrastructure debt. Re-promote to Active when the existing pipeline is drained.
 
 ### #2 Obsidian plugins worth adopting (after Phase 1)
 

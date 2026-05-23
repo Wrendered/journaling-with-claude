@@ -101,6 +101,14 @@ If they hit MIT multiple days:
 If they missed MIT:
 - "What got in the way?" — no guilt
 
+## Historical resonance (when reflecting on the day)
+
+If the day's reflection surfaced a named pattern from `private/self-map.md` (back-door, "enough" loop, decisions-close-via-crisis, where-do-I-live loop, etc.), surface 1-2 prior dated occurrences. The pattern entries in self-map already cite `raw/historical-journal.txt` with dates; pull from there or from the relevant `history/themes-*.md` file.
+
+Frame as evidence not interpretation: *"You wrote this on YYYY-MM-DD: '...'"* — let her connect the dots. One line of context, no analysis. If nothing matches today's content, skip silently. **Do not manufacture connections.**
+
+The point: turn 9 years of past from invisible-until-asked into a default channel that surfaces when actually relevant.
+
 ## Tomorrow Preview (if Todoist connected)
 
 **Try to fetch tomorrow's tasks** using `mcp__todoist__find-tasks-by-date` with tomorrow's date.

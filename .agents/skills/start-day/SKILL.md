@@ -90,6 +90,16 @@ Short:
 - "One thing. Get it done."
 - "[X] days to [deadline]."
 
+## Historical resonance (light touch)
+
+After MIT and any rotating-element response are captured, scan `private/self-map.md` for named patterns (e.g., back-door, happiness parasite, "enough" loop, construction-project frame, pure-choice test, quit/strike-out loop, where-do-I-live loop) that match today's content. If there's a clear match:
+
+- Surface ONE dated quote from the relevant pattern entry (self-map citations point at `raw/historical-journal.txt` with dates)
+- Frame as evidence not interpretation: *"You wrote this on YYYY-MM-DD: '...'"*
+- One line of context max. No analysis. No "what does this mean?"
+
+If nothing matches, skip silently. **Do not manufacture connections.** The point is making 9 years of past continuously present when relevant, not generating fake resonance.
+
 ## Observe (internal)
 
 Notice:

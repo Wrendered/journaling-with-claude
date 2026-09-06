@@ -1,282 +1,96 @@
-# Structured Journaling with Claude Code & Codex CLI
+# Journaling with Claude and Codex
 
-I built this project to apply what I've learned [designing reliable AI systems](https://wrenchatwork.substack.com/p/rigorous-work-with-fallible-ai) to create a better journaling practice: daily rituals, weekly reviews, decision tracking, and history that stays searchable over time. It ships with a few frameworks and journaling practices, but you can add whatever resonates. Import old journals and they become organized and accessible, not just archived. The system runs in **both Claude Code and OpenAI Codex CLI** — same skills, same hooks, single source of truth. Your data stays local in markdown files you control. Tell the assistant you're getting started and it'll walk you through onboarding.
+A personal reflection and knowledge system for Claude Code and OpenAI Codex. Talk naturally, preserve your own words, and connect journals with decisions, relationships, career plans, writing, and projects. The system uses portable local files and a rebuildable search index. Its reliability approach grew out of [designing reliable AI systems](https://wrenchatwork.substack.com/p/rigorous-work-with-fallible-ai).
 
----
+You can start with a heart dump. You do not need to organize your archive or complete a questionnaire first.
 
-## How It Works
+## Getting started
 
-**Files over chat.** Your self-knowledge accumulates in markdown files you control, not hidden in chat logs. Daily rituals capture intentions and reflections. Weekly reviews surface patterns and keep history searchable.
+Clone the repository and open it in your chosen client. Python 3.9+ with SQLite FTS5 is required; no additional Python packages or graph service are needed for the core.
 
-**Grows with what matters.** Big decisions, recurring patterns, ongoing projects - give them their own space and track your thinking over time. Frameworks from researchers and authors are built in when you need a lens.
-
-**Your history stays searchable.** Import old journals and they become organized and accessible. Weekly summaries, consistent structure, and a purpose-built search agent help Claude find patterns across years of writing.
-
-**No need to pre-organize.** Dump stream-of-consciousness, ramble, think out loud. Clarity comes from the back-and-forth: summarization, follow-up questions, figuring out what resonates.
-
-**Extensible and private.\*** Track projects, habits, ideas. Adapt the structure to your life. Your data stays on your machine, protected by security hooks. *(\*See [Privacy](#privacy) for important caveats.)*
-
----
-
-## Quick Start
-
-**Requires either:**
-- [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (Anthropic's CLI), OR
-- [OpenAI Codex CLI](https://developers.openai.com/codex/cli)
-
-```bash
+```sh
 git clone https://github.com/Wrendered/journaling-with-claude.git
 cd journaling-with-claude
+bash scripts/install-git-hooks.sh
+bash scripts/check.sh
 ```
 
-Open your assistant in this directory and tell it you're getting started. Onboarding triggers automatically and creates the personalized config files.
+Tell the assistant you want to start journaling. Onboarding creates missing private pages while preserving existing files. Personal preferences live in `private/system-instructions.md`. `CLAUDE.md` is a compatibility symlink to `AGENTS.md`, so both clients read the same public instructions. `.claude/skills` points to `.agents/skills`.
 
-**Daily:** Say good morning to set your MIT, wind down at night to reflect. The right skill auto-triggers from your intent — you don't need to remember command names.
+Restart clients after changing their project hooks. UserPromptSubmit captures each message and returns a receipt. Where the client does not load those hooks, the assistant follows the same capture contract manually. A missing receipt must never be treated as proof of saving.
 
-**Weekly:** Ask to plan the week or review the past week.
+The Git hook installer preserves existing custom hook systems. If it reports one, integrate the staged privacy and configuration checks into that workflow.
 
-**Tip:** Dictation works great here — typos and garbled speech don't matter because Claude processes everything through context. Just start dumping thoughts and the monologue skill picks it up. On macOS: System Settings → Keyboard → Dictation → set shortcut to "Press Globe Key Twice."
+## What happens when you talk
 
----
+Your exact words are saved before interpretation, including uncertainty and unfinished thoughts. While you are still talking, the assistant keeps acknowledgment brief. You choose when to reflect. Its interpretations stay visibly separate from your words; agreement is a new user statement rather than retroactive authorship.
 
-## How It's Organized
+Corrections create new records and preserve earlier accounts. Current status points to a dated supporting passage. Older imported writing keeps its original context, and conflicting reports stay visible. The system does not invent reasons for a decision you have not explained.
 
-The architecture follows a **three-layer pattern** (modeled on [Karpathy's "LLM Wiki"](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)):
+## Where things live
 
-| Layer | Purpose | Location |
-|-------|---------|----------|
-| **Raw** | Immutable source inputs you don't edit | `private/raw/`, `private/import/`, `private/history/journal-raw.txt` |
-| **Wiki** | Synthesized self-knowledge Claude maintains over time | Most of `private/` |
-| **Schema** | How the wiki is organized; how the assistant should navigate it | `AGENTS.md` (public) + `private/system-instructions.md` (personal) |
-
-```
-private/                  # Your data (gitignored, stays local)
-├── _index.md             # MOC — first thing Claude reads (catalog)
-├── self-map.md           # Patterns, drivers, self-knowledge
-├── dashboard.md          # Current state — MIT, life areas, habits, experiments
-├── log.md                # Append-only chronological log (greppable timeline)
-├── tags.md               # Controlled vocabulary
-├── journal/              # Weekly + daily journal files
-├── decisions/            # Big decisions you're working through
-├── relationships/        # Key people in your life
-├── history/              # Imported past material (years of writing, processed)
-├── raw/                  # Untouched source inputs
-├── archive/              # Closed/resolved items
-└── assessments/          # Framework calibration results
-
-frameworks/               # Lenses (Atomic Habits, Stoicism, CBT, IFS, WRAP, ...)
-daily-practices/          # Journaling rituals (MIT, Gratitude, Seneca, Stoic Morning)
-assessments/              # External quizzes (Big Five, Enneagram, MBTI)
-exercises/                # Guided deep work (Values Clarification)
-templates/                # Starter files copied into private/ on onboarding
-.claude/                  # Claude Code config (skills, agents, hooks)
-```
-
-**Conventions:**
-- `_index.md` files at folder roots are MOCs — Claude reads them first to orient
-- YAML frontmatter on entries makes filtering grep-cheap (`status: open`, `type: decision`)
-- `log.md` uses prefix format `## [YYYY-MM-DD] type | Title` for cheap timeline reconstruction
-
-The reference folders (`frameworks/`, `daily-practices/`, `assessments/`, `exercises/`) are lenses for self-reflection, not therapeutic protocols. Mention any author, book, or concept that resonates and the add-framework skill will research and integrate it.
-
----
-
-## Importing Historical Journals
-
-If you have old journals, therapy notes, or past reflections, Claude can process them into a searchable, organized structure.
-
-Tell Claude you have old journals to import — the import-history skill triggers and Claude reads your raw material and builds:
-- A searchable full-text archive
-- A quotes index organized by theme
-- Theme files for recurring patterns
-- Relationship files for key people
-
-Years of reflection become accessible context, not buried archives.
-
-Not required to start. Powerful if you have it.
-
----
-
-## Intelligent Search
-
-Ask Claude about your past and it searches automatically. No special command needed.
-
-> "What have I written about decision-making?"
-> "When did I first mention wanting to change careers?"
-> "Find patterns about avoidance"
-
-This works because the whole system keeps your data search-ready: weekly reviews generate summaries, journals follow a consistent structure, and index files describe what exists. The search agent reads those indexes first, scans summaries to find relevant timeframes, then dives into raw content only when needed. Patterns across time, not just keyword matches.
-
----
-
-## Personalization
-
-The system separates what you share (skills, frameworks, practices, scaffolding) from what's personal (your tone, rituals, lens stack, history).
-
-**Public, generic, tracked:**
-- `AGENTS.md` — canonical agent instructions (read by Codex CLI natively, by Claude Code via symlink/import)
-- Skills in `.agents/skills/`, frameworks in `frameworks/`, etc.
-
-**Personal, gitignored:**
-- `private/system-instructions.md` — your personalized config (tone, lens stack, daily ritual specifics). This is the file you edit.
-- Everything in `private/` — your journal, decisions, relationships, history
-
-**During onboarding** the assistant walks you through setting up:
-- Daily rituals: morning intention prompts, evening reflection style
-- Weekly rhythm: when to plan the week, when to review
-- Working style: how to challenge you, what to never do without asking
-- Lens stack: which frameworks fit which moments
-
-These all land in `private/system-instructions.md`.
-
-**Sharing:** Fork the repo, customize `private/system-instructions.md` for yourself, pull updates to skills/frameworks/AGENTS.md without losing your preferences. `AGENTS.md` tells the assistant to read this file at session start.
-
----
-
-## Using Obsidian (optional)
-
-The vault is plain markdown on disk, so [Obsidian](https://obsidian.md/) works on top of it without any restructuring. This gets you visualizations (local graph view, backlinks pane, Bases tables) for browsing the wiki layer alongside the LLM-driven editing you already have.
-
-### Phase 0 — Minimal setup
-
-1. **Install Obsidian** from [obsidian.md](https://obsidian.md/) (free for personal use).
-2. **Open this project folder as a vault**: in Obsidian, `Open folder as vault` → pick the repo root. The included [`.obsidianignore`](.obsidianignore) hides tooling (`.git/`, `.claude/`, `.codex/`, `.agents/`, build caches) so only knowledge content shows in the graph.
-3. Browse the included `frameworks/`, `daily-practices/`, `exercises/`, `couple/`, etc. With your own `private/` content joined in, the entire vault becomes one navigable graph.
-
-### What stays per-user vs shared
-
-The `.obsidian/` folder Obsidian creates (workspace state, plugin local data, custom hotkeys) is **gitignored entirely** — your personal Obsidian config never touches the public repo. Later phases will ship recommended defaults under `templates/obsidian-config/` that any consumer can copy into their `.obsidian/` to bootstrap a sensible starting setup.
-
-### What's coming in later phases
-
-See [ROADMAP.md](ROADMAP.md) for the full vision, active phases, and backlog. Short version:
-
-- **Currently shipped**: Phase 0 (this `.obsidianignore` + gitignore setup) and Phase 1b (wikilink convention for journal `people:` arrays). That's it. The Bases templates that were briefly shipped have been moved to `templates/bases/_draft/` after a holistic review surfaced they don't work on this user's actual vault until the schema drift in decisions/relationships gets fixed.
-- **Highest-leverage next moves** (not necessarily Obsidian-related): finish surfacing the cross-decade pattern findings from `deep-consolidate` reports; wire 8-year history into daily skill flows so it's continuously available rather than only-when-asked.
-- **Backlog**: Smart Connections plugin, Calendar plugin, mobile capture, audio capture, quarterly scheduled deep-consolidate, external integrations. Promote from backlog as they mature.
-
-### Plugin safety note
-
-Obsidian community plugins are **not sandboxed** — they have full filesystem and network access. A 2026 supply-chain incident (PHANTOMPULSE RAT) underscored the risk. Stay in Restricted Mode by default. Only enable well-vetted plugins from the official directory. Audit anything obscure before installing.
-
----
-
-## Dual-Tool Compatibility
-
-The system runs in **both Claude Code and OpenAI Codex CLI** with a single source of truth for skills and hooks. This is unusual; here's how it works.
-
-### Why both
-
-- **Claude Code** — strongest agent integration, native skills, hooks, subagents
-- **Codex CLI** — different model family, different ergonomics, broader tool ecosystem (uses [agents.md spec](https://agents.md))
-
-The same daily ritual, the same lens stack, the same hooks fire in either tool.
-
-### What's shared (single source of truth)
-
-| Primitive | Source | How both tools find it |
+| Layer | Location | Purpose |
 |---|---|---|
-| **System instructions** | `AGENTS.md` (public) + `private/system-instructions.md` (personal) | Codex reads `AGENTS.md` natively. Claude Code reads the same public instructions via `CLAUDE.md` symlink/import. Both are then instructed to read `private/system-instructions.md` as the personal layer. |
-| **Skills** | `.agents/skills/<name>/SKILL.md` ([agentskills.io](https://agentskills.io) spec) | Codex reads natively. Claude Code reads via `.claude/skills/` symlink. |
-| **Hook scripts** | `.claude/hooks/` (env-agnostic shell scripts) | Both tools invoke the same scripts. `.codex/hooks/` is a symlink. |
+| Original messages | `private/journal/entries/YYYY-MM-DD/` | Exact text, speaker, stable ID, dates, checksum |
+| Imported originals | `private/raw/imports/` | Original bytes, hash, import manifest |
+| Sourced state | `private/state/assertions/` | Dated reports, evidence, explicit corrections |
+| Personal wiki | `private/relationships/`, `decisions/`, `career/`, `writing/`, `projects/`, `self-map.md` | Useful synthesis with links back to evidence |
+| Current and chronological views | `private/views/current.md`, `timeline.md` | Generated from records |
+| Interactive graph | `private/views/graph.html` | Local source browser with typed connections |
+| Search cache | `private/.cache/vault.sqlite` | Rebuildable SQLite full-text index |
+| Operational ledger | `private/state/operations.jsonl` | Compact record of successful operations |
 
-### What needs adaptation (different config formats)
+Existing weekly journals, raw history, and `private/log.md` remain intact as legacy material. They stay searchable; new messages use the source-record format. Weekly reviews produce attributed wiki summaries under `private/reviews/`.
 
-| Primitive | Claude Code | Codex CLI | Reconciliation |
-|---|---|---|---|
-| **Hook wiring** | `.claude/settings.json` | `.codex/hooks.json` | Generated from `.claude/settings.json` by `scripts/sync-codex.sh` |
-| **Subagents** | `.claude/agents/*.md` (Markdown + YAML) | `.codex/agents/*.toml` (TOML) | Generated from `.claude/agents/` by `scripts/sync-codex.sh` |
-| **MCP servers** | `.claude/settings.json` | `.codex/config.toml` | Maintained separately (small, low-rot risk) |
+Other project repositories remain where they are. Link them from personal project pages and connect those pages to writings, goals, and source records. There is no requirement to merge your code repositories into this vault.
 
-`scripts/verify-sync.sh` is a pre-commit guard that fails if the Codex side has drifted from the Claude side.
+## Everyday entry points
 
-### Codex CLI gaps (accept these)
+| Say something like | Skill |
+|---|---|
+| “I need to talk” | monologue |
+| “Help me understand this decision” | deep-dive |
+| “Good morning” / “Let’s reflect on today” | start-day / end-day |
+| “Help me plan the week” / “Review my week” | plan-week / weekly-review |
+| “Here are my old journals” | import-history |
+| “Check my knowledge system for contradictions” | consolidate-memory |
+| “Add this framework” | add-framework |
+| “Set up backups” / “Back up my journal” | setup-backups / backup |
 
-- **No auto-triggered skills.** Codex invokes skills via `$skill-name` (explicit). Claude Code auto-triggers from intent. You'll need to be more explicit on Codex.
-- **No auto-dispatched subagents.** Codex spawns subagents only on explicit request.
-- **Hooks need `[features] codex_hooks = true`** in `.codex/config.toml` (handled in this repo).
+Rituals and coaching are optional. Community, relationships, and outside support can be part of the reflection without becoming mandatory tracking chores. External task integrations are optional and follow the user’s requested scope.
 
----
+## Search, graph, and integrity
 
-## Claude Code & Codex CLI Architecture
+```sh
+python3 scripts/vault.py build
+python3 scripts/vault.py search "a phrase or topic"
+python3 scripts/vault.py show SOURCE_ID
+python3 scripts/vault.py audit
+```
 
-Understanding this helps if you want to customize or extend it.
+Search refreshes its index so newly saved material is discoverable. Open `private/views/graph.html` locally to explore records and source passages. The page uses no external scripts or network requests. Legacy documents are marked as mixed or unknown authorship until their original passages establish who said what.
 
-### Skills
+This uses ideas from [Karpathy’s LLM Wiki](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f): preserved inputs, a linked wiki, and a clear schema. Dated evidence and explicit supersession borrow temporal concepts described by [Graphiti](https://github.com/getzep/graphiti). Search is currently lexical. Semantic retrieval such as [QMD](https://github.com/tobi/qmd) can be evaluated later against the same sources if phrasing differences cause misses.
 
-Auto-triggered workflows in Claude Code; explicitly invoked in Codex CLI. The skill files (one [agentskills.io](https://agentskills.io)-compliant `SKILL.md` per skill) live in `.agents/skills/` (canonical) with `.claude/skills/` symlinked to that path.
+## Backups and privacy
 
-| Skill | Triggers when you... |
-|-------|----------------------|
-| `start-day` | Say good morning, want to set today's MIT |
-| `end-day` | Wind down, ask "how did today go" |
-| `monologue` | Start dumping thoughts unprompted |
-| `deep-dive` | Want to dig into a pattern, calibrate an assessment, work through a decision |
-| `plan-week` | Want to set focus for the week ahead |
-| `weekly-review` | Want to look back at the week, organize the journal |
-| `onboarding` | Are setting up the system for the first time |
-| `import-history` | Have old journals to bring in |
-| `add-framework` | Mention a framework or methodology you want to add |
-| `setup-backups` | Want to configure automatic backups |
-| `backup` | Want to run a backup |
+`private/` is ignored by the public repository. Client guards and the Git pre-commit check help prevent accidental public commits; inspect diffs as well. The public repository contains reusable tools, generic instructions, templates, and synthetic tests. Journal entries, personal preferences, imports, generated graphs, search databases, and backup manifests belong in the private vault. Publishing a generated HTML graph would publish its embedded source passages.
 
-### Agents
+Personal files sent to a model are handled by that client/provider. Local storage alone does not mean model processing is offline. A Dropbox or iCloud backup location may sync off the machine.
 
-Auto-invoked by Claude when relevant. Located in `.claude/agents/`.
+```sh
+python3 scripts/vault.py backup --destination /your/backup/folder
+python3 scripts/vault.py verify-backup /your/backup.zip --restore-to /empty/restore-test
+```
 
-| Agent | Triggers on |
-|-------|-------------|
-| `search` | Questions about your past, patterns, history |
+A backup includes originals, import staging, wiki, and state, with a hash manifest. It excludes generated views/caches, Git internals, environments, `.env*`, and symlinks. Existing backups are never automatically pruned. Restoration requires an empty destination and puts the vault under `DEST/private`. Do not restore over a live vault.
 
-### Hooks
+The backup skill uses `private/backup-config.sh`. Its `--encrypt` wrapper supports password entry in an interactive terminal using legacy ZIP encryption; passwords never belong in chat or command arguments. Private Git commits and remote configuration require explicit authorization.
 
-Claude Code hooks that enforce rules. Located in `.claude/hooks/`.
+## Maintaining the harness
 
-| Hook | Purpose |
-|------|---------|
-| `PreToolUse` | Blocks `git add`/`commit`/`push` of `private/` or `CLAUDE.md` |
-| `PostToolUse` | Reviews committed diffs for accidentally included personal info |
+Read [the memory contract](docs/memory-contract.md) for capture/state/import formats and [the harness guide](docs/harness.md) for lifecycle hooks and model profiles. Shared instructions stay short. Model profiles are recommendations, not changes to your selected model.
 
-### Adding Your Own
+After editing `.claude/settings.json` or `.claude/agents/`, run `bash scripts/sync-codex.sh`. The sync check compares without mutating your files. `bash scripts/check.sh` exercises synthetic capture, correction, concurrency, retrieval, attribution, backup/restore, and public privacy cases.
 
-**New skill:** Create `.claude/skills/your-skill/SKILL.md` with frontmatter (`name`, `description`). The description is what makes it auto-trigger — list the situations where you want it to fire.
-
-**New framework:** Tell Claude you want to add one — the add-framework skill researches and creates it.
-
----
-
-## Privacy
-
-**Local storage:** The `private/` folder is gitignored. Your journal files stay on your machine in markdown you control. A security hook blocks any attempt to commit `private/` or `CLAUDE.md`.
-
-See [SECURITY.md](SECURITY.md) for the full public-release and privacy checklist.
-
-**But be aware:** When you use Claude Code, your prompts and file contents are sent to Anthropic's servers. This means your reflections pass through their API. What that means for privacy:
-
-- **Training:** Consumer accounts (Pro/Max) can opt out of model training at [claude.ai/settings](https://claude.ai/settings). Commercial API accounts are excluded from training by default.
-- **Retention:** With training opt-out, data is retained for 30 days. With opt-in, up to 5 years.
-- **Trust & Safety:** Anthropic's safety team can review flagged content regardless of your settings.
-- **Telemetry:** You can disable non-essential telemetry with `export CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1`.
-
-This is a journaling tool, not a secure vault. Don't include passwords, financial account numbers, or information that could harm others if exposed. For maximum privacy, use a commercial API account with zero-retention configured.
-
-**Backups:** Tell Claude you want to set up backups — the setup-backups skill walks you through configuring automatic backups to Dropbox, iCloud, or a local folder. Backups also run during weekly review.
-
----
-
-## A Note About This Tool
-
-This is a space for reflection, not therapy. Writing things down, noticing patterns, and having a thinking partner can be genuinely valuable for self-understanding. Many people find that journaling helps them process experiences, clarify their thoughts, and track what matters to them.
-
-That said, this tool isn't treatment. If you're working through something heavy, a good therapist can offer things this can't: clinical training, the nuance of face-to-face conversation, and professional support tailored to your specific situation. Using both together often works well.
-
-**If you're in crisis:**
-- **988** Suicide & Crisis Lifeline: Call or text 988 (US, 24/7, free, confidential)
-- **Crisis Text Line:** Text HOME to 741741
-- **International:** [findahelpline.com](https://findahelpline.com)
-
-There's no shame in needing support. These resources exist because hard times are part of being human.
-
----
-
-*Built for Claude Code & OpenAI Codex CLI*
+[Roadmap](ROADMAP.md) tracks remaining evaluation work and optional extensions.

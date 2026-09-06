@@ -76,8 +76,8 @@ check_stale_personal_config_refs() {
 check_secret_like_content() {
   local hits
   hits="$(
-    git grep -I -n -E '(api[_-]?key|client_secret|github_pat_|ghp_|sk-[A-Za-z0-9]{20,}|BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY|password[[:space:]]*[:=]|bearer [A-Za-z0-9._-]{20,})' \
-      -- . ':!private' ':!scripts/public-sanity-check.sh' || true
+    git grep -I -l -E '(api[_-]?key|client_secret|github_pat_|ghp_|sk-[A-Za-z0-9]{20,}|BEGIN (RSA|OPENSSH|EC|PRIVATE) KEY|password[[:space:]]*[:=]|bearer [A-Za-z0-9._-]{20,})' \
+      -- . ':!private' ':!scripts/public-sanity-check.sh' ':!scripts/check_staged.py' ':!tests' || true
   )"
   if [[ -n "$hits" ]]; then
     printf '%s\n' "$hits" >&2

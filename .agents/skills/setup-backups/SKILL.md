@@ -1,99 +1,14 @@
 ---
 name: setup-backups
-description: One-time configuration of automatic backups of private/ data to Dropbox, iCloud, or a local path. Verifies the destination, creates private/backup-config.sh from the template, runs a test backup, and confirms success.
-when_to_use: |
-  ALWAYS invoke this skill when the user wants to configure backups for the first time.
-  Trigger phrases (any of these): "set up backups", "configure backups", "how do I back up",
-  "where do my journals go", "I want to preserve this data", "back up to Dropbox",
-  "back up to iCloud".
-  Do NOT invoke for routine backup runs — that's the `backup` skill.
-allowed-tools: Read, Edit, Write, Bash
+description: Configure a personal backup destination and verify a first snapshot without pruning existing archives.
 ---
 
 # Setup Backups
 
-One-time setup for automatic backups of private data.
+Read [the shared memory contract](../../../docs/memory-contract.md) before the first capture, state update, or import in a session. Use AGENTS.md for privacy, attribution, and current-context precedence.
 
-## What Gets Backed Up
-
-- `private/` folder (excluding `import/`)
-
-`AGENTS.md` and other project-level scaffolding are version-controlled in the public repo and recoverable via `git clone` — backups intentionally cover only `private/` (the per-user data that has no remote).
-
-Backups are timestamped zips stored in your configured location. Last 10 kept, older pruned automatically.
-
-## Setup Flow
-
-### 0. Verify backup destination exists
-
-Before setup, confirm your backup destination's parent directory exists:
-- Dropbox: `ls ~/Dropbox` (should exist if Dropbox installed)
-- iCloud: `ls ~/Library/Mobile\ Documents/com~apple~CloudDocs`
-- Local: Any local path you choose
-
-### 1. Check backup location
-
-Ask user: "Where do you want backups stored?"
-
-Default: `~/Dropbox/backups/journaling-with-claude/`
-
-Other options:
-- iCloud: `~/Library/Mobile Documents/com~apple~CloudDocs/backups/journaling-with-claude/`
-- Local: `~/backups/journaling-with-claude/`
-- Custom path
-
-Verify the parent directory exists.
-
-### 2. Create private config
-
-Copy template to `private/backup-config.sh`:
-
-```bash
-cp templates/backup-config.template.sh private/backup-config.sh
-```
-
-If the user chose a non-default location (anything other than `~/Dropbox/backups/journaling-with-claude/`), edit `private/backup-config.sh` and replace the `BACKUP_DIR="..."` line with their chosen path. The template ships with the Dropbox default uncommented; an `sed -i ''` or `Edit` tool change is fine.
-
-### 3. Create backup directory
-
-```bash
-mkdir -p [BACKUP_DIR]
-```
-
-### 4. Test the backup
-
-Run the backup script to verify it works:
-
-```bash
-.claude/skills/backup/scripts/backup-private.sh
-```
-
-Confirm backup was created successfully.
-
-### 5. Confirm setup
-
-Show summary:
-- Backup location
-- Runs during weekly-review
-- Manual: `.claude/skills/backup/scripts/backup-private.sh`
-- Encrypted: `.claude/skills/backup/scripts/backup-private.sh --encrypt`
-
-## Manual Backup
-
-Anytime, run:
-
-```bash
-.claude/skills/backup/scripts/backup-private.sh           # Regular
-.claude/skills/backup/scripts/backup-private.sh --encrypt # Password-protected
-```
-
-## Checking Backups
-
-```bash
-ls -la [BACKUP_DIR]
-```
-
-## Notes
-
-- Backups exclude `private/import/` (one-time processing material)
-- Encrypted backups prompt for password — don't forget it!
+1. Read current configuration and personal backup notes. Reuse an already-authorized active location; never resume writing into a frozen archive.
+2. If no destination is known, ask where backups should live. A folder synced by another service may leave this machine; describe the location accurately.
+3. Write private/backup-config.sh using templates/backup-config.template.sh and the chosen path. Preserve older backups and do not configure retention deletion.
+4. Run the backup skill, verify the manifest, and restore into an empty temporary directory as a rehearsal. Record the successful path and date in personal operating notes.
+5. Do not add a recurring automation unless the user requested scheduling. Do not add Git remotes, commit private data, or promise offsite upload from local verification.

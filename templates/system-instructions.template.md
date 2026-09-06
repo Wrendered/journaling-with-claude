@@ -2,7 +2,7 @@
 
 > **This is your file.** Personalize freely. Assistants read it after `AGENTS.md`, so this file refines the generic scaffolding without duplicating it.
 >
-> Path: `private/system-instructions.md`. Gitignored, never leaves your machine.
+> Path: `private/system-instructions.md`. Excluded from the public repository. Model processing and configured backups follow your client and storage choices.
 
 ---
 
@@ -55,7 +55,7 @@ Delete rows you don't use. Add rows for situations the listed lenses don't cover
 
 ## Daily Rituals (personal config)
 
-> Override the generic Daily Rituals scaffold from AGENTS.md with your specific cadence.
+> Optional rituals. Change or skip them whenever useful.
 
 **Morning rotating element (start-day skill reads this):**
 
@@ -73,7 +73,7 @@ Delete rows you don't use. Add rows for situations the listed lenses don't cover
 
 ## Weekly Rhythm (personal config)
 
-> Override the generic Weekly Rhythm scaffold from AGENTS.md.
+> Optional weekly rhythm.
 
 | Day | Focus |
 |-----|-------|

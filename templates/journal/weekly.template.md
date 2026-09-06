@@ -1,64 +1,20 @@
-# Week [NN] ([Date Range])
-
-<!-- REQUIRED: Search agents read these first -->
-<!-- Fill these in during /weekly-review -->
-
-## Summary
-
-[2-4 sentences: what happened this week, major themes]
-
-## Highlight Quotes
-
-> "exact words that capture something important" — context
-
 ---
-
-<!-- OPTIONAL: Include what's relevant to this week -->
-
-## Keywords
-
-`tag1` `tag2` `tag3`
-
-## Patterns Noticed
-
-- [recurring themes worth tracking]
-
-## Relationships
-
-- **Name:** [what came up]
-
-## Decisions
-
-- [movement on open decisions]
-
-## Goals / Career
-
-- [progress, setbacks, clarity]
-
-## Experiments
-
-- [what you're trying, what you learned]
-
-## Emotional Themes
-
-- [what came up emotionally]
-
+type: review
+author: assistant
+period: YYYY-Www
 ---
+# Weekly review
 
-## Raw Log
+Save a completed review under private/reviews/YYYY-Www.md. This is an attributed synthesis. Original source records remain unchanged.
 
-<!-- Append throughout the week -->
+## User reports and exact passages
 
-### Sun [Date]
+Link each report or quote to its source record and date.
 
-**Morning:** [/start-day content]
+## Assistant observations
 
-**Evening:** [/end-day content]
+Tentative connections, clearly separate from user conclusions.
 
-### Mon [Date]
+## Open questions and chosen commitments
 
-[continues...]
-
----
-
-*Week [NN] of journaling system.*
+Distinguish unanswered questions, suggestions, and explicit user commitments.

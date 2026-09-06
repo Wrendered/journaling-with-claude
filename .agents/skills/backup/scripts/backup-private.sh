@@ -1,94 +1,37 @@
-#!/bin/bash
-# Backup private/ to the configured destination
-#
-# Usage:
-#   ./backup-private.sh           # Regular backup
-#   ./backup-private.sh --encrypt # Encrypted backup (prompts for password)
-#
-# Backups stored in: ~/Dropbox/backups/journaling-with-claude/
-
-set -e
-
-# Config (defaults, can override in private/backup-config.sh)
+#!/usr/bin/env bash
+# Verified backups with originals and import staging; never prune old archives.
+set -euo pipefail
 REPO_DIR="$(cd "$(dirname "$0")/../../../.." && pwd)"
 BACKUP_DIR="$HOME/Dropbox/backups/journaling-with-claude"
-KEEP_BACKUPS=10
-
-# Load private config if exists (overrides BACKUP_DIR, KEEP_BACKUPS)
 if [[ -f "$REPO_DIR/private/backup-config.sh" ]]; then
-    source "$REPO_DIR/private/backup-config.sh"
+  source "$REPO_DIR/private/backup-config.sh"
 fi
-
-TIMESTAMP=$(date '+%Y-%m-%d_%H%M%S')
-BACKUP_NAME="journaling-with-claude_${TIMESTAMP}.zip"
-
-# Parse args
-ENCRYPT=false
-if [[ "$1" == "--encrypt" ]]; then
-    ENCRYPT=true
+if [[ $# -eq 0 ]]; then
+  exec python3 "$REPO_DIR/scripts/vault.py" backup --destination "$BACKUP_DIR"
 fi
-
-# Create backup directory if needed
+if [[ "$1" != '--encrypt' || $# -ne 1 ]]; then
+  echo 'Usage: backup-private.sh [--encrypt]' >&2
+  exit 1
+fi
+if [[ ! -t 0 ]]; then
+  echo 'Encrypted backups require an interactive terminal for password entry.' >&2
+  exit 1
+fi
+STAGING_DIR="$(mktemp -d)"
+trap 'rm -rf "$STAGING_DIR"' EXIT
+python3 "$REPO_DIR/scripts/vault.py" backup --destination "$STAGING_DIR" > "$STAGING_DIR/result.json"
+ARCHIVE_PATH="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["archive"])' "$STAGING_DIR/result.json")"
+python3 "$REPO_DIR/scripts/vault.py" verify-backup "$ARCHIVE_PATH" --restore-to "$STAGING_DIR/restored"
+python3 - "$ARCHIVE_PATH" "$STAGING_DIR/restored/BACKUP-MANIFEST.json" <<'PY'
+import sys, zipfile
+from pathlib import Path
+with zipfile.ZipFile(sys.argv[1]) as archive:
+    Path(sys.argv[2]).write_bytes(archive.read('BACKUP-MANIFEST.json'))
+PY
 mkdir -p "$BACKUP_DIR"
-
-# Verify backup directory is writable
-if [[ ! -w "$BACKUP_DIR" ]]; then
-    echo "Error: $BACKUP_DIR is not writable" >&2
-    exit 1
-fi
-
-# Create temp directory for staging
-TEMP_DIR=$(mktemp -d)
-trap "rm -rf $TEMP_DIR" EXIT
-
-# Copy files to stage, excluding generated/cached folders and import/
-# Excluded: import/ (top-level), .git (local repo), .venv (Python venvs anywhere),
-#           __pycache__, .ipynb_checkpoints, .DS_Store, *.pyc, .env
-echo "Staging files..."
-if [[ -d "$REPO_DIR/private" ]]; then
-    mkdir -p "$TEMP_DIR/private"
-    rsync -a \
-        --exclude='import' \
-        --exclude='.git' \
-        --exclude='.venv' \
-        --exclude='__pycache__' \
-        --exclude='.ipynb_checkpoints' \
-        --exclude='.DS_Store' \
-        --exclude='*.pyc' \
-        --exclude='.env' \
-        "$REPO_DIR/private/" "$TEMP_DIR/private/"
-else
-    echo "Note: private/ not found"
-fi
-
-# Check we have something to backup
-if [[ ! -d "$TEMP_DIR/private" ]]; then
-    echo "Error: Nothing to backup"
-    exit 1
-fi
-
-# Create zip
-echo "Creating backup..."
-cd "$TEMP_DIR"
-
-if [[ "$ENCRYPT" == true ]]; then
-    echo "Encrypting backup (you'll be prompted for password)..."
-    zip -r -e "$BACKUP_DIR/$BACKUP_NAME" . -x "*.DS_Store"
-else
-    zip -r "$BACKUP_DIR/$BACKUP_NAME" . -x "*.DS_Store"
-fi
-
-# Prune old backups (keep last N)
-echo "Pruning old backups (keeping last $KEEP_BACKUPS)..."
-cd "$BACKUP_DIR"
-ls -t journaling-with-claude_*.zip 2>/dev/null | tail -n +$((KEEP_BACKUPS + 1)) | xargs rm -f 2>/dev/null || true
-
-# Report
-BACKUP_SIZE=$(du -h "$BACKUP_DIR/$BACKUP_NAME" | cut -f1)
-BACKUP_COUNT=$(ls -1 "$BACKUP_DIR"/journaling-with-claude_*.zip 2>/dev/null | wc -l | tr -d ' ')
-
-echo ""
-echo "Backup complete:"
-echo "  File: $BACKUP_DIR/$BACKUP_NAME"
-echo "  Size: $BACKUP_SIZE"
-echo "  Total backups: $BACKUP_COUNT"
+ENCRYPTED_PATH="$BACKUP_DIR/$(basename "$ARCHIVE_PATH" .zip)_encrypted.zip"
+cd "$STAGING_DIR/restored"
+echo 'ZIP encryption uses legacy ZipCrypto. Enter the password in this terminal.'
+zip -q -r -e "$ENCRYPTED_PATH" private BACKUP-MANIFEST.json
+python3 "$REPO_DIR/scripts/vault.py" verify-backup "$ENCRYPTED_PATH" --password-prompt
+printf 'Verified encrypted backup: %s\n' "$ENCRYPTED_PATH"

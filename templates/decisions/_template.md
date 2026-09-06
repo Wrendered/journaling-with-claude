@@ -1,87 +1,25 @@
 ---
 type: decision
-status: open
-created: YYYY-MM-DD
-revisit: YYYY-MM-DD
-tags: [add, relevant, tags]
+entity: decision:identifier
 ---
+# Decision
 
-# Decision: [TITLE]
+## Current context
 
-**Status:** Open | Exploring | Leaning [X] | DECIDED — [OUTCOME]
+Link to ../views/current.md and the source supporting the present decision status. Event dates and recording dates stay separate.
 
-**Last Updated:** [DATE]
+## The user’s account
 
-> The YAML frontmatter above is what tools (grep, search agents, future Bases views) query. Keep `status` accurate: `open` | `resolved` | `abandoned`. Body-text **Status:** line above is the human-readable narrative version.
+What they chose, why, what they loved or valued, and what remains uncertain, using their actual words and source links. Leave unstated reasons blank rather than reconstructing them.
 
----
+## Options and earlier deliberation
 
-## TL;DR
+Preserve past thinking with its original dates. It is evidence of earlier thinking, not a substitute for the eventual account.
 
-**The question:** [One sentence framing the decision]
+## Assistant framings
 
-**Options:**
-- A: [Option A]
-- B: [Option B]
-- C: [Option C if applicable]
+Only framings already delivered, clearly attributed. User agreement is a separate source.
 
-**Current leaning:** [Where you're at]
+## Open questions
 
----
-
-## Context
-
-[Why this decision matters. What's at stake. Background.]
-
----
-
-## The Options
-
-### Option A: [Name]
-
-| Pros | Cons |
-|------|------|
-| | |
-
-### Option B: [Name]
-
-| Pros | Cons |
-|------|------|
-| | |
-
----
-
-## Key Questions
-
-- [Question 1]
-- [Question 2]
-- [Question 3]
-
----
-
-## The Question Under the Question
-
-*Is there a deeper issue this decision touches on? Identity, values, fears?*
-
-[Explore here]
-
----
-
-## Body Check
-
-*Which option makes your body relax? Which creates tension?*
-
-[Notes]
-
----
-
-## Current Thinking
-
-[Where you're at right now. What's pulling you which way.]
-
----
-
-## Log
-
-### [DATE] — [Brief title]
-[Notes from this session]
+Unresolved questions and explicitly chosen revisit dates. A resolved decision can still involve grief or uncertainty.

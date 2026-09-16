@@ -43,6 +43,27 @@ by client. Do not hard-code a universal maximum-effort or always-delegate rule.
 API-specific replay and compaction machinery belongs to an API application; Codex
 and Claude Code already provide the surrounding runtime here.
 
+## Reflection behavior
+
+Adaptation here means saving sourced feedback, retrieving it in later conversations,
+and revising instructions and evaluation cases. This repository does not run a
+model-training or fine-tuning job. [Custom instructions](https://learn.chatgpt.com/docs/agent-configuration/agents-md)
+guide behavior through context; [supervised fine-tuning](https://developers.openai.com/api/docs/guides/supervised-fine-tuning)
+is a separate training workflow. Private fit feedback stays in the vault; public
+changes contain reusable rules and independently invented scenarios.
+
+[Conversation design](conversation-design.md) supplies task selection, adaptation,
+and feedback rules. Framework references load as needed. A selected model does not
+act as a panel of clinicians; no provider API or diagnostic classifier is required.
+
+Keep instructions specific to decisions this system needs, with short skill
+descriptions and relevant references. Check real response behavior using
+[fictional scenarios](support-evaluation.md) after material instruction or model
+changes. This follows the direction of [OpenAI's skills guidance](https://developers.openai.com/blog/rethinking-skills-and-prompts-for-gpt-6-astra)
+(checked September 14, 2026): avoid unnecessary instructions and indiscriminate skill
+loading. These local scenarios do not establish cross-model reliability or clinical
+effectiveness. Actual user feedback remains separately attributed in the private vault.
+
 Current primary references (checked September 6, 2026):
 - [Sol](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-5.6)
 - [Astra](https://developers.openai.com/api/docs/guides/latest-model)

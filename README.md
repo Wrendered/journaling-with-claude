@@ -50,6 +50,9 @@ Other project repositories remain where they are. Link them from personal projec
 |---|---|
 | “I need to talk” | monologue |
 | “Help me understand this decision” | deep-dive |
+| “Show me a few ways to understand this feeling” | deep-dive |
+| “Compare approaches and help me learn what fits” | compare-approaches |
+| “Help me find a therapist or coach” | find-support |
 | “Good morning” / “Let’s reflect on today” | start-day / end-day |
 | “Help me plan the week” / “Review my week” | plan-week / weekly-review |
 | “Here are my old journals” | import-history |
@@ -58,6 +61,25 @@ Other project repositories remain where they are. Link them from personal projec
 | “Set up backups” / “Back up my journal” | setup-backups / backup |
 
 Rituals and coaching are optional. Community, relationships, and outside support can be part of the reflection without becoming mandatory tracking chores. External task integrations are optional and follow the user’s requested scope.
+
+## Reflection, learning, and coaching
+
+The [conversation guide](docs/conversation-design.md) distinguishes listening,
+exploring feelings, examining beliefs, coping, learning about methods, and working
+toward chosen goals. You can change direction naturally: “just listen,” “try another
+interpretation,” “explain that approach,” or “help me act on this.”
+
+The [framework library](frameworks/_index.md) compares therapeutic lenses,
+philosophical perspectives, and coaching tools with their benefits and limitations.
+These are adaptations for reflection, not validated AI treatment protocols. The
+assistant uses relevant references rather than assigning you a school or diagnosis.
+Your corrections matter; an interpretation that resonates remains an interpretation.
+
+An optional private `support/what-helps.md` records sourced feedback, including
+what missed. A separate consultation brief can support [finding a therapist, coach,
+or both](docs/finding-support.md). Neither is shared automatically. The
+[evaluation guide](docs/support-evaluation.md) describes fictional scenario checks
+and the limits of those checks.
 
 ## Search, graph, and integrity
 

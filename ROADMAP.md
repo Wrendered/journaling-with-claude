@@ -2,7 +2,7 @@
 
 ## Implemented September 2026
 
-- Shared concise instructions and twelve focused skills for Claude Code and Codex.
+- Shared concise instructions and focused skills for Claude Code and Codex.
 - Exact source capture with stable IDs, speaker attribution, checksums, and separate event/recording dates.
 - Sourced current-state assertions, explicit supersession, and visible conflicting reports.
 - Preserved legacy journals and content-addressed imports.
@@ -10,6 +10,8 @@
 - Client lifecycle adapters, direct-file source guards, changed-text attribution checks, and independent Git staged privacy checks.
 - Verified non-pruning backups and restoration into an empty location.
 - Synthetic regression tests and independent forward testing.
+- A conversation guide for flexible reflection, learning, and coaching; sourced
+  framework cards, approach comparison, private fit feedback, and provider briefs.
 
 ## Next, driven by actual use
 

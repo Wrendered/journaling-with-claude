@@ -37,6 +37,8 @@ Kinds: `user_statement` / speaker `user`; `assistant_framing` or
 Assistant kinds require `delivered: true`. Do not set it on text you plan to send.
 Normally only user text needs immediate capture. Add already-delivered assistant
 context later when useful, with references to the relevant source IDs.
+If a user discloses immediate danger, respond with urgent support without waiting
+for storage or retrieval. Capture when it can be done without delaying that response.
 
 `references` is an optional list of `{relation, target, evidence}`. Relations are
 `about`, `mentions`, `source_for`, `related_project`, `supersedes`, `contradicts`.

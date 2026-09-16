@@ -12,5 +12,8 @@ Read [the shared memory contract](../../../docs/memory-contract.md) before the f
 3. Preserve the tracked CLAUDE.md compatibility symlink to AGENTS.md. If a custom CLAUDE.md exists, inspect it and retain its personal guidance in private/system-instructions.md before proposing any replacement. Do not overwrite it automatically.
 4. Ask one useful question at a time about what the user needs now. Capture actual messages immediately; a heart dump can be the entire first session. Tone and ritual preferences can emerge gradually.
 5. Keep public instructions generic. Put personal preferences and backup locations only in private/. Avoid unnecessary questionnaires, labels, scores, or framework assignments.
+   Create `private/support/` from relevant support templates only when the user
+   wants to learn what helps or prepare for a therapist/coach. Existing feedback
+   can seed it with source links; leave unknown preferences unknown.
 6. Build current/timeline/search views. If migrating legacy material, first make a verified backup, preview legacy-manifest, then write the manifest to preserve originals in place. Use the memory contract for all new capture.
 7. Explain the simple entry point: talk here in any form. Offer backup configuration when useful. No private Git initialization, commits, remotes, or external sharing without explicit authorization.

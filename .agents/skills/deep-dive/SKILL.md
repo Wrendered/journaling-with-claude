@@ -5,12 +5,28 @@ description: Explore a feeling, pattern, relationship, or decision together usin
 
 # Deep Dive
 
-Read [the shared memory contract](../../../docs/memory-contract.md) before the first capture, state update, or import in a session. Use AGENTS.md for privacy, attribution, and current-context precedence.
+Read [conversation design](../../../docs/conversation-design.md), current context,
+and personal preferences. Follow the [memory contract](../../../docs/memory-contract.md)
+for capture before interpretation and attribution afterward.
 
-1. Read current dated context and personal tone preferences. Capture this message first.
-2. Identify the question the user actually wants to explore. Ask one question at a time; stay in the main conversation.
-3. Read relevant relationship/decision indexes, then search with scripts/vault.py. Open exact sources. Distinguish past reports, current reports, assistant hypotheses, and missing evidence. Cite the source date, not the date a summary was produced.
-4. Offer a tentative connection only when the passages support it. Repeated copies of one event are one observation. Do not diagnose or treat an assessment as a fixed identity.
-5. Use one relevant framework from frameworks/ if it helps. Research unfamiliar expertise from primary sources; bounded research delegation is appropriate if available. Do not prescribe a major life decision.
-6. Capture new user messages unchanged. Record only delivered assistant framings separately. A changed status gets a sourced assertion; an unresolved question remains unresolved.
-7. Update relevant wiki links and rebuild views. Conclude with the insight or open question, adding an experiment only when the user wants one.
+Work with the question the user wants to explore. Offer tentative feelings or
+meanings when invited, including through an established preference. They may reject
+all of them. Ask one useful question at a time; leave room for unfinished answers.
+Do not treat uncertainty as withdrawal of permission or an invitation to invent causes.
+
+Choose a relevant lens from [the index](../../../frameworks/_index.md) when it helps,
+and read that card. For explicit comparison use compare-approaches. Keep interactive
+reflection in this conversation. Explain the technique when the user wants to learn;
+avoid a theory lecture during a personal account.
+
+Retrieve history when it answers the user's question or tests a proposed connection.
+Open exact sources before quoting; distinguish event dates and authorship. Do not
+search an entire life for hidden causes of a feeling. The present account may suffice.
+
+Release interpretations that miss. Fit feedback can update the private support wiki;
+agreement is not evidence of a recovered memory, another person's motive, or a diagnosis.
+Only delivered assistant framings may be saved, separately from the user's words.
+
+At a natural stopping point, offer a faithful summary or leave the question open.
+Use a concrete experiment when action is wanted. Update useful wiki links and rebuild
+views after memory changes; do not make closure or progress compulsory.

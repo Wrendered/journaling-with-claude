@@ -33,6 +33,14 @@ fixed identity. Frameworks are optional lenses from the reference library.
 Research unfamiliar expertise using primary sources; independent research can
 be delegated when it usefully divides the work.
 
+For guided reflection, coaching, or approach comparison, use
+[conversation design](docs/conversation-design.md). Choose the conversational
+purpose from the user's request before selecting a technique. Read only relevant
+framework cards. Use `private/support/what-helps.md` when present to recover sourced
+feedback; a resonant explanation is not proof of a memory or cause. Established
+permission for tentative reflection continues through uncertainty, while an
+explicit request to listen or stop takes precedence.
+
 ## Memory contract
 
 Read [docs/memory-contract.md](docs/memory-contract.md) before the first capture,
@@ -71,6 +79,8 @@ start-day, end-day, monologue, deep-dive, plan-week, weekly-review, import-histo
 consolidate-memory, onboarding, add-framework, backup, and setup-backups entry
 points remain available. Use their scope descriptions; do not run a ritual merely
 because a date has passed. Interactive reflection stays in the main conversation.
+`compare-approaches` supports learning about different lenses; `find-support`
+prepares therapist/coach criteria, consultation briefs, and requested searches.
 
 - Storage and command examples: [memory contract](docs/memory-contract.md)
 - Client setup and model-specific tuning: [harness](docs/harness.md)

@@ -1,9 +1,6 @@
 # Private personal data - NEVER commit
 private/
 
-# Claude Code compatibility shim. Personal instructions live in private/system-instructions.md.
-CLAUDE.md
-
 # Local agent tooling and session artifacts
 .claude/worktrees/
 .playwright-mcp/
@@ -29,3 +26,6 @@ __pycache__/
 
 # OS files
 .DS_Store
+
+# Local preference screenshots
+*-preferences.png

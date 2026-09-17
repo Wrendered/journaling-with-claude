@@ -2,7 +2,7 @@
 
 > **This is your file.** Personalize freely. Assistants read it after `AGENTS.md`, so this file refines the generic scaffolding without duplicating it.
 >
-> Path: `private/system-instructions.md`. Gitignored, never leaves your machine.
+> Path: `private/system-instructions.md`. Excluded from the public repository. Model processing and configured backups follow your client and storage choices.
 
 ---
 
@@ -13,7 +13,9 @@
 - **Default tone:** [direct / supportive / challenging / curious — your preference]
 - **What lands:** [examples of feedback that helps you think clearly]
 - **What doesn't:** [what to avoid — fake-humble, sycophancy, soft-pedaling, performative care, etc.]
-- **Don't just agree with me:** When you spot rationalization or avoidance, say so.
+- **Challenge preference:** [when direct challenge helps; how to handle a disagreement]
+- **Exploration preference:** [listen first / offer possible feelings / ask a question]
+- **When an interpretation misses:** [how you want the assistant to change course]
 
 ## Past Approaches That Helped
 
@@ -39,23 +41,24 @@
 - **What helps me un-stick:** [describe]
 - **What makes it worse:** [describe]
 
-## Lens Stack
+## Choosing an approach
 
-> Optional. Map situations to which framework the assistant should reach for. The frameworks live in `frameworks/`.
+> Optional. Use `docs/conversation-design.md` and `frameworks/_index.md` for options.
+> These are preferences, not automatic triggers. Current requests take precedence.
 
 | When | Lens | Move |
 |------|------|------|
-| Daily default | [e.g., Stoicism + Atomic Habits] | [What's in my control today; identity-based action] |
-| Distorted thinking shows up | [e.g., CBT] | [Catch the should-statements, test against evidence] |
-| Inner conflict / self-criticism | [e.g., IFS] | ["What part of me is feeling this?"] |
-| Decision work | [e.g., WRAP + Pre-mortem + 10-10-10] | [In deep-dive sessions] |
-| Time slipping | [e.g., Eisenhower Matrix] | [In plan-week / weekly-review] |
+| Exploring a feeling | [optional preferred lens] | [what kind of reflection helps] |
+| Examining a belief or conflict | [optional preferred lens] | [how to examine it together] |
+| Pursuing a chosen goal | [optional coaching approach] | [helpful level of structure] |
 
 Delete rows you don't use. Add rows for situations the listed lenses don't cover.
+If useful, keep source-linked feedback in `support/what-helps.md`. Liking an approach
+once need not make it a permanent default.
 
 ## Daily Rituals (personal config)
 
-> Override the generic Daily Rituals scaffold from AGENTS.md with your specific cadence.
+> Optional rituals. Change or skip them whenever useful.
 
 **Morning rotating element (start-day skill reads this):**
 
@@ -73,7 +76,7 @@ Delete rows you don't use. Add rows for situations the listed lenses don't cover
 
 ## Weekly Rhythm (personal config)
 
-> Override the generic Weekly Rhythm scaffold from AGENTS.md.
+> Optional weekly rhythm.
 
 | Day | Focus |
 |-----|-------|

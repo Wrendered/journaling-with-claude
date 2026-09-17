@@ -1,7 +1,7 @@
 #!/bin/bash
 # Security hook: Block private files (hard) + Review diff content (soft)
 #
-# PreToolUse: Block private/ or CLAUDE.md (exit 2)
+# PreToolUse: Block private/ (exit 2)
 # PostToolUse: Inject diff to assistant for content review (additionalContext)
 #
 # Works in both Claude Code (sets $CLAUDE_PROJECT_DIR) and OpenAI Codex CLI
@@ -34,11 +34,11 @@ fi
 
 # === Path patterns (single source of truth) ===
 # A staged-files regex that matches one filename per line.
-BLOCKED_FILES_REGEX='^private/|^CLAUDE\.md$'
+BLOCKED_FILES_REGEX='^private/'
 # An argument-position regex for `git add <path>` etc. Matches both `private`
 # and anything under `private/`.
-BLOCKED_ARG_REGEX='(^|[[:space:]])(private(/[^[:space:]]*)?|CLAUDE\.md)([[:space:]]|$)'
-BLOCKED_LIST="private/ or CLAUDE.md"
+BLOCKED_ARG_REGEX='(^|[[:space:]])(private(/[^[:space:]]*)?)([[:space:]]|$)'
+BLOCKED_LIST="private/"
 
 normalize_segment() {
   local normalized="$1"

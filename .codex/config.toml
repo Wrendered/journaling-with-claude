@@ -6,7 +6,7 @@
 
 [features]
 # Required to enable hooks declared in .codex/hooks.json
-codex_hooks = true
+hooks = true
 
 # Subagents directory (.codex/agents/*.toml). Default depth is 1.
 [agents]

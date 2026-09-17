@@ -1,67 +1,14 @@
 ---
 name: backup
-description: Runs the configured backup script (.claude/skills/backup/scripts/backup-private.sh) to create a timestamped zip of private/ data in the user's chosen location. Supports an --encrypt flag for password-protected backups.
-when_to_use: |
-  ALWAYS invoke this skill when the user wants to run a backup right now.
-  Trigger phrases (any of these): "back up my data", "run a backup", "save my journal",
-  "preserve my private data", "back up to Dropbox", "manual backup".
-  Also invoke automatically near the end of the weekly-review skill (after journal organization),
-  or before any major restructuring of private/ files.
-  For first-time configuration use the `setup-backups` skill instead.
-allowed-tools: Read, Bash
+description: Create a verified, non-pruning backup of the private vault and optionally test restoration.
 ---
 
-# Backup Private Data
+# Backup
 
-Run the backup script to create a timestamped archive of private data.
+Read [the shared memory contract](../../../docs/memory-contract.md) before the first capture, state update, or import in a session. Use AGENTS.md for privacy, attribution, and current-context precedence.
 
-## Quick Backup
-
-```bash
-.claude/skills/backup/scripts/backup-private.sh
-```
-
-## Encrypted Backup
-
-For password-protected backup:
-
-```bash
-.claude/skills/backup/scripts/backup-private.sh --encrypt
-```
-
-## What Gets Backed Up
-
-- `private/` folder (excluding `import/`)
-
-`AGENTS.md` and other project-level scaffolding are version-controlled in the public repo and recoverable via `git clone` — backups intentionally cover only `private/` (the per-user data that has no remote).
-
-Backups are timestamped zips. Last 10 kept, older pruned automatically.
-
-## Check Configuration
-
-Read the config to find backup location:
-
-```bash
-cat private/backup-config.sh
-```
-
-## List Existing Backups
-
-After reading config for BACKUP_DIR:
-
-```bash
-ls -la [BACKUP_DIR]
-```
-
-## First-Time Setup
-
-If backup hasn't been configured yet, invoke the `setup-backups` skill to:
-1. Choose backup location (Dropbox, iCloud, local)
-2. Create config file
-3. Test the backup
-
-## When to Backup
-
-- Automatically near the end of the `weekly-review` skill
-- Manually anytime with the commands above
-- Before major changes to journal structure
+1. Read private/backup-config.sh and personal backup notes. Use the configured destination, preserving any explicit frozen-archive decision. If none is configured, ask for a destination or use setup-backups.
+2. Run bash .agents/skills/backup/scripts/backup-private.sh. The shared vault tool snapshots originals, imports, wiki, and state under a lock, includes a hash manifest, and verifies the archive. It excludes caches, generated views, secrets files, and Git internals. It never prunes previous backups.
+3. A directory named Dropbox or iCloud is a configured backup location; do not claim cloud upload completion from a local write.
+4. For a restore rehearsal, use scripts/vault.py verify-backup ARCHIVE --restore-to EMPTY_DIR. The restored vault is EMPTY_DIR/private. Never restore over the live vault.
+5. Report the path, verification result, and any exclusions relevant to the request. Encryption uses the wrapper’s --encrypt option in an interactive terminal; never put a password in a command, chat, or log. Do not commit private files.

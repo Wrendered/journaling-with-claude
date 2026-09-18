@@ -534,6 +534,14 @@ def verify_backup(archive, restore_to=None, password=None):
             'vault_path': str(Path(restore_to).resolve() / 'private') if restore_to else None}
 
 
+SYSTEM_NOTIFICATION_MARKERS = ('<task-notification', '[SYSTEM NOTIFICATION')
+
+
+def is_system_notification(prompt):
+    """True when a UserPromptSubmit payload is a harness notification, not user text."""
+    return prompt.lstrip()[:200].startswith(SYSTEM_NOTIFICATION_MARKERS)
+
+
 def hook(vault, data):
     if not isinstance(data, dict):
         raise ValueError('Hook input must be a JSON object.')
@@ -545,6 +553,8 @@ def hook(vault, data):
         prompt = data.get('prompt')
         if not isinstance(prompt, str) or not prompt.strip():
             return {}
+        if is_system_notification(prompt):
+            return {'hookSpecificOutput': {'hookEventName': event, 'additionalContext': 'Harness notification not captured: it is not user text.'}}
         turn = data.get('turn_id')
         rid = 'prompt-' + (digest(str(data.get('session_id')) + ':' + str(turn))[:32] if turn else uuid.uuid4().hex)
         result = vault.capture({'id': rid, 'text': prompt, 'session_id': data.get('session_id', ''),

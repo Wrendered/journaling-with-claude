@@ -132,6 +132,16 @@ class MemoryTests(unittest.TestCase):
         self.assertEqual(hook(self.v, {'hook_event_name':'UserPromptSubmit','prompt':''}),{})
         self.assertIn('Memory v2',hook(self.v,{'hook_event_name':'SessionStart'})['hookSpecificOutput']['additionalContext'])
 
+    def test_hook_skips_harness_notifications(self):
+        for prompt in ['<task-notification>\n<task-id>abc</task-id>\n<status>completed</status>\n</task-notification>',
+                       '  [SYSTEM NOTIFICATION - NOT USER INPUT]\nThis is an automated background-task event.']:
+            result=hook(self.v,{'hook_event_name':'UserPromptSubmit','session_id':'session-one','turn_id':'turn-n','prompt':prompt})
+            self.assertIn('not captured',result['hookSpecificOutput']['additionalContext'])
+        self.assertEqual(len(list(self.v.records())),0)
+        real=hook(self.v,{'hook_event_name':'UserPromptSubmit','session_id':'session-one','turn_id':'turn-r','prompt':'The agent said <task-notification> is a tag.'})
+        self.assertIn('source ID',real['hookSpecificOutput']['additionalContext'])
+        self.assertEqual(len(list(self.v.records())),1)
+
     def test_restore_and_tamper(self):
         self.capture(); self.state()
         (self.v.root/'import').mkdir();(self.v.root/'import/older.txt').write_bytes(b'original\r\n')
